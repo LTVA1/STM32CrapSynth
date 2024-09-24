@@ -73,6 +73,7 @@ int main()
 	// try to connect to the device
 	if (serial.openDevice(device_name,baud)==1)
 	{
+		std::cout << "Connection successful" << std::endl;
 	}
 	else
 	{
