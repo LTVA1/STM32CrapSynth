@@ -7993,6 +7993,28 @@
 			)
 		)
 	)
+	(global_label "ZCEN_DAC"
+		(shape input)
+		(at 48.26 160.02 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "30f2ed23-58f2-4b17-9d5d-54d9bdd045e2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 35.7196 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "Analog_data"
 		(shape input)
 		(at 133.35 60.96 0)
@@ -9898,28 +9920,6 @@
 		(uuid "ec20361d-3ff2-45d7-adde-a52d1e9342f5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 120.0239 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "ZCEN_DAC"
-		(shape input)
-		(at 48.26 124.46 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "edb50547-7221-434b-9606-48833f97f49d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.7196 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
