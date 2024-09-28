@@ -7743,28 +7743,6 @@
 			)
 		)
 	)
-	(global_label "MUX_SEL_1"
-		(shape input)
-		(at 248.92 149.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "11093152-cb1f-4bc2-a4cb-d8afe3d9456b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 262.4279 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "MUX_SEL_2"
 		(shape input)
 		(at 48.26 139.7 180)
@@ -8337,6 +8315,28 @@
 			)
 		)
 	)
+	(global_label "MUX_SEL_1"
+		(shape input)
+		(at 248.92 147.32 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "52fac410-176f-468c-805b-9646ac94652f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 262.4279 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "FLASH_CS"
 		(shape input)
 		(at 48.26 147.32 180)
@@ -8509,6 +8509,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "CH3_TOVOL"
+		(shape input)
+		(at 170.18 92.71 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6d94ae42-c67e-4aed-b1b7-efbe2d1dc85d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 156.6719 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -8777,6 +8799,28 @@
 			)
 		)
 	)
+	(global_label "NOISE_CS"
+		(shape input)
+		(at 248.92 172.72 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8099b3ba-aa06-4ab9-9cf9-50e89c2a3d54")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 260.9766 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "FILTER_FEEDBACK_IN"
 		(shape input)
 		(at 167.64 248.92 0)
@@ -8817,50 +8861,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "NOISE_DI"
-		(shape input)
-		(at 248.92 147.32 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "82a2989a-c2a9-4e2d-91e2-8618dbc3ac9f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 260.3719 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "CH3_TOVOL"
-		(shape input)
-		(at 170.18 82.55 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "85d04587-cc32-4a9f-94c6-8a0120a0130d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 156.6719 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -8975,6 +8975,28 @@
 			)
 		)
 	)
+	(global_label "NOISE_DI"
+		(shape input)
+		(at 248.92 149.86 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9e23bd94-bbb1-44ce-9c4b-782dd307cf29")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 260.3719 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "Analog_data"
 		(shape input)
 		(at 165.1 60.96 180)
@@ -9010,6 +9032,28 @@
 		(uuid "a0730ef6-15aa-4b8f-a539-ad3d78b8064f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 34.7521 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "CH4_TOVOL"
+		(shape input)
+		(at 170.18 82.55 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a15ca64c-6307-4215-889f-41fc1367affc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 156.6719 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9305,28 +9349,6 @@
 			)
 		)
 	)
-	(global_label "CH4_TOVOL"
-		(shape input)
-		(at 170.18 92.71 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b25ec3f3-25b2-4291-bbe2-ee5941d28bfd")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 156.6719 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "DDS1_out"
 		(shape input)
 		(at 110.49 85.09 180)
@@ -9406,28 +9428,6 @@
 		(uuid "b611baef-2e9b-4715-a7b7-fd9d5c42495d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 171.4114 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "NOISE_CS"
-		(shape input)
-		(at 248.92 172.72 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b77443dd-4d93-4c85-92c4-f151ad657cb0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 260.9766 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
