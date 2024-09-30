@@ -5,6 +5,181 @@
 	(uuid "e8cec806-e837-4d6f-b166-2de75a563bd6")
 	(paper "A3")
 	(lib_symbols
+		(symbol "4ms_Capacitor:0.22uF_0603_25V"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.254) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 1.905 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "0.22uF_0603_25V"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Footprint" "4ms_Capacitor:C_0603"
+				(at -2.54 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+				(at -2.54 -7.874 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer" "TDK"
+				(at -2.54 -9.398 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Part Number" "CGA3E2X5R1E224K080AA"
+				(at -2.54 -10.922 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Display" "0.22uF"
+				(at 1.905 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "ki_keywords" "0.22uF 220nF 0603"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "0.22uF_0603_25V_0_1"
+				(polyline
+					(pts
+						(xy -1.524 -0.508) (xy 1.524 -0.508)
+					)
+					(stroke
+						(width 0.3302)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 0.508) (xy 1.524 0.508)
+					)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "0.22uF_0603_25V_1_1"
+				(pin passive line
+					(at 0 2.54 270)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "4ms_Resistor:100k_0603"
 			(pin_numbers hide)
 			(pin_names
@@ -4893,16 +5068,46 @@
 		)
 	)
 	(junction
+		(at 130.81 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "013ce984-513a-4b6e-ae76-1dfc2ec38100")
+	)
+	(junction
+		(at 189.23 193.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "11b281f3-56ec-4e2c-b13d-5311d2cd367a")
+	)
+	(junction
+		(at 134.62 107.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1c5854da-624c-41c0-b38b-c94efdc912dc")
+	)
+	(junction
 		(at 220.98 217.17)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1c87861b-1081-4f83-b0da-15621740e11b")
 	)
 	(junction
+		(at 181.61 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "273461fa-b642-4164-9589-a81b48d1f42e")
+	)
+	(junction
 		(at 215.9 172.72)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "29cdca22-d594-4583-9b91-d411dda03d80")
+	)
+	(junction
+		(at 154.94 87.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2bf4e460-eddd-4a65-91ac-0b77b33d67d7")
 	)
 	(junction
 		(at 220.98 243.84)
@@ -4923,16 +5128,46 @@
 		(uuid "378839c5-32ba-4527-832c-9c35d6d66bcc")
 	)
 	(junction
+		(at 110.49 224.79)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "45a3d704-6f24-4a80-be7d-2c3170618df4")
+	)
+	(junction
 		(at 215.9 165.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "47914c55-6124-4bcf-9dd7-30ab7cb3b7aa")
 	)
 	(junction
+		(at 134.62 257.81)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "488a87ae-88c1-4222-b875-985292bc08b7")
+	)
+	(junction
 		(at 217.17 121.92)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "49e4de16-83e6-4443-bca1-ffac4262af5e")
+	)
+	(junction
+		(at 275.59 256.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5399fbcc-9d69-4c76-8dae-6a7cd8eb5354")
+	)
+	(junction
+		(at 167.64 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "548517f8-3e92-41ef-a2a9-fc81c26165a4")
+	)
+	(junction
+		(at 143.51 87.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5eb1354b-a404-4b9f-821e-5fdfa68cf3d4")
 	)
 	(junction
 		(at 165.1 255.27)
@@ -4965,6 +5200,12 @@
 		(uuid "73d7564d-b20e-4250-ae33-1b82d62e12cb")
 	)
 	(junction
+		(at 180.34 190.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "74227f39-34ce-4b4e-a2f2-2acb315e768d")
+	)
+	(junction
 		(at 83.82 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4977,10 +5218,46 @@
 		(uuid "7899727e-0aa8-471b-96c8-94f429770737")
 	)
 	(junction
+		(at 181.61 134.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7e07ead6-0b67-4463-a07e-91d0be2ed4fc")
+	)
+	(junction
+		(at 189.0828 214.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "836bee52-1029-4ea6-bed0-1f632fc3555a")
+	)
+	(junction
+		(at 176.53 257.81)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "844b056a-4f7e-4f4c-b4e4-947ca20c2ed8")
+	)
+	(junction
 		(at 217.17 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9307b0ce-7aeb-4272-b0ec-10030ab19e21")
+	)
+	(junction
+		(at 167.64 55.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9baef2bc-c016-4832-91cf-fbdbc377de80")
+	)
+	(junction
+		(at 187.96 224.79)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a6c8b8b0-b21c-4b5e-873f-6069ec3fce78")
+	)
+	(junction
+		(at 110.49 163.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ab1b5e1b-b0d0-406a-a571-cb042415b82f")
 	)
 	(junction
 		(at 217.17 194.31)
@@ -4995,10 +5272,28 @@
 		(uuid "b723db01-0501-430b-868b-fe5eb6c40f1f")
 	)
 	(junction
+		(at 177.8 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c2ae8ac8-efdf-43eb-ba74-101f06a17ff2")
+	)
+	(junction
 		(at 229.87 243.84)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c7171879-1898-4c20-93f3-affcbcf4d9ac")
+	)
+	(junction
+		(at 66.04 199.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c7f2e923-5e3c-4840-8854-edf670b2e29e")
+	)
+	(junction
+		(at 110.49 193.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "caa895a1-5404-46f8-8f54-4830d4dfdfed")
 	)
 	(junction
 		(at 128.27 252.73)
@@ -5011,6 +5306,30 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d08dd650-97ef-4118-9d2c-299a8c61e2e6")
+	)
+	(junction
+		(at 130.81 55.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d16e3569-80c3-4b77-b862-e94b57e378d0")
+	)
+	(junction
+		(at 181.61 163.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d79ef6dd-c491-4ede-a7b5-5e8967991171")
+	)
+	(junction
+		(at 180.34 222.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d9f67f7d-df08-446b-971f-4a37af3ec6c7")
+	)
+	(junction
+		(at 123.19 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "da1180fd-b200-4edc-9369-a15883b0d4e2")
 	)
 	(junction
 		(at 218.44 180.34)
@@ -5100,6 +5419,26 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 224.79) (xy 160.02 224.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "049a17c6-193a-4d45-ad14-a787ba197ac5")
+	)
+	(wire
+		(pts
+			(xy 134.62 257.81) (xy 132.08 257.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "051eaa6f-4ca9-42cf-82d5-74843974075b")
+	)
+	(wire
+		(pts
 			(xy 171.45 66.04) (xy 165.1 66.04)
 		)
 		(stroke
@@ -5117,6 +5456,16 @@
 			(type default)
 		)
 		(uuid "06070650-0bff-49a4-8cdc-6620e512dbc6")
+	)
+	(wire
+		(pts
+			(xy 146.05 83.82) (xy 146.05 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06228c21-562a-45ec-b747-cf3c5f1a878d")
 	)
 	(wire
 		(pts
@@ -5180,13 +5529,23 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 193.04) (xy 160.02 193.04)
+			(xy 191.77 193.04) (xy 189.23 193.04)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "0bcaf286-27e7-459d-b735-3adcfa6c3dc6")
+	)
+	(wire
+		(pts
+			(xy 176.53 257.81) (xy 184.15 257.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0bf248c5-a701-4783-bc50-354578bf044c")
 	)
 	(wire
 		(pts
@@ -5260,6 +5619,26 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 190.5) (xy 180.34 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12f40bde-1317-4cf5-8790-ae207717b643")
+	)
+	(wire
+		(pts
+			(xy 115.57 132.08) (xy 123.19 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "13b8c5c7-83f2-4f1a-a769-bec1ef4e154f")
+	)
+	(wire
+		(pts
 			(xy 115.57 161.29) (xy 139.7 161.29)
 		)
 		(stroke
@@ -5290,6 +5669,16 @@
 	)
 	(wire
 		(pts
+			(xy 189.0828 214.63) (xy 185.42 214.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17688a5c-f3dc-40fa-9016-758167c78165")
+	)
+	(wire
+		(pts
 			(xy 171.45 71.12) (xy 165.1 71.12)
 		)
 		(stroke
@@ -5307,6 +5696,16 @@
 			(type default)
 		)
 		(uuid "17f9bcd7-263e-404d-bc20-6b63355a7b92")
+	)
+	(wire
+		(pts
+			(xy 190.5 205.74) (xy 189.23 205.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1923a3ef-2d09-4780-8edd-ec807c1f3e11")
 	)
 	(wire
 		(pts
@@ -5410,6 +5809,16 @@
 	)
 	(wire
 		(pts
+			(xy 185.42 222.25) (xy 180.34 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26cd3846-2dee-4c6f-a1ed-b51f00c209fe")
+	)
+	(wire
+		(pts
 			(xy 248.92 129.54) (xy 215.9 129.54)
 		)
 		(stroke
@@ -5417,6 +5826,16 @@
 			(type default)
 		)
 		(uuid "26e988a2-65ba-4903-8962-36ea8f6072e4")
+	)
+	(wire
+		(pts
+			(xy 189.23 214.63) (xy 189.0828 214.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "275d6443-2f3a-4bbe-9552-3ebe76886b88")
 	)
 	(wire
 		(pts
@@ -5580,6 +5999,26 @@
 	)
 	(wire
 		(pts
+			(xy 152.4 93.98) (xy 154.94 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a64aef6-2aac-4f75-9329-9da94f6ce466")
+	)
+	(wire
+		(pts
+			(xy 133.35 269.24) (xy 134.62 269.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a83883b-9b85-4915-9a63-aa610efe0c1f")
+	)
+	(wire
+		(pts
 			(xy 118.11 219.71) (xy 120.65 219.71)
 		)
 		(stroke
@@ -5660,6 +6099,26 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 87.63) (xy 143.51 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "422b6cfb-f264-4af9-b61f-e9d4819b937e")
+	)
+	(wire
+		(pts
+			(xy 176.53 269.24) (xy 176.53 257.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42d7c89c-3663-4f9e-ae82-55f657bc25c5")
+	)
+	(wire
+		(pts
 			(xy 236.22 261.62) (xy 250.19 261.62)
 		)
 		(stroke
@@ -5677,6 +6136,16 @@
 			(type default)
 		)
 		(uuid "45f3ecd6-11f1-4a02-bcad-09ea9a522206")
+	)
+	(wire
+		(pts
+			(xy 134.62 257.81) (xy 134.62 269.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46572a5d-46bf-48f5-ade0-d07dbb30edd9")
 	)
 	(wire
 		(pts
@@ -5760,6 +6229,16 @@
 	)
 	(wire
 		(pts
+			(xy 181.61 134.62) (xy 194.31 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4dbc05cd-9e75-4d9d-9fb4-3bfe86d79879")
+	)
+	(wire
+		(pts
 			(xy 248.92 172.72) (xy 215.9 172.72)
 		)
 		(stroke
@@ -5767,6 +6246,16 @@
 			(type default)
 		)
 		(uuid "4dbd56c4-b4ef-40fd-b2ca-f61bf1d12984")
+	)
+	(wire
+		(pts
+			(xy 66.04 199.39) (xy 74.93 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e06d129-6ddd-49b3-89a0-652f9afd8b22")
 	)
 	(wire
 		(pts
@@ -5780,6 +6269,16 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 30.48) (xy 133.35 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ee5fe4c-30e4-48e4-99bd-ee115b88be55")
+	)
+	(wire
+		(pts
 			(xy 191.77 195.58) (xy 191.77 193.04)
 		)
 		(stroke
@@ -5787,6 +6286,26 @@
 			(type default)
 		)
 		(uuid "50892de5-db6d-4be4-b7b8-00c4dad6b10e")
+	)
+	(wire
+		(pts
+			(xy 162.56 30.48) (xy 167.64 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50f78e0b-1741-4146-b191-0a8e2c0b7e64")
+	)
+	(wire
+		(pts
+			(xy 189.23 237.49) (xy 187.96 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "534acf95-f193-44b0-bfb3-f1c3332bc781")
 	)
 	(wire
 		(pts
@@ -5800,6 +6319,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 78.74) (xy 143.51 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "561ece14-93f0-4090-915e-c257486c25f8")
+	)
+	(wire
+		(pts
 			(xy 115.57 190.5) (xy 139.7 190.5)
 		)
 		(stroke
@@ -5807,6 +6336,16 @@
 			(type default)
 		)
 		(uuid "5852242b-6738-452c-9e7d-bf1ff7ca6373")
+	)
+	(wire
+		(pts
+			(xy 99.06 163.83) (xy 110.49 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5860b292-368f-4779-841d-f678e2b9c257")
 	)
 	(wire
 		(pts
@@ -5820,6 +6359,16 @@
 	)
 	(wire
 		(pts
+			(xy 177.8 132.08) (xy 185.42 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ad34b33-93fd-4878-9f10-b8717a8d3233")
+	)
+	(wire
+		(pts
 			(xy 229.87 236.22) (xy 229.87 194.31)
 		)
 		(stroke
@@ -5830,7 +6379,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 257.81) (xy 132.08 257.81)
+			(xy 137.16 257.81) (xy 134.62 257.81)
 		)
 		(stroke
 			(width 0)
@@ -5857,6 +6406,56 @@
 			(type default)
 		)
 		(uuid "5f768a35-7e50-405d-8edf-201b5b61f36d")
+	)
+	(wire
+		(pts
+			(xy 181.61 161.29) (xy 189.23 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f95a41b-12a6-402d-9d81-619552b29178")
+	)
+	(wire
+		(pts
+			(xy 97.79 224.79) (xy 110.49 224.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fc39082-3059-4dae-8340-26414019da0d")
+	)
+	(wire
+		(pts
+			(xy 119.38 107.95) (xy 134.62 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "614d346b-6080-47f1-bf96-04dbe299c8b4")
+	)
+	(wire
+		(pts
+			(xy 97.79 193.04) (xy 110.49 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6154e4c6-73e1-47d9-b4ed-a6b39c6b0a82")
+	)
+	(wire
+		(pts
+			(xy 162.56 55.88) (xy 167.64 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "619039c5-b2f4-4df7-beea-4cf0c108a7c0")
 	)
 	(wire
 		(pts
@@ -6000,6 +6599,16 @@
 	)
 	(wire
 		(pts
+			(xy 154.94 93.98) (xy 154.94 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "736c075c-5dd3-4763-b1f8-a8ba6d6516dd")
+	)
+	(wire
+		(pts
 			(xy 248.92 139.7) (xy 215.9 139.7)
 		)
 		(stroke
@@ -6077,6 +6686,16 @@
 			(type default)
 		)
 		(uuid "7b8a48ad-c99a-4995-9d6d-cfe1486903e0")
+	)
+	(wire
+		(pts
+			(xy 181.61 163.83) (xy 185.42 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c6c9011-0db7-4279-a341-aedf4e054034")
 	)
 	(wire
 		(pts
@@ -6167,6 +6786,16 @@
 			(type default)
 		)
 		(uuid "8763a2f9-2656-4dfb-9058-798bbc82f70f")
+	)
+	(wire
+		(pts
+			(xy 180.34 269.24) (xy 176.53 269.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "877edd94-8017-4033-99b4-f4c83691e2f9")
 	)
 	(wire
 		(pts
@@ -6270,6 +6899,16 @@
 	)
 	(wire
 		(pts
+			(xy 189.23 193.04) (xy 160.02 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8df73607-341a-48df-854a-7dccf31721f2")
+	)
+	(wire
+		(pts
 			(xy 129.54 43.18) (xy 127 43.18)
 		)
 		(stroke
@@ -6320,6 +6959,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 186.69) (xy 187.96 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c7b004a-d857-4d6d-99e3-c3f79c2b7606")
+	)
+	(wire
+		(pts
 			(xy 220.98 261.62) (xy 220.98 252.73)
 		)
 		(stroke
@@ -6337,6 +6986,16 @@
 			(type default)
 		)
 		(uuid "9ea54eb8-3a30-4e3b-9a37-4061995006a8")
+	)
+	(wire
+		(pts
+			(xy 185.42 214.63) (xy 185.42 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ed8dd99-0798-45e9-a3ae-2f8b3aa1b9c9")
 	)
 	(wire
 		(pts
@@ -6520,6 +7179,26 @@
 	)
 	(wire
 		(pts
+			(xy 189.23 193.04) (xy 189.23 205.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af49ded8-e83b-41a7-83f3-fcd5a76daa1b")
+	)
+	(wire
+		(pts
+			(xy 187.96 224.79) (xy 187.96 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aff55dd0-5c37-42ad-b3a2-d7060a0e780e")
+	)
+	(wire
+		(pts
 			(xy 168.91 41.91) (xy 166.37 41.91)
 		)
 		(stroke
@@ -6690,6 +7369,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 83.82) (xy 146.05 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7d3a776-438f-495d-8e2e-77044dcc9287")
+	)
+	(wire
+		(pts
 			(xy 58.42 227.33) (xy 69.85 227.33)
 		)
 		(stroke
@@ -6770,7 +7459,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 257.81) (xy 184.15 257.81)
+			(xy 162.56 257.81) (xy 176.53 257.81)
 		)
 		(stroke
 			(width 0)
@@ -6787,6 +7476,16 @@
 			(type default)
 		)
 		(uuid "d81f3d6b-1ce2-4c57-b4bc-d970bfb6e442")
+	)
+	(wire
+		(pts
+			(xy 130.81 55.88) (xy 134.62 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d837d6d4-a351-4d27-902e-8e1a206c022d")
 	)
 	(wire
 		(pts
@@ -6890,7 +7589,7 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 224.79) (xy 160.02 224.79)
+			(xy 191.77 224.79) (xy 187.96 224.79)
 		)
 		(stroke
 			(width 0)
@@ -6927,6 +7626,16 @@
 			(type default)
 		)
 		(uuid "e459f920-0cd9-4550-8f98-63302c264f35")
+	)
+	(wire
+		(pts
+			(xy 275.59 256.54) (xy 283.21 256.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e49c78c6-e985-4e30-80b1-abff69afcb03")
 	)
 	(wire
 		(pts
@@ -7077,6 +7786,16 @@
 			(type default)
 		)
 		(uuid "f8e169c2-5faa-499c-91e1-7e4f84c0ab87")
+	)
+	(wire
+		(pts
+			(xy 191.77 186.69) (xy 187.96 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa36df70-6281-4f3d-83d0-4262d7e085e5")
 	)
 	(wire
 		(pts
@@ -8333,28 +9052,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "FLASH_CS"
-		(shape input)
-		(at 48.26 147.32 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "540046d8-ec23-4a19-af21-37046bdc48d0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 36.0824 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -9855,6 +10552,28 @@
 			)
 		)
 	)
+	(global_label "FLASH_CS"
+		(shape input)
+		(at 248.92 167.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e0684254-8f05-4a28-bb85-cb7d1951cf88")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 261.0976 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "ZCEN_3"
 		(shape input)
 		(at 139.7 182.88 180)
@@ -10231,6 +10950,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 148.59 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "03ad881c-f476-458a-87f3-65804f99703b")
+		(property "Reference" "#PWR075"
+			(at 148.59 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 148.59 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 148.59 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 148.59 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 148.59 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2e72ab2b-0dca-4e5c-ba1a-73ae7a82942c")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR075")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
 		(at 53.34 229.87 180)
 		(unit 1)
@@ -10361,6 +11147,74 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR047")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 92.71 224.79 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "06ae95e1-3000-4ac2-b505-945e59dc90ce")
+		(property "Reference" "#PWR088"
+			(at 92.71 231.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 92.71 229.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 92.71 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 92.71 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 92.71 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9fdccc74-b199-4d2e-8dd3-1d6f8b4a454a")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR088")
 					(unit 1)
 				)
 			)
@@ -10550,6 +11404,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 196.85 186.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0f4db4a7-1305-44e8-b8f5-1cfa8f94e098")
+		(property "Reference" "#PWR086"
+			(at 196.85 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 196.85 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 196.85 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 196.85 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 196.85 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b279cf1-6d66-4d34-a486-b1899a8d13e1")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR086")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Generic:P,-15")
 		(at 191.77 227.33 0)
 		(unit 1)
@@ -10613,6 +11534,74 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR068")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 114.3 107.95 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "114fbd6c-0aec-402f-8869-5e0528d914f5")
+		(property "Reference" "#PWR077"
+			(at 114.3 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 114.3 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 114.3 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 114.3 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2959f37b-3e14-4331-b40e-20ca855d8c6d")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR077")
 					(unit 1)
 				)
 			)
@@ -10823,6 +11812,74 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 157.48 30.48 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "23580824-36d9-413d-8963-4105456358f8")
+		(property "Reference" "#PWR072"
+			(at 157.48 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 157.48 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 157.48 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.48 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 157.48 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cde1042b-dbe9-443d-8ba5-0ed7da5e05fa")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR072")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
 		(at 53.34 255.27 180)
 		(unit 1)
@@ -10953,6 +12010,114 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR044")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 182.88 269.24 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "29db709d-7bb9-4c4f-9ad6-5dbf24a49252")
+		(property "Reference" "C22"
+			(at 182.8863 262.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 179.07 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 187.96 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 182.88 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 182.88 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 190.754 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 192.278 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 193.802 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 182.8863 265.43 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dcb61896-ac50-426b-8436-87d59dbe6916")
+		)
+		(pin "2"
+			(uuid "061c75cc-7dc7-4653-b26f-db6d00af9684")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C22")
 					(unit 1)
 				)
 			)
@@ -11132,6 +12297,74 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 157.48 55.88 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2d467970-3f1a-400b-a552-4433a7c69dbd")
+		(property "Reference" "#PWR074"
+			(at 157.48 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 157.48 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 157.48 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.48 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 157.48 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "67b1447e-bb0a-416a-80bc-ac7324393e7c")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR074")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+5V")
 		(at 130.81 30.48 0)
 		(unit 1)
@@ -11192,6 +12425,74 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR07")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 110.49 132.08 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "323d4778-6e8a-4548-b3b5-1be97422403e")
+		(property "Reference" "#PWR078"
+			(at 110.49 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 110.49 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 110.49 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 110.49 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 110.49 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e473d073-4f98-46ea-a0ff-9c8e3d6154bf")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR078")
 					(unit 1)
 				)
 			)
@@ -11395,6 +12696,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 190.5 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3a4b7993-035b-40d6-8a8b-aa790eb5bd1e")
+		(property "Reference" "#PWR079"
+			(at 190.5 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 190.5 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 190.5 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 190.5 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5cae81ea-eeca-4fa6-8a27-04b2677057f0")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR079")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "4ms_Resistor:100k_0603")
 		(at 120.65 154.94 0)
 		(unit 1)
@@ -11508,6 +12876,141 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "R11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 92.71 193.04 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4064c272-ff62-4f38-9fbd-80bb1618204a")
+		(property "Reference" "#PWR085"
+			(at 92.71 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 92.71 198.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 92.71 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 92.71 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 92.71 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "789e82d4-e1ef-4ff1-a034-3d241989faa7")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR085")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 288.29 256.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "44694bd3-3da8-48c7-ab2b-f8e137cb78a1")
+		(property "Reference" "#PWR093"
+			(at 288.29 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 288.29 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 288.29 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 288.29 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 288.29 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "58002a75-ec5d-4071-afff-5b5a6bd89a78")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR093")
 					(unit 1)
 				)
 			)
@@ -11713,6 +13216,222 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 187.96 132.08 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4acdd20d-2b37-410f-b054-0c36df7a53c3")
+		(property "Reference" "C9"
+			(at 187.9663 125.73 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 184.15 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 193.04 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.96 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 187.96 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 195.834 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 197.358 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 198.882 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 187.9663 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "39f4633d-db7f-4e9f-9e08-789258812d9b")
+		)
+		(pin "2"
+			(uuid "2bc82c16-eef9-4708-bc53-497f928ec2c9")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 137.16 55.88 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4b12b9a4-4e73-4070-b1de-a852a3575e04")
+		(property "Reference" "C3"
+			(at 137.1663 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 133.35 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 142.24 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 137.16 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 145.034 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 146.558 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 148.082 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 137.1663 52.07 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2451dedf-f107-4852-a2fa-0e4918920c84")
+		)
+		(pin "2"
+			(uuid "4b809026-c2d1-4729-b05c-c280d8650393")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -12079,6 +13798,73 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 199.39 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5406d142-b92b-407d-b862-0676ff3eb8a8")
+		(property "Reference" "#PWR080"
+			(at 199.39 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 199.39 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 199.39 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 199.39 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9bc2f82f-62a0-4ce4-9def-e9150985c191")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR080")
 					(unit 1)
 				)
 			)
@@ -12612,6 +14398,73 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 139.7 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5b6eb14f-cd6a-42b3-ad49-10e06ad94c90")
+		(property "Reference" "#PWR073"
+			(at 139.7 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 139.7 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 139.7 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 139.7 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "45a986ab-6109-4504-a522-93b46de6ca31")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR073")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 175.26 156.21 0)
 		(mirror y)
 		(unit 1)
@@ -12988,6 +14841,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 194.31 237.49 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "611bac50-bff0-4c7a-bb07-2a85d4198779")
+		(property "Reference" "#PWR090"
+			(at 194.31 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 194.31 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 194.31 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 194.31 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "79c39d5c-9a6e-463b-80ab-5250554cecb5")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR090")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Generic:P,-15")
 		(at 71.12 257.81 0)
 		(unit 1)
@@ -13051,6 +14971,115 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR064")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 149.86 93.98 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "63dc2826-6967-4ead-b08e-5bf0a5449acc")
+		(property "Reference" "C6"
+			(at 149.8537 87.63 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 153.67 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 144.78 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.86 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 149.86 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 141.986 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 140.462 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 138.938 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 149.8537 90.17 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4f1822dd-401b-4867-a9f7-8daf04280386")
+		)
+		(pin "2"
+			(uuid "b4ac9b26-65f3-4b2f-95a4-f1ca9c117b89")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -13143,6 +15172,223 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "U7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 160.02 55.88 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "671b7fcc-6b21-4fb4-ab2b-744a9a1bdb24")
+		(property "Reference" "C4"
+			(at 160.0137 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 163.83 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 154.94 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 160.02 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 152.146 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 150.622 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 149.098 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 160.0137 52.07 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "51fd6df1-70c5-4c50-b2c5-e465753e599f")
+		)
+		(pin "2"
+			(uuid "ae4bad79-5d46-4f92-bf72-34c71250b76d")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 191.77 161.29 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6749a84b-841c-4b43-8865-ab5820319bca")
+		(property "Reference" "C11"
+			(at 191.7763 154.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 187.96 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 196.85 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 191.77 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 191.77 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 199.644 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 201.168 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 202.692 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 191.7763 157.48 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1a8e3464-539b-4c8c-b1be-5f8eb3e58010")
+		)
+		(pin "2"
+			(uuid "7407e220-e59c-49b4-af65-c304da58b47e")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C11")
 					(unit 1)
 				)
 			)
@@ -13429,6 +15675,114 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR053")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 191.77 237.49 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6a2642f0-a310-4a26-9503-6b65862b6c6d")
+		(property "Reference" "C20"
+			(at 191.7763 231.14 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 187.96 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 196.85 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 191.77 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 191.77 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 199.644 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 201.168 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 202.692 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 191.7763 233.68 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "336ce75a-cdc3-45fe-a10b-c6e667a84bf5")
+		)
+		(pin "2"
+			(uuid "02a29eee-36f6-4adb-a365-4bdcabfbf6c5")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -13745,6 +16099,74 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 93.98 163.83 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6e36d992-5fdf-48a1-8f93-234013ce976c")
+		(property "Reference" "#PWR084"
+			(at 93.98 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 93.98 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 93.98 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 93.98 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 93.98 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "faa053a7-abec-4174-9ef3-b982384a5ecf")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR084")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 222.25 199.39 0)
 		(mirror y)
 		(unit 1)
@@ -13806,6 +16228,222 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR069")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 77.47 199.39 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "716b332d-58b5-44c9-b5bd-0923f0e55568")
+		(property "Reference" "C13"
+			(at 77.4763 193.04 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 73.66 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 82.55 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 77.47 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 77.47 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 85.344 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 86.868 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 88.392 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 77.4763 195.58 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2f4188da-990f-420d-ad9f-4ad68fd486e0")
+		)
+		(pin "2"
+			(uuid "f3a2c445-5692-466a-9bd7-e9cdf44db889")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 193.04 205.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "747adf2e-9182-482e-b728-b8b4ac62b618")
+		(property "Reference" "C17"
+			(at 193.0463 199.39 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 189.23 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 198.12 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 193.04 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 200.914 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 202.438 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 203.962 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 193.0463 201.93 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "068cce6e-9661-4343-bcd6-22b1b6050cb6")
+		)
+		(pin "2"
+			(uuid "8eb451aa-5c9a-46e0-9f5a-6e8defb13f11")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C17")
 					(unit 1)
 				)
 			)
@@ -14083,6 +16721,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 80.01 199.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7c7306d8-a96e-4cb2-86c0-242d127bd23c")
+		(property "Reference" "#PWR083"
+			(at 80.01 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 80.01 204.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 80.01 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 80.01 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 80.01 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1aed1e07-0bb4-4e2e-88e7-125e8495d3c1")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR083")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "project:PGA2320")
 		(at 149.86 187.96 0)
 		(unit 1)
@@ -14186,6 +16891,114 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "U10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 191.6228 214.63 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "807813e8-8e43-4ae1-a25d-b1e703dc4ae4")
+		(property "Reference" "C19"
+			(at 191.6291 208.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 187.8128 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 196.7028 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 191.6228 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 191.6228 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 199.4968 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 201.0208 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 202.5448 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 191.6291 210.82 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "77bfb97e-dffa-490a-9c2c-ed4568453bca")
+		)
+		(pin "2"
+			(uuid "a80f5da5-a919-4445-a5db-6b1ae5b253d9")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C19")
 					(unit 1)
 				)
 			)
@@ -14445,6 +17258,114 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "R12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 146.05 78.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "870245f7-effb-4322-9f9e-322bba054469")
+		(property "Reference" "C5"
+			(at 146.0563 72.39 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 142.24 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 151.13 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 146.05 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 146.05 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 153.924 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 155.448 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 156.972 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 146.0563 74.93 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ca7e2fc2-463d-4dda-a13f-f1d0974d875f")
+		)
+		(pin "2"
+			(uuid "47fac1c0-ad5b-4054-8deb-bb1f6d5ed439")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -14716,6 +17637,182 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR041")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 160.02 30.48 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8d8f8205-5c9a-4a7c-adfc-87b7ac11e3b6")
+		(property "Reference" "C2"
+			(at 160.0137 24.13 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 163.83 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 154.94 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 160.02 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 152.146 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 150.622 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 149.098 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 160.0137 26.67 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "56115832-b65a-4b1c-9df7-03baf24b9001")
+		)
+		(pin "2"
+			(uuid "cf735457-c4ed-4aba-8c4e-a0a9a7f25ddf")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 195.58 205.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "94eb7a26-4792-4a44-8603-34a1cfcd411b")
+		(property "Reference" "#PWR087"
+			(at 195.58 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 195.58 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 195.58 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 195.58 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 195.58 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "faf78968-0605-46a7-9dc7-f24896014ded")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR087")
 					(unit 1)
 				)
 			)
@@ -15939,6 +19036,114 @@
 		)
 	)
 	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 135.89 30.48 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b676bc8b-2171-4408-9f65-1d8bf683392e")
+		(property "Reference" "C1"
+			(at 135.8963 24.13 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 132.08 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 140.97 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 135.89 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 135.89 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 143.764 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 145.288 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 146.812 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 135.8963 26.67 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1dc464c5-7738-4419-88a4-fcc01bb1384b")
+		)
+		(pin "2"
+			(uuid "1061c47f-5c04-4d44-b183-724b8c4d1888")
+		)
+		(instances
+			(project ""
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "4ms_Resistor:3.0k_0603_0.1%")
 		(at 217.17 226.06 90)
 		(unit 1)
@@ -16743,6 +19948,115 @@
 		)
 	)
 	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 95.25 193.04 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cb20d78d-c333-4e16-9e82-10765bd9f585")
+		(property "Reference" "C15"
+			(at 95.2437 186.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 99.06 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 90.17 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 95.25 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 87.376 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 85.852 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 84.328 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 95.2437 189.23 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b183670a-7da0-467e-955b-2849c0d9bcbf")
+		)
+		(pin "2"
+			(uuid "2996f468-b7bc-4bcf-a948-3d7a2bcf257b")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 229.87 251.46 0)
 		(unit 1)
@@ -16895,6 +20209,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 185.42 269.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d1b14c29-a1d1-4176-b298-9c68e692d55f")
+		(property "Reference" "#PWR092"
+			(at 185.42 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 185.42 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 185.42 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 185.42 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b5cd399d-822d-4163-9599-7be354f651be")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR092")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "project:LTC1063")
 		(at 149.86 256.54 0)
 		(unit 1)
@@ -16975,6 +20356,223 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "U13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 113.03 132.08 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d33ef2f5-3077-43e5-945a-81b355933548")
+		(property "Reference" "C8"
+			(at 113.0237 125.73 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 116.84 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 107.95 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 113.03 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 105.156 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 103.632 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 102.108 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 113.0237 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1bfef6e5-dcfe-408d-8d3c-c932c6e7171e")
+		)
+		(pin "2"
+			(uuid "4ffa2f54-cd8e-4195-b245-2be19a6cfdc6")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 194.31 186.69 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d381b1ea-4268-421d-8b1f-7c8730ed9c7f")
+		(property "Reference" "C16"
+			(at 194.3163 180.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 190.5 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 199.39 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 194.31 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 202.184 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 203.708 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 205.232 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 194.3163 182.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "49ac1900-2133-4f31-954f-1c0c5bb87283")
+		)
+		(pin "2"
+			(uuid "5c9049f3-0e87-49cc-9407-1654cf432fde")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C16")
 					(unit 1)
 				)
 			)
@@ -17388,6 +20986,115 @@
 		)
 	)
 	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 130.81 269.24 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "daf7a39e-508f-4337-934e-cd0be355097f")
+		(property "Reference" "C21"
+			(at 130.8037 262.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 134.62 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 125.73 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 130.81 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 130.81 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 122.936 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 121.412 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 119.888 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 130.8037 265.43 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4aef251a-4cd0-4b27-b8f1-f28bdb86bb36")
+		)
+		(pin "2"
+			(uuid "bc7ecb21-d663-4fc8-8a66-6806b13694cd")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 236.22 269.24 0)
 		(unit 1)
@@ -17723,6 +21430,182 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 194.31 161.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e1087d3a-05d4-4e17-bb17-afbd0524d0aa")
+		(property "Reference" "#PWR081"
+			(at 194.31 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 194.31 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 194.31 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 194.31 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e630e342-e2e7-4e10-ae0d-8a4a5acb3624")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR081")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 96.52 163.83 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e3f41c0f-cc49-4cea-9af4-3c2a7ff79bca")
+		(property "Reference" "C14"
+			(at 96.5137 157.48 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 100.33 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 91.44 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 96.52 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 88.646 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 87.122 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 85.598 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 96.5137 160.02 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6789492b-34cf-481b-a27c-0de2d4d5744d")
+		)
+		(pin "2"
+			(uuid "1bd1a2a3-14f3-43ea-9f69-b5ccd5213c22")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Generic:P,+15")
 		(at 181.61 158.75 0)
 		(unit 1)
@@ -17926,6 +21809,181 @@
 		)
 	)
 	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 285.75 256.54 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e707f71c-d506-4d3b-bce3-0aa16c0c4e4e")
+		(property "Reference" "C23"
+			(at 285.7563 250.19 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 281.94 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 290.83 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 285.75 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 285.75 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 293.624 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 295.148 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 296.672 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 285.7563 252.73 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "81906d44-634a-4fa6-a1d1-c1bd8ed33492")
+		)
+		(pin "2"
+			(uuid "f0544055-522c-4528-b00f-ca3f65b6590b")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 194.1628 214.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e74fd6d2-8b69-4702-9892-57e0e1157355")
+		(property "Reference" "#PWR089"
+			(at 194.1628 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 194.1628 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 194.1628 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.1628 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 194.1628 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c9796a0c-0a46-47d4-b079-d78f20443bcc")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR089")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Mechanical:MountingHole")
 		(at 57.15 26.67 0)
 		(unit 1)
@@ -17984,6 +22042,114 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 187.96 163.83 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e9dc54ca-cce9-4732-a30f-131a4d3054eb")
+		(property "Reference" "C12"
+			(at 187.9663 157.48 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 184.15 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 193.04 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.96 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 187.96 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 195.834 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 197.358 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 198.882 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 187.9663 160.02 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "184edafd-59c1-42ad-a94f-e51179530e97")
+		)
+		(pin "2"
+			(uuid "bcb4c45b-67fa-460d-816c-b8fd36cf590e")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C12")
 					(unit 1)
 				)
 			)
@@ -18124,6 +22290,141 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 147.32 93.98 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ee2e22ad-ed1f-469b-812d-044ab8750eef")
+		(property "Reference" "#PWR076"
+			(at 147.32 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 147.32 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 147.32 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 147.32 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ca1b58b3-4304-4e30-9b8c-4e327ad5cf41")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR076")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 190.5 163.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ee5f2e22-9177-4ad9-9b06-6bcc7754eaca")
+		(property "Reference" "#PWR082"
+			(at 190.5 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 190.5 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 190.5 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 190.5 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f4e695d1-8582-46bb-8736-e0cd7bcda1ea")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR082")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 66.04 199.39 0)
 		(unit 1)
@@ -18252,6 +22553,74 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR065")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 128.27 269.24 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f1b097a2-be15-435f-9017-e5c53906bf26")
+		(property "Reference" "#PWR091"
+			(at 128.27 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 128.27 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 128.27 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 128.27 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "03c54825-3dfe-41ca-9b30-f2070bcb8ade")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR091")
 					(unit 1)
 				)
 			)
@@ -18712,6 +23081,115 @@
 		)
 	)
 	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 95.25 224.79 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f8349314-c5f6-48d2-a50a-8036e894b359")
+		(property "Reference" "C18"
+			(at 95.2437 218.44 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 99.06 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 90.17 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 95.25 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 87.376 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 85.852 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 84.328 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 95.2437 220.98 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4eb8fcb2-62db-4a43-9cca-15d03c3a5dd8")
+		)
+		(pin "2"
+			(uuid "90e4b6c8-7c5f-4148-a6d8-2a982037f8d2")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Generic:P,-5")
 		(at 132.08 259.08 0)
 		(unit 1)
@@ -18775,6 +23253,223 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR059")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 196.85 134.62 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fc057d3e-5630-4403-b597-0d7336bc91dd")
+		(property "Reference" "C10"
+			(at 196.8563 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 193.04 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 201.93 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 196.85 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 196.85 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 204.724 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 206.248 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 207.772 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 196.8563 130.81 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "63894491-c6cd-4806-a4d0-a37b9f5c2355")
+		)
+		(pin "2"
+			(uuid "44c97bf8-617a-46ef-8507-48f95aaa8e20")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Capacitor:0.22uF_0603_25V")
+		(at 116.84 107.95 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fc827706-179d-435b-b642-bf0dc13fcc2a")
+		(property "Reference" "C7"
+			(at 116.8337 101.6 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22uF_0603_25V"
+			(at 120.65 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Capacitor:C_0603"
+			(at 111.76 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.84 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 116.84 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "0.22uF, Min 25V, 10%, X7R or similar"
+			(at 108.966 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "TDK"
+			(at 107.442 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "CGA3E2X5R1E224K080AA"
+			(at 105.918 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "0.22uF"
+			(at 116.8337 104.14 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fbfa28e5-328b-47e8-ac02-5c7a2293fc52")
+		)
+		(pin "2"
+			(uuid "0c93d575-0825-48c6-9f4b-eb152e54b564")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -18860,6 +23555,73 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "U11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 138.43 30.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ffb50ce6-5cde-4c14-aa0f-babb448759ec")
+		(property "Reference" "#PWR071"
+			(at 138.43 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 138.43 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 138.43 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 138.43 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 138.43 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9a62820d-10b3-4ffa-88c0-1ce2ed79bce2")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
