@@ -5,10 +5,9 @@
 	(layer "F.Cu")
 	(descr "Through hole pin header")
 	(tags "pin header")
-	(property "Reference" "H?"
-		(at 0 -11.176 0)
+	(property "Reference" "U"
+		(at 6.096 -7.874 0)
 		(layer "F.SilkS")
-		(hide yes)
 		(uuid "7dcda675-9d97-4158-b5c1-bab63b5548fa")
 		(effects
 			(font
