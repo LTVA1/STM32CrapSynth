@@ -7499,6 +7499,7 @@
 		(property "Value" "~"
 			(at 0 6.1 90)
 			(layer "F.Fab")
+			(hide yes)
 			(uuid "24caf44e-f847-4184-9036-9dd52f7d244c")
 			(effects
 				(font
