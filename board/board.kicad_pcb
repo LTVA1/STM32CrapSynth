@@ -19131,8 +19131,8 @@
 		(uuid "33b91347-01e0-4c93-9722-537d6906f02f")
 	)
 	(gr_line
-		(start 98.270142 58.000001)
-		(end 107.220177 58.000001)
+		(start 98.2 58.000001)
+		(end 107.150035 58.000001)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19152,8 +19152,8 @@
 		(uuid "73a4afd1-6ca3-46b8-89ff-f7ace56fde0b")
 	)
 	(gr_line
-		(start 98.330142 106.92)
-		(end 98.350142 117.08)
+		(start 97.98 107)
+		(end 98 121)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19162,8 +19162,8 @@
 		(uuid "742798d4-6318-4ed8-abaa-7f05c5740d9f")
 	)
 	(gr_line
-		(start 189.770142 117.08)
-		(end 189.770142 48.5)
+		(start 190 121)
+		(end 190 45.2)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19194,8 +19194,8 @@
 		(uuid "8ace1621-108b-4e2e-98df-c386c5468f63")
 	)
 	(gr_line
-		(start 107.220142 58.025)
-		(end 107.220142 106.92)
+		(start 107.220177 58.000001)
+		(end 107.2 107)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19204,8 +19204,8 @@
 		(uuid "9eabe650-91b7-4f4a-8465-996e4faabdf5")
 	)
 	(gr_line
-		(start 98.270142 48.5)
-		(end 189.770142 48.5)
+		(start 98.2 45.2)
+		(end 190 45.2)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19225,8 +19225,8 @@
 		(uuid "d0985cad-0f34-4feb-882f-bbc94f289f4f")
 	)
 	(gr_line
-		(start 107.220142 106.92)
-		(end 98.330142 106.92)
+		(start 107.2 107)
+		(end 98.11 107)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19235,8 +19235,8 @@
 		(uuid "d753c596-fb24-4d3d-b59c-50ea064cdc14")
 	)
 	(gr_line
-		(start 189.770142 117.08)
-		(end 98.350142 117.08)
+		(start 190 121)
+		(end 98 121)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19245,8 +19245,8 @@
 		(uuid "dd88abc2-28af-477a-9ed6-2d6e27f2a8e2")
 	)
 	(gr_line
-		(start 98.270142 48.5)
-		(end 98.270142 58.000001)
+		(start 98.2 45.2)
+		(end 98.2 58.000001)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -19398,7 +19398,7 @@
 		)
 	)
 	(gr_text "PB5"
-		(at 159.35 51.9 90)
+		(at 159.2 51 90)
 		(layer "F.SilkS")
 		(uuid "5237423e-96c3-4890-8926-515e5bf8469f")
 		(effects
@@ -19494,7 +19494,7 @@
 		)
 	)
 	(gr_text "PD2"
-		(at 166.85 52 90)
+		(at 166.85 51 90)
 		(layer "F.SilkS")
 		(uuid "7eb65205-85cb-45de-a7cd-490210730b89")
 		(effects
@@ -19542,7 +19542,7 @@
 		)
 	)
 	(gr_text "PC9"
-		(at 159.35 116.95 90)
+		(at 159.35 118 90)
 		(layer "F.SilkS")
 		(uuid "a1b71558-250b-4ba3-84e6-27312666b643")
 		(effects
@@ -19554,7 +19554,7 @@
 		)
 	)
 	(gr_text "PB4"
-		(at 161.75 51.9 90)
+		(at 161.75 51 90)
 		(layer "F.SilkS")
 		(uuid "a7130620-6184-4dc8-9f15-016b62f2ac3d")
 		(effects
@@ -19626,7 +19626,7 @@
 		)
 	)
 	(gr_text "PB14"
-		(at 146.5 117.15 90)
+		(at 146.5 119 90)
 		(layer "F.SilkS")
 		(uuid "bba4b75d-b716-42d5-902e-f170f6c00bb7")
 		(effects
@@ -19650,7 +19650,7 @@
 		)
 	)
 	(gr_text "PC7"
-		(at 154.3 116.95 90)
+		(at 154.3 118 90)
 		(layer "F.SilkS")
 		(uuid "be5ec811-6383-41dd-b52e-87bbb2f6e47b")
 		(effects
@@ -19662,7 +19662,7 @@
 		)
 	)
 	(gr_text "PC6"
-		(at 151.7 116.95 90)
+		(at 151.7 118 90)
 		(layer "F.SilkS")
 		(uuid "c0692c1c-7992-41e3-a61e-7f3491012e81")
 		(effects
@@ -19674,7 +19674,7 @@
 		)
 	)
 	(gr_text "PB6"
-		(at 156.7 51.9 90)
+		(at 156.7 51 90)
 		(layer "F.SilkS")
 		(uuid "cc085c34-135e-4a38-bfea-43db8d12ac54")
 		(effects
@@ -19710,7 +19710,7 @@
 		)
 	)
 	(gr_text "PB15"
-		(at 149.15 117.1 90)
+		(at 149 119 90)
 		(layer "F.SilkS")
 		(uuid "d06a7a60-a947-42b0-b837-1962aa8ea5d1")
 		(effects
@@ -19734,7 +19734,7 @@
 		)
 	)
 	(gr_text "PC12"
-		(at 169.4 52.55 90)
+		(at 169.4 51 90)
 		(layer "F.SilkS")
 		(uuid "da0a8a92-bb94-400e-a53d-d59c5e85c452")
 		(effects
@@ -19806,7 +19806,7 @@
 		)
 	)
 	(gr_text "PA15"
-		(at 171.95 52.4 90)
+		(at 171.95 51 90)
 		(layer "F.SilkS")
 		(uuid "eebf6b5a-45c1-42df-b0e9-37cc3764bdc2")
 		(effects
@@ -19818,7 +19818,7 @@
 		)
 	)
 	(gr_text "PC8"
-		(at 156.7 116.95 90)
+		(at 156.7 118 90)
 		(layer "F.SilkS")
 		(uuid "ef61cb7d-5e3f-49c5-8d1a-59fb860ac615")
 		(effects
@@ -19842,7 +19842,7 @@
 		)
 	)
 	(gr_text "PB3"
-		(at 164.3 51.9 90)
+		(at 164.3 51 90)
 		(layer "F.SilkS")
 		(uuid "f963b896-91ac-4417-97a8-bd9a8f97a64f")
 		(effects
