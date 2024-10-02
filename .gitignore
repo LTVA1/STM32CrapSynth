@@ -1,3 +1,4 @@
-board/board-backups
+board/board-backups/*
 *.o
 */.vscode/
+.metadata/*

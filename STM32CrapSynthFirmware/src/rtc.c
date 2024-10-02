@@ -5,6 +5,7 @@
  *      Author: georg
  */
 
+#include "rtc.h"
 #include "stm32f3xx.h"
 
 void RTC_WKUP_IRQHandler()

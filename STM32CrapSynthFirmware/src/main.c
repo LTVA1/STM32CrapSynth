@@ -32,6 +32,7 @@ SOFTWARE.
 
 #include "systick.h"
 #include "rtc.h"
+#include "internal_flash.h"
 
 /* Private macro */
 /* Private variables */
@@ -112,6 +113,7 @@ int main(void)
 {
 	enable_all_clocks(); // in that order because http://efton.sk/STM32/gotcha/g183.html
 	set_72MHz();
+	unlock_flash();
 	systick_init();
 	rtc_init();
 
