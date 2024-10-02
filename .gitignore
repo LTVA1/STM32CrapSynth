@@ -2,3 +2,7 @@ board/board-backups/*
 *.o
 */.vscode/
 .metadata/*
+.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+.metadata/.plugins/org.eclipse.cdt.ui/STM32CrapSynthFirmware.build.log
+.metadata/.plugins/org.eclipse.cdt.ui/global-build.log
