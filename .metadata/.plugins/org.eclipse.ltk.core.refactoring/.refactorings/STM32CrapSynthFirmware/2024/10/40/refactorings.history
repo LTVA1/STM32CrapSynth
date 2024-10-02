@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;STM32CrapSynthFirmware/src/systick&apos; to &apos;systick.h&apos;" description="Rename resource &apos;systick&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/systick" name="systick.h" stamp="1727873887190" updateReferences="true"/>
+</session>

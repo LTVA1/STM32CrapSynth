@@ -1,0 +1,13 @@
+/*
+ * systick.c
+ *
+ *  Created on: 2 окт. 2024 г.
+ *      Author: georg
+ */
+
+#include "stm32f3xx.h"
+
+void systick_init()
+{
+
+}
