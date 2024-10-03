@@ -14,6 +14,7 @@ void SysTick_Handler()
 
 void systick_init()
 {
+	//phase reset timer 3
 	SysTick->CTRL = 0; // disable running timer
 	SysTick->LOAD = 1;
 	SysTick->VAL = 1;

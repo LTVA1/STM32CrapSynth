@@ -500,7 +500,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at 0 6.858 0)
+			(at 0 8.636 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -556,6 +556,14 @@
 			)
 		)
 		(symbol "LTC1063_1_1"
+			(text "LTC1063"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
 			(pin input line
 				(at -12.7 3.81 0)
 				(length 2.54)

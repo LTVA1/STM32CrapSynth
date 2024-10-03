@@ -6,11 +6,8 @@
     "hidden_netclasses": [],
     "hidden_nets": [
       "+3.3V",
-      "P,+15",
       "GND",
-      "P,-15",
-      "+5V",
-      "P,-5"
+      "+5V"
     ],
     "high_contrast_mode": 0,
     "net_color_mode": 1,

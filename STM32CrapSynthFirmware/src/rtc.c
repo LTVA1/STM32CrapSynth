@@ -25,6 +25,7 @@ void rtc_init()
 
 	while(!(RTC->ISR & RTC_ISR_WUTWF)) {}
 
+	//phase reset timer 4
 	RTC->CR &= RTC_CR_WUCKSEL;
 	RTC->CR |= RTC_CR_WUCKSEL_2;
 	RTC->CR |= RTC_CR_WUTIE;

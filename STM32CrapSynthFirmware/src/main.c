@@ -33,6 +33,7 @@ SOFTWARE.
 #include "systick.h"
 #include "rtc.h"
 #include "internal_flash.h"
+#include "tim.h"
 
 /* Private macro */
 /* Private variables */
@@ -124,6 +125,7 @@ int main(void)
 	unlock_flash();
 	systick_init();
 	rtc_init();
+	timers_all_init();
 
 	while(1)
 	{
