@@ -34,6 +34,8 @@ SOFTWARE.
 #include "rtc.h"
 #include "internal_flash.h"
 #include "tim.h"
+#include "spi.h"
+#include "uart.h"
 
 /* Private macro */
 /* Private variables */
@@ -126,6 +128,8 @@ int main(void)
 	systick_init();
 	rtc_init();
 	timers_all_init();
+	spi_init();
+	uart_init();
 
 	while(1)
 	{

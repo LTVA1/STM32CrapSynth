@@ -77,7 +77,7 @@ void timers_all_init()
 	TIM16->CCR1 = 0;	//<-- here need put pwm value...
 	TIM16->CCER |= TIM_CCER_CC1E | TIM_CCER_CC1NP; //TIM_CCER_CC1NP - change polarity (since complementary channel is used)
 
-	//noise clock -> TIM17 ch.1 complementary
+	//noise clock (or "SPI" clock when loading MM5437 LFSR) -> TIM17 ch.1 complementary
 	TIM17->CCMR1 |= TIM_CCMR1_OC1CE | TIM_CCMR1_OC1PE;
 	TIM17->CCMR1 |= TIM_CCMR1_OC1M_2 | TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_0;	//<-- pwm mode 2
 	TIM17->CCR1 = 0;	//<-- here need put pwm value...
