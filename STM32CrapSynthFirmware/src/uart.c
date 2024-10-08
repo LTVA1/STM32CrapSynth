@@ -31,11 +31,9 @@ void USART1_IRQHandler()
 
 void uart_init()
 {
-	USART1->CR1 |= USART_CR1_TE | USART_CR1_RE;	//enable transmit and receive
+	USART1->CR1 |= USART_CR1_TE | USART_CR1_RE | USART_CR1_TCIE | USART_CR1_RXNEIE;	//enable transmit and receive and interruption
 
 	USART1->BRR = SystemCoreClock/256000; //256000 baud rate
-
-	USART1->CR1 |= USART_CR1_TCIE | USART_CR1_RXNEIE; //interruption
 	NVIC_SetPriority(USART1_IRQn, 3);
 
 	USART1->CR3 |= USART_CR3_DMAT; //enable DMA tx mode

@@ -36,6 +36,7 @@ SOFTWARE.
 #include "tim.h"
 #include "spi.h"
 #include "uart.h"
+#include "dac.h"
 
 /* Private macro */
 /* Private variables */
@@ -129,6 +130,7 @@ int main(void)
 	rtc_init();
 	timers_all_init();
 	spi_init();
+	dac_init();
 	uart_init();
 
 	while(1)
