@@ -12,5 +12,6 @@
 #include <stdint.h>
 
 #define WAVETABLE_SIZE 256
+#define NOISE_LFSR_LENGTH 23
 
 #endif /* PLAYBACK_H_ */

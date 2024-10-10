@@ -10,6 +10,7 @@
 #include "playback.h"
 
 extern uint8_t wavetable_array[2][WAVETABLE_SIZE];
+extern uint32_t noise_lfsr_load[];
 
 void dma_init()
 {
@@ -18,6 +19,7 @@ void dma_init()
 
 	//DMA channels mapping:
 
+	//DMA1_Channel1 - TIM17-driven noise chip LFSR load ("SPI")
 	//DMA1_Channel2 - SPI1 RX
 	//DMA1_Channel3 - SPI1 TX
 	//DMA1_Channel4 - USART1 TX
@@ -27,6 +29,12 @@ void dma_init()
 
 	//DMA2_Channel3 - DAC ch.1 request
 	//DMA2_Channel4 - DAC ch.2 request
+
+	DMA1_Channel1->CCR |= DMA_CCR_MINC | DMA_CCR_DIR | DMA_CCR_TCIE | DMA_CCR_MSIZE_1; //32 bits
+	DMA1_Channel1->CPAR = (uint32_t)(&(GPIOB->BSRRL));
+	DMA1_Channel1->CMAR = (uint32_t)(&noise_lfsr_load[0]);
+	NVIC_SetPriority(DMA1_Channel1_IRQn, 8);
+	NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 
 	DMA1_Channel2->CCR |= DMA_CCR_MINC | DMA_CCR_TCIE;
 	DMA1_Channel2->CPAR = (uint32_t)(&(SPI1->DR));
