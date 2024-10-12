@@ -1,0 +1,238 @@
+(footprint "UART_port"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "Through hole pin header")
+	(tags "pin header")
+	(property "Reference" "H1"
+		(at -4.9 0.07366 -90)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "05bc911a-1c96-4525-90ae-3cbd090c33f4")
+		(effects
+			(font
+				(size 0.65 0.65)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "MOD INS"
+		(at 4.9 0.762 -90)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "ecda02f8-2f9b-4d63-b50a-7a68e40ac528")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" "UART_port"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3dee9a39-f393-4a3a-b7b3-9f6071c855c0")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 -90)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b457e0b0-15d3-4356-b25f-b26f6190e6bd")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 -90)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "37aeb905-8cdf-420e-a9c2-acd4d003e6a2")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -3.9624 -1.27)
+		(end 3.81 -1.27)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "52181080-6eef-4376-8bdd-ff6d5e8d7bb8")
+	)
+	(fp_line
+		(start -3.9624 1.27)
+		(end -3.9624 -1.27)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "5a1c34f3-9410-4593-ad98-65f765f44f5b")
+	)
+	(fp_line
+		(start 3.81 -1.27)
+		(end 3.81 1.27)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ad82616f-ff15-4acf-8d2f-2eeb1cb4cf1d")
+	)
+	(fp_line
+		(start 3.81 1.27)
+		(end -3.9624 1.27)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f4db152d-ba48-4e07-bafc-fa21e02e8829")
+	)
+	(fp_line
+		(start -4.29 -1.52)
+		(end -4.29 1.52)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "6ab2b718-fb7d-40da-9c19-18512fb20a52")
+	)
+	(fp_line
+		(start -4.29 -1.52)
+		(end 4.31 -1.52)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "ee693454-56ae-4ae5-9dfa-3c3d52e15476")
+	)
+	(fp_line
+		(start -4.29 1.52)
+		(end 4.31 1.52)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "e7003ed9-97cc-45ee-87d3-897c714c1c05")
+	)
+	(fp_line
+		(start 4.31 -1.52)
+		(end 4.31 1.52)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "bb3d9222-1dca-441a-bc8e-0aa7c6ba3cd5")
+	)
+	(fp_text user "UART connection"
+		(at -17.78 0.254 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "22d8cee4-ab4e-43f9-8cc2-a56df80d3d10")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "RX"
+		(at -1.016 3.302 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "24dfdbef-e2fd-4404-9008-1ea364710f61")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "TX"
+		(at -3.81 3.302 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "7e20a256-ab8c-4d68-9354-79530868da1e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "GND"
+		(at 1.524 3.302 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "cb5e3137-f338-4af3-980a-e113bee8126c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -2.54 0 90)
+		(size 1.7 1.7)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(clearance 0.381)
+		(uuid "abe91357-6004-4e1b-a898-05b7d08105c9")
+	)
+	(pad "2" thru_hole circle
+		(at 0 0 90)
+		(size 1.7 1.7)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "f468e136-c979-47e7-9811-8dc3e0285e99")
+	)
+	(pad "3" thru_hole circle
+		(at 2.54 0 90)
+		(size 1.7 1.7)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(clearance 0.381)
+		(uuid "7e027497-be24-4af6-b749-ee50360fde79")
+	)
+	(model "${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.wrl"
+		(offset
+			(xyz 0 2.54 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

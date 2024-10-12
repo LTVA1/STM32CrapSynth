@@ -1,4 +1,4 @@
-23826648978844668
+23828377718058341
 4ms_Capacitor
 CP_Elec_5x5.3
 SMT capacitor, aluminium electrolytic, 5x5.3
@@ -97310,6 +97310,13 @@ project
 BOOMELE_PJ-320B
 
 
+0
+3
+3
+project
+UART_port
+Through hole pin header
+pin header
 0
 3
 3
