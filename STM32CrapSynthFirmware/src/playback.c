@@ -10,3 +10,4 @@
 
 uint8_t wavetable_array[2][WAVETABLE_SIZE];
 uint32_t noise_lfsr_load[NOISE_LFSR_LENGTH * 2];
+uint8_t sample_mem_ram[SAMPLE_MEM_RAM_SIZE];

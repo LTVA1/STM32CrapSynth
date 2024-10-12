@@ -39,6 +39,8 @@ SOFTWARE.
 #include "dac.h"
 #include "dma.h"
 #include "playback.h"
+#include "gpio.h"
+#include "external_flash.h"
 
 /* Private macro */
 /* Private variables */
@@ -123,8 +125,6 @@ void set_72MHz()
 	SystemCoreClockUpdate();
 }
 
-uint8_t sample_mem_ram[48 * 1024];
-
 int main(void)
 {
 	enable_all_clocks(); // in that order because http://efton.sk/STM32/gotcha/g183.html
@@ -133,14 +133,17 @@ int main(void)
 	systick_init();
 	rtc_init();
 	timers_all_init();
-	spi_init();
 	dac_init();
-	uart_init();
 	dma_init();
+	gpio_init();
+	spi_init();
+	external_flash_init_and_request_info();
+	uart_init();
+	uart_send_comms_establish_packet();
 
 	while(1)
 	{
-		sample_mem_ram[77] = 1;
+
 	}
 
   return 0;

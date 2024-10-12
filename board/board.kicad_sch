@@ -6899,6 +6899,16 @@
 	)
 	(wire
 		(pts
+			(xy 48.26 149.86) (xy 85.09 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72ec7c68-6d84-430b-8dc2-db7e4ba2e888")
+	)
+	(wire
+		(pts
 			(xy 154.94 93.98) (xy 154.94 87.63)
 		)
 		(stroke
@@ -7359,7 +7369,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 162.56) (xy 74.93 162.56)
+			(xy 85.09 162.56) (xy 48.26 162.56)
 		)
 		(stroke
 			(width 0)
@@ -7426,16 +7436,6 @@
 			(type default)
 		)
 		(uuid "a98c369b-bd87-4666-9c1f-1d85bba743e5")
-	)
-	(wire
-		(pts
-			(xy 48.26 149.86) (xy 85.09 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aa1e8ee8-da83-4654-82a7-92a3cda81f7b")
 	)
 	(wire
 		(pts
@@ -8279,7 +8279,7 @@
 		(uuid "02e4c64c-f7c2-49d4-bc1a-2cccc2bc3673")
 	)
 	(label "PA8(clock)"
-		(at 74.93 162.56 0)
+		(at 48.26 162.56 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8345,7 +8345,7 @@
 		(uuid "09b13d95-d405-47a7-8743-b05782e07439")
 	)
 	(label "PB15{slash}adc4_in5"
-		(at 67.31 149.86 0)
+		(at 48.26 149.86 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8422,7 +8422,7 @@
 		(uuid "375c2691-a4c9-40cf-860e-f4dd65202973")
 	)
 	(label "PB13{slash}adc3_in5"
-		(at 67.31 144.78 0)
+		(at 48.26 144.78 0)
 		(fields_autoplaced yes)
 		(effects
 			(font

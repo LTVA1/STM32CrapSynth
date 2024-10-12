@@ -62,7 +62,7 @@ void dma_init()
 	DMA1_Channel7->CCR |= DMA_CCR_MINC | DMA_CCR_PINC | DMA_CCR_MEM2MEM;
 	DMA1_Channel7->CPAR = (uint32_t)(&wavetable_array[1][0]);
 
-	DMA2_Channel3->CCR |= DMA_CCR_MINC | DMA_CCR_DIR | DMA_CCR_TCIE; //here we may disable interrupt later if it's looped sample without custom loop point
+	DMA2_Channel3->CCR |= DMA_CCR_MINC | DMA_CCR_DIR | DMA_CCR_TCIE; //here we may disable interrupt later if it's looped sample without custom loop point or wavetable
 	DMA2_Channel3->CPAR = (uint32_t)(&DAC1->DHR8R1);
 	NVIC_SetPriority(DMA2_Channel3_IRQn, 8);
 	NVIC_EnableIRQ(DMA2_Channel3_IRQn);

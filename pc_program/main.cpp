@@ -15,7 +15,7 @@
 #define SYNTH_CMD_LOAD_RAM 1
 #define SYNTH_CMD_LOAD_EXT_FLASH 2
 
-#define SYNTH_RESPONSE_SIZE 32
+#define SYNTH_RESPONSE_SIZE 48
 
 #define SYNTH_RESPONSE_READY 0
 #define SYNTH_RESPONSE_FLASH_BLOCK 1
@@ -34,6 +34,8 @@ int load_file(serialib serial)
 	uint32_t SUPPORTED_FILE_VERSION = 0;
 	uint32_t FIRMWARE_VERSION = 0;
 	uint32_t EXTERNAL_FLASH_SIZE = 0;
+	uint64_t EXTERNAL_FLASH_UID = 0;
+	uint8_t EXTERNAL_FLASH_MANUFACTURER_ID = 0;
 
 	uint8_t our_xor = 0;
 
@@ -68,6 +70,9 @@ int load_file(serialib serial)
 	SUPPORTED_FILE_VERSION = (uint32_t)rxbuf[14] + ((uint32_t)rxbuf[15] << 8) + ((uint32_t)rxbuf[16] << 16) + ((uint32_t)rxbuf[17] << 24);
 	FIRMWARE_VERSION = (uint32_t)rxbuf[18] + ((uint32_t)rxbuf[19] << 8) + ((uint32_t)rxbuf[20] << 16) + ((uint32_t)rxbuf[21] << 24);
 	EXTERNAL_FLASH_SIZE = (uint32_t)rxbuf[22] + ((uint32_t)rxbuf[23] << 8) + ((uint32_t)rxbuf[24] << 16) + ((uint32_t)rxbuf[25] << 24);
+	EXTERNAL_FLASH_UID = (uint64_t)rxbuf[26] + ((uint64_t)rxbuf[27] << 8) + ((uint64_t)rxbuf[28] << 16) + ((uint64_t)rxbuf[29] << 24)
+		 + ((uint64_t)rxbuf[30] << 32) + ((uint64_t)rxbuf[31] << 40) + ((uint64_t)rxbuf[32] << 48) + ((uint64_t)rxbuf[33] << 56);
+	EXTERNAL_FLASH_MANUFACTURER_ID = rxbuf[34];
 
 	EXTERNAL_FLASH_SIZE = 1024 * 1024 * 16; //16 MiB TODO: remove when actual comms are established
 
@@ -80,7 +85,9 @@ int load_file(serialib serial)
 		"Samples range in Flash starting address: 0x%08X\n"
 		"Samples array in RAM starting address: 0x%08X\n"
 		"Highest supported .scs file version: %d.%d.%d.%d\n"
-		"External Flash memory size: %d bytes (%d%s)",
+		"External Flash memory size: %d bytes (%d%s)\n"
+		"External Flash memory UID: 0x%08X\n"
+		"External Flash manufacturer ID: 0x%02X\n",
 			rxbuf[21], rxbuf[20], rxbuf[19], rxbuf[18],
 			MCU_FIRMWARE_SIZE,
 			BASE_ADDR_FLASH,
@@ -88,7 +95,9 @@ int load_file(serialib serial)
 			rxbuf[17], rxbuf[16], rxbuf[15], rxbuf[14],
 			EXTERNAL_FLASH_SIZE, //%d bytes
 			EXTERNAL_FLASH_SIZE > 1024 * 1024 ? EXTERNAL_FLASH_SIZE / (1024 * 1024) : EXTERNAL_FLASH_SIZE / 1024, //%d
-			EXTERNAL_FLASH_SIZE > 1024 * 1024 ? "MiB" : "KiB"); //%s
+			EXTERNAL_FLASH_SIZE > 1024 * 1024 ? "MiB" : "KiB", //%s
+			EXTERNAL_FLASH_UID,
+			EXTERNAL_FLASH_MANUFACTURER_ID);
 	
 	std::cout << buffer_cout << std::endl;
 
@@ -161,7 +170,6 @@ int load_file(serialib serial)
 	while(flash_samples_pos < flash_samples_size - 1)
 	{
 		uint32_t block_size = ((flash_samples_size - flash_samples_pos) > FLASH_BLOCK_SIZE ? FLASH_BLOCK_SIZE : (flash_samples_size - flash_samples_pos));
-		//txbuf[0] = SYNTH_SYNC_BYTE;
 		uint8_t data_xor = 0;
 
 		txbuf[1] = SYNTH_CMD_LOAD_FLASH;
@@ -262,7 +270,6 @@ int load_file(serialib serial)
 	while(ram_samples_pos < ram_samples_size - 1)
 	{
 		uint32_t block_size = ((ram_samples_size - ram_samples_pos) > RAM_BLOCK_SIZE ? RAM_BLOCK_SIZE : (ram_samples_size - ram_samples_pos));
-		//txbuf[0] = SYNTH_SYNC_BYTE;
 		uint8_t data_xor = 0;
 
 		txbuf[1] = SYNTH_CMD_LOAD_RAM;
@@ -372,7 +379,6 @@ int load_file(serialib serial)
 	while(regdump_pos < regdump_size - 1)
 	{
 		uint32_t block_size = ((regdump_size - regdump_pos) > EXT_FLASH_BLOCK_SIZE ? EXT_FLASH_BLOCK_SIZE : (regdump_size - regdump_pos));
-		//txbuf[0] = SYNTH_SYNC_BYTE;
 		uint8_t data_xor = 0;
 
 		txbuf[1] = SYNTH_CMD_LOAD_EXT_FLASH;
