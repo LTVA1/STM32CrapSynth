@@ -38,9 +38,13 @@ SOFTWARE.
 #include "uart.h"
 #include "dac.h"
 #include "dma.h"
-#include "playback.h"
 #include "gpio.h"
 #include "external_flash.h"
+#include "main.h"
+#include "commands.h"
+
+Program_state_ccm state_ccm;
+Program_state_ram state_ram;
 
 /* Private macro */
 /* Private variables */
@@ -125,6 +129,11 @@ void set_72MHz()
 	SystemCoreClockUpdate();
 }
 
+void state_init()
+{
+	state_ccm.state = STATE_IDLE;
+}
+
 int main(void)
 {
 	enable_all_clocks(); // in that order because http://efton.sk/STM32/gotcha/g183.html
@@ -136,6 +145,7 @@ int main(void)
 	dac_init();
 	dma_init();
 	gpio_init();
+	state_init();
 	spi_init();
 	external_flash_init_and_request_info();
 	uart_init();
@@ -143,7 +153,8 @@ int main(void)
 
 	while(1)
 	{
-
+		write_packet_to_flash();
+		decode_command();
 	}
 
   return 0;

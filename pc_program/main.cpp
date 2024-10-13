@@ -21,6 +21,8 @@
 #define SYNTH_RESPONSE_FLASH_BLOCK 1
 #define SYNTH_RESPONSE_RAM_BLOCK 2
 #define SYNTH_RESPONSE_EXTERNAL_FLASH_BLOCK 3
+#define SYNTH_RESPONSE_BAD_XOR 4
+#define SYNTH_RESPONSE_UNKNOWN_COMMAND 5
 
 //#define MCU_FIRMWARE_SIZE (50 * 1024) /*TODO: replace with final size*/
 //#define BASE_ADDR_FLASH 0x08000000 + MCU_FIRMWARE_SIZE
@@ -172,9 +174,9 @@ int load_file(serialib serial)
 		uint32_t block_size = ((flash_samples_size - flash_samples_pos) > FLASH_BLOCK_SIZE ? FLASH_BLOCK_SIZE : (flash_samples_size - flash_samples_pos));
 		uint8_t data_xor = 0;
 
-		txbuf[1] = SYNTH_CMD_LOAD_FLASH;
-		txbuf[2] = block_size >> 8;
-		txbuf[3] = block_size & 0xff;
+		txbuf[1] = (block_size + 4) >> 8;
+		txbuf[2] = (block_size + 4) & 0xff;
+		txbuf[3] = SYNTH_CMD_LOAD_FLASH;
 
 		txbuf[4] = (BASE_ADDR_FLASH + flash_samples_pos) & 0xff;
 		txbuf[5] = ((BASE_ADDR_FLASH + flash_samples_pos) >> 8) & 0xff;
@@ -272,9 +274,9 @@ int load_file(serialib serial)
 		uint32_t block_size = ((ram_samples_size - ram_samples_pos) > RAM_BLOCK_SIZE ? RAM_BLOCK_SIZE : (ram_samples_size - ram_samples_pos));
 		uint8_t data_xor = 0;
 
-		txbuf[1] = SYNTH_CMD_LOAD_RAM;
-		txbuf[2] = block_size >> 8;
-		txbuf[3] = block_size & 0xff;
+		txbuf[1] = (block_size + 4) >> 8;
+		txbuf[2] = (block_size + 4) & 0xff;
+		txbuf[3] = SYNTH_CMD_LOAD_RAM;
 
 		txbuf[4] = (BASE_ADDR_RAM + ram_samples_pos) & 0xff;
 		txbuf[5] = ((BASE_ADDR_RAM + ram_samples_pos) >> 8) & 0xff;
@@ -367,7 +369,7 @@ int load_file(serialib serial)
 	{
 		std::cout << "Registers dump block is bigger than external Flash memory!" << std::endl;
 		std::cout << "Exactly by " << regdump_size - EXTERNAL_FLASH_SIZE << " bytes, if you're curious." << std::endl;
-		std::cout << "External Flash size is " << EXTERNAL_FLASH_SIZE << " bytes when regdump is " << regdump_size << "bytes." << std::endl;
+		std::cout << "External Flash size is " << EXTERNAL_FLASH_SIZE << " bytes when regdump is " << regdump_size << " bytes." << std::endl;
 		fclose(f);
 		return -1;
 	}
@@ -381,9 +383,9 @@ int load_file(serialib serial)
 		uint32_t block_size = ((regdump_size - regdump_pos) > EXT_FLASH_BLOCK_SIZE ? EXT_FLASH_BLOCK_SIZE : (regdump_size - regdump_pos));
 		uint8_t data_xor = 0;
 
-		txbuf[1] = SYNTH_CMD_LOAD_EXT_FLASH;
-		txbuf[2] = block_size >> 8;
-		txbuf[3] = block_size & 0xff;
+		txbuf[1] = (block_size + 4) >> 8;
+		txbuf[2] = (block_size + 4) & 0xff;
+		txbuf[3] = SYNTH_CMD_LOAD_EXT_FLASH;
 
 		txbuf[4] = (regdump_pos) & 0xff;
 		txbuf[5] = ((regdump_pos) >> 8) & 0xff;

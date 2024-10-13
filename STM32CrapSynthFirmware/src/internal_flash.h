@@ -9,5 +9,6 @@
 #define INTERNAL_FLASH_H_
 
 void unlock_flash();
+void write_packet_to_flash();
 
 #endif /* INTERNAL_FLASH_H_ */
