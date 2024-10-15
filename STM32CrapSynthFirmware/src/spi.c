@@ -55,17 +55,6 @@ void spi1_send_via_dma(uint8_t* sendbuf, uint16_t size)
 	DMA1_Channel3->CCR |= DMA_CCR_EN;
 }
 
-void spi2_send_via_dma(uint8_t* sendbuf, uint16_t size)
-{
-	while(!spi2_ready) { asm("nop"); }
-
-	DMA1_Channel5->CCR &= ~DMA_CCR_EN;
-	DMA1_Channel5->CMAR = (uint32_t)sendbuf;
-	DMA1_Channel5->CNDTR = size;
-	spi2_ready = 0;
-	DMA1_Channel5->CCR |= DMA_CCR_EN;
-}
-
 void spi1_receive_via_dma(uint8_t* sendbuf, uint8_t* receivebuf, uint16_t size)
 {
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
@@ -86,6 +75,17 @@ void spi1_receive_via_dma(uint8_t* sendbuf, uint8_t* receivebuf, uint16_t size)
 	spi1_rxtx = 1;
 	DMA1_Channel2->CCR |= DMA_CCR_EN;
 	DMA1_Channel3->CCR |= DMA_CCR_EN;
+}
+
+void spi2_send_via_dma(uint8_t* sendbuf, uint16_t size)
+{
+	while(!spi2_ready) { asm("nop"); }
+
+	DMA1_Channel5->CCR &= ~DMA_CCR_EN;
+	DMA1_Channel5->CMAR = (uint32_t)sendbuf;
+	DMA1_Channel5->CNDTR = size;
+	spi2_ready = 0;
+	DMA1_Channel5->CCR |= DMA_CCR_EN;
 }
 
 void spi_init()
