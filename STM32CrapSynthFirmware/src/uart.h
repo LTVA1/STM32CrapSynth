@@ -16,5 +16,6 @@
 void uart_init();
 void uart_send_via_dma(uint16_t size);
 void uart_send_comms_establish_packet();
+void uart_send_response();
 
 #endif /* UART_H_ */

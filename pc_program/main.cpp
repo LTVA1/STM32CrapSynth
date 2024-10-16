@@ -178,10 +178,10 @@ int load_file(serialib serial)
 		txbuf[2] = (block_size + 4) & 0xff;
 		txbuf[3] = SYNTH_CMD_LOAD_FLASH;
 
-		txbuf[4] = (BASE_ADDR_FLASH + flash_samples_pos) & 0xff;
-		txbuf[5] = ((BASE_ADDR_FLASH + flash_samples_pos) >> 8) & 0xff;
-		txbuf[6] = ((BASE_ADDR_FLASH + flash_samples_pos) >> 16) & 0xff;
-		txbuf[7] = ((BASE_ADDR_FLASH + flash_samples_pos) >> 24) & 0xff;
+		txbuf[4] = (flash_samples_pos) & 0xff;
+		txbuf[5] = ((flash_samples_pos) >> 8) & 0xff;
+		txbuf[6] = ((flash_samples_pos) >> 16) & 0xff;
+		txbuf[7] = ((flash_samples_pos) >> 24) & 0xff;
 
 		for(int i = 0; i < block_size; i++) //fill buffer
 		{
@@ -278,10 +278,10 @@ int load_file(serialib serial)
 		txbuf[2] = (block_size + 4) & 0xff;
 		txbuf[3] = SYNTH_CMD_LOAD_RAM;
 
-		txbuf[4] = (BASE_ADDR_RAM + ram_samples_pos) & 0xff;
-		txbuf[5] = ((BASE_ADDR_RAM + ram_samples_pos) >> 8) & 0xff;
-		txbuf[6] = ((BASE_ADDR_RAM + ram_samples_pos) >> 16) & 0xff;
-		txbuf[7] = ((BASE_ADDR_RAM + ram_samples_pos) >> 24) & 0xff;
+		txbuf[4] = (ram_samples_pos) & 0xff;
+		txbuf[5] = ((ram_samples_pos) >> 8) & 0xff;
+		txbuf[6] = ((ram_samples_pos) >> 16) & 0xff;
+		txbuf[7] = ((ram_samples_pos) >> 24) & 0xff;
 
 		for(int i = 0; i < block_size; i++) //fill buffer
 		{

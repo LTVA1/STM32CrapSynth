@@ -13,6 +13,8 @@
 
 #define STATE_IDLE 0
 #define STATE_PROG_INTERNAL_FLASH 1
+#define STATE_PROG_EXTERNAL_FLASH 2
+#define STATE_PROG_RAM 3
 
 typedef struct
 {
@@ -20,6 +22,7 @@ typedef struct
 	uint32_t block_start_offset; // shared between writing to flash (internal and external) and writing to RAM
 	uint16_t block_length;
 	uint8_t* data_pointer;
+	uint8_t last_packet_xor;
 } Program_state_ccm; //in CCM for faster code execution
 
 typedef struct

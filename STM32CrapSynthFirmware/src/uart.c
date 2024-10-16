@@ -9,12 +9,14 @@
 #include "stm32f3xx.h"
 #include "ring_buf.h"
 #include "commands.h"
+#include "main.h"
 
 extern RingBuffer rx_ring_buf;
 
 extern uint16_t manufacturer_id;
 extern uint64_t device_uid;
 extern uint32_t memory_size;
+extern Program_state_ccm state_ccm;
 
 uint8_t tx_buf[TX_BUF_SIZE];
 uint8_t rx_buf[RX_BUF_SIZE];
@@ -123,6 +125,54 @@ void uart_send_comms_establish_packet()
 	}
 
 	tx_buf[SYNTH_RESPONSE_SIZE - 1] = our_xor;
+
+	uart_send_via_dma(SYNTH_RESPONSE_SIZE);
+}
+
+void uart_send_response()
+{
+	our_xor = 0;
+
+	tx_buf[0] = SYNTH_SYNC_BYTE;
+
+	switch(state_ccm.state)
+	{
+		case STATE_PROG_INTERNAL_FLASH:
+		{
+			tx_buf[1] = SYNTH_RESPONSE_FLASH_BLOCK;
+			break;
+		}
+		case STATE_PROG_EXTERNAL_FLASH:
+		{
+			tx_buf[1] = SYNTH_RESPONSE_EXTERNAL_FLASH_BLOCK;
+			break;
+		}
+		case STATE_PROG_RAM:
+		{
+			tx_buf[1] = SYNTH_RESPONSE_RAM_BLOCK;
+			break;
+		}
+		default: break;
+	}
+
+	tx_buf[2] = state_ccm.last_packet_xor;
+
+	tx_buf[3] = state_ccm.block_start_offset & 0xff;
+	tx_buf[4] = (state_ccm.block_start_offset & 0xff) >> 8;
+	tx_buf[5] = (state_ccm.block_start_offset & 0xff) >> 16;
+	tx_buf[6] = (state_ccm.block_start_offset & 0xff) >> 24;
+
+	tx_buf[7] = state_ccm.block_length & 0xff;
+	tx_buf[8] = (state_ccm.block_length & 0xff) >> 8;
+
+	for(int i = 9; i < SYNTH_RESPONSE_SIZE; i++)
+	{
+		tx_buf[i] = 0;
+	}
+	for(int i = 0; i < SYNTH_RESPONSE_SIZE - 1; i++)
+	{
+		our_xor ^= tx_buf[i];
+	}
 
 	uart_send_via_dma(SYNTH_RESPONSE_SIZE);
 }

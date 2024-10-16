@@ -8,13 +8,16 @@
 #include "external_flash.h"
 #include "spi.h"
 #include "gpio.h"
+#include "uart.h"
 #include "stm32f3xx.h"
+#include "main.h"
 
 uint8_t spi_rx_double_buf[EXT_FLASH_RX_BUF_SIZE];
 uint8_t spi_tx_buf[EXT_FLASH_TX_BUF_SIZE];
 
 extern uint8_t spi1_ready_tx;
 extern uint8_t spi1_ready_rx;
+extern Program_state_ccm state_ccm;
 
 uint16_t manufacturer_id;
 uint16_t device_id;
@@ -218,4 +221,15 @@ void external_flash_write_page(uint32_t address, uint8_t* data, uint8_t size) //
 	external_flash_wait_until_not_busy();
 
 	CS_EXT_FLASH_HIGH
+}
+
+void external_flash_write_page_task()
+{
+	if(state_ccm.state != STATE_PROG_EXTERNAL_FLASH) return;
+
+	external_flash_write_page(state_ccm.block_start_offset, state_ccm.data_pointer, state_ccm.block_length);
+
+	uart_send_response();
+
+	state_ccm.state = STATE_IDLE;
 }

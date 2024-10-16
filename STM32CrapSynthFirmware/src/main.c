@@ -43,6 +43,7 @@ SOFTWARE.
 #include "main.h"
 #include "commands.h"
 #include "ad9833.h"
+#include "pga2320.h"
 
 Program_state_ccm state_ccm;
 Program_state_ram state_ram;
@@ -149,14 +150,16 @@ int main(void)
 	state_init();
 	spi_init();
 	ad9833_init_all();
+	att_init_all();
 	external_flash_init_and_request_info();
 	uart_init();
 	uart_send_comms_establish_packet();
 
 	while(1)
 	{
-		write_packet_to_flash();
 		decode_command();
+		write_packet_to_flash();
+		external_flash_write_page_task();
 	}
 
   return 0;

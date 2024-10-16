@@ -7,11 +7,13 @@
 
 #include "spi.h"
 #include "stm32f3xx.h"
+#include "gpio.h"
 
 uint8_t spi1_ready_tx;
 uint8_t spi1_ready_rx;
 uint8_t spi1_rxtx;
 uint8_t spi2_ready;
+extern uint8_t att_need_write;
 
 void DMA1_Channel2_IRQHandler() //receive
 {
@@ -39,6 +41,8 @@ void DMA1_Channel5_IRQHandler() //receive
 	DMA1->IFCR |= DMA_IFCR_CTCIF5;
 	DMA1_Channel5->CCR &= ~DMA_CCR_EN; //stop DMA
 
+	CS_ATTEN_HIGH //to not busy-wait until all 8 bytes are sent...
+	att_need_write = 0;
 	spi2_ready = 1;
 }
 

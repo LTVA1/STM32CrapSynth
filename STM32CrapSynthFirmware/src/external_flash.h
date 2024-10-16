@@ -13,5 +13,6 @@
 #define EXT_FLASH_TX_BUF_SIZE 32
 
 void external_flash_init_and_request_info();
+void external_flash_write_page_task();
 
 #endif /* EXTERNAL_FLASH_H_ */

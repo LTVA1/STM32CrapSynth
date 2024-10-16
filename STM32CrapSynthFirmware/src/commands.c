@@ -10,10 +10,12 @@
 #include "stm32f3xx.h"
 #include "uart.h"
 #include "ring_buf.h"
+#include <string.h>
 
 extern Program_state_ccm state_ccm;
 extern RingBuffer rx_ring_buf;
 extern uint8_t tx_buf[];
+extern uint8_t sample_mem_ram[];
 
 void decode_command()
 {
@@ -91,8 +93,23 @@ void decode_command()
 							((uint32_t)cmd_buf[6] << 16) + ((uint32_t)cmd_buf[7] << 24);
 					state_ccm.block_length = size - 4;
 					state_ccm.data_pointer = &cmd_buf[8];
+
+					if(cmd_buf[3] == SYNTH_CMD_LOAD_RAM)
+					{
+						memcpy(&sample_mem_ram[state_ccm.block_start_offset], state_ccm.data_pointer, state_ccm.block_length);
+						state_ccm.state = STATE_PROG_RAM;
+					}
+					if(cmd_buf[3] == SYNTH_CMD_LOAD_FLASH)
+					{
+						state_ccm.state = STATE_PROG_INTERNAL_FLASH;
+					}
+					if(cmd_buf[3] == SYNTH_CMD_LOAD_EXT_FLASH)
+					{
+						state_ccm.state = STATE_PROG_EXTERNAL_FLASH;
+					}
 				}
-				//todo: do commands
+
+				state_ccm.last_packet_xor = our_xor;
 			}
 
 			if(our_xor != curr_byte && cmd_buf[1] < SYNTH_CMD_MAX)
@@ -134,7 +151,6 @@ void decode_command()
 			}
 
 			state = CMD_DECODE_STATE_BEGIN;
-			//memset(cmd_buf, 0, 64);
 			our_xor = 0;
 			size = 0;
 			break;

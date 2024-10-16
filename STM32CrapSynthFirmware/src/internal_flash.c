@@ -8,6 +8,7 @@
 #include "internal_flash.h"
 #include "main.h"
 #include "stm32f3xx.h"
+#include "uart.h"
 
 extern Program_state_ccm state_ccm;
 
@@ -64,6 +65,8 @@ void write_packet_to_flash()
 
 	flash_erase(state_ccm.block_start_offset);
 	flash_write(state_ccm.data_pointer, state_ccm.block_start_offset, state_ccm.block_length);
+
+	uart_send_response();
 
 	state_ccm.state = STATE_IDLE;
 }
