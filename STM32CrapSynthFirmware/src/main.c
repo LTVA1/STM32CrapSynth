@@ -42,6 +42,7 @@ SOFTWARE.
 #include "external_flash.h"
 #include "main.h"
 #include "commands.h"
+#include "ad9833.h"
 
 Program_state_ccm state_ccm;
 Program_state_ram state_ram;
@@ -117,14 +118,14 @@ void set_72MHz()
 	RCC->CR |= RCC_CR_PLLON;
 
 	/* ќжидаем, пока PLL выставит бит готовности */
-	while((RCC->CR & RCC_CR_PLLRDY) == 0) {}
+	while((RCC->CR & RCC_CR_PLLRDY) == 0) { asm("nop"); }
 
 	/* ¬ыбираем PLL как источник системной частоты */
 	RCC->CFGR &= ~RCC_CFGR_SW;
 	RCC->CFGR |= RCC_CFGR_SW_PLL;
 
 	/* ќжидаем, пока PLL выберетс€ как источник системной частоты */
-	while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL) {}
+	while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL) { asm("nop"); }
 
 	SystemCoreClockUpdate();
 }
@@ -147,6 +148,7 @@ int main(void)
 	gpio_init();
 	state_init();
 	spi_init();
+	ad9833_init_all();
 	external_flash_init_and_request_info();
 	uart_init();
 	uart_send_comms_establish_packet();

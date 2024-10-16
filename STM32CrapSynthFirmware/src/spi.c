@@ -77,7 +77,7 @@ void spi1_receive_via_dma(uint8_t* sendbuf, uint8_t* receivebuf, uint16_t size)
 	DMA1_Channel3->CCR |= DMA_CCR_EN;
 }
 
-void spi2_send_via_dma(uint8_t* sendbuf, uint16_t size)
+void spi2_send_via_dma(uint16_t* sendbuf, uint16_t size)
 {
 	while(!spi2_ready) { asm("nop"); }
 
