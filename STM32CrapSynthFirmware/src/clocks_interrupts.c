@@ -7,9 +7,14 @@
 
 #include "stm32f3xx.h"
 
-void remap_interrupt_vectors_table_to_ccmram()
+void remap_and_place_interrupt_vectors_table_to_ccmram()
 {
+	for(int i = 0; i < 404; i += 4)
+	{
+		*((uint32_t*)(0x10000000 + i)) = *((uint32_t*)(0x08000000 + i)); //dumb copy data (vector interrupt table) to CCMRAM from Flash
+	}
 
+	SCB->VTOR = 0x10000000;
 }
 
 void enable_all_clocks()

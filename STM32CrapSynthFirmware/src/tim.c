@@ -26,7 +26,7 @@ void TIM20_UP_IRQHandler()
 	if(TIM20->SR & TIM_SR_UIF)
 	{
 		TIM20->SR = ~(TIM_SR_UIF);
-		GPIOA->ODR ^= 1 << 10;
+		//GPIOA->ODR ^= 1 << 10;
 	}
 }
 

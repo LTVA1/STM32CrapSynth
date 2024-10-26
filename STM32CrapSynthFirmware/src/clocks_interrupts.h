@@ -8,7 +8,7 @@
 #ifndef CLOCKS_INTERRUPTS_H_
 #define CLOCKS_INTERRUPTS_H_
 
-void remap_interrupt_vectors_table_to_ccmram();
+void remap_and_place_interrupt_vectors_table_to_ccmram();
 void enable_all_clocks();
 void set_72MHz();
 

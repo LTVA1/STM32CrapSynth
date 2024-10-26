@@ -140,11 +140,20 @@ SECTIONS
   */
   /*--- New CCMRAM linker section definition ---*/
   _siccmram = LOADADDR(.ccmram);
+  
+  .isr_vector_ccmram :
+  {
+    . = ALIGN(4);
+    KEEP(*(.isr_vector_ccmram)) /* Startup code */
+    . = ALIGN(4);
+  } >CCMRAM
+  
   /* CCMRAM section */
   .ccmram :
   {
     . = ALIGN(4);
     _sccmram = .;        /* define a global symbols at ccmram start */
+    *(.isr_vector_ccmram)
     *(.ccmram)     
     *(.ccmram*)
     . = ALIGN(4);

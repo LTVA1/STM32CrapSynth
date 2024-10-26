@@ -70,7 +70,7 @@ void state_init()
 
 int main(void)
 {
-	remap_interrupt_vectors_table_to_ccmram();
+	remap_and_place_interrupt_vectors_table_to_ccmram();
 	enable_all_clocks(); // in that order because http://efton.sk/STM32/gotcha/g183.html
 	set_72MHz();
 	unlock_flash();
@@ -82,18 +82,18 @@ int main(void)
 	gpio_init();
 	state_init();
 	spi_init();
-	//ad9833_init_all();
+	ad9833_init_all();
 	att_init_all();
 	external_flash_init_and_request_info();
 	uart_init();
 	uart_send_comms_establish_packet();
 
-	//ad9833_write_freq(2, 5000);
+	ad9833_write_freq(2, 5000);
 
-	TIM20->ARR = 7200;
-	TIM20->PSC = 10000;
+	//TIM20->ARR = 7200;
+	//TIM20->PSC = 10000;
 
-	TIM20->CR1 = TIM_CR1_CEN;
+	//TIM20->CR1 = TIM_CR1_CEN;
 
 	while(1)
 	{
@@ -105,7 +105,7 @@ int main(void)
 		{
 			for(int j = 0; j < 7200000; j++) { asm("nop"); }
 
-			//ad9833_change_wave(2, i);
+			ad9833_change_wave(2, i);
 		}
 	}
 
