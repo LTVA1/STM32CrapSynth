@@ -26,7 +26,7 @@ void gpio_init()
 	GPIOB->MODER |= GPIO_MODER_MODER0_1 | GPIO_MODER_MODER1_1 | GPIO_MODER_MODER3_1 | GPIO_MODER_MODER4_1 |
 			GPIO_MODER_MODER5_1 | GPIO_MODER_MODER6_1 | GPIO_MODER_MODER7_1 | GPIO_MODER_MODER8_1 |
 			GPIO_MODER_MODER9_0 | GPIO_MODER_MODER13_1 | GPIO_MODER_MODER15_1;
-	GPIOB->AFR[0] |= 2 | (4 << 4) | (5 << (4*3)) | (5 << (4*5)) | (5 << (4*5)) | (2 << (4*6)) | (1 << (4*7));
+	GPIOB->AFR[0] |= 2 | (4 << 4) | (5 << (4*3)) | (5 << (4*4)) | (5 << (4*5)) | (2 << (4*6)) | (1 << (4*7));
 	GPIOB->AFR[1] |= 1 | (5 << (4*5)) | (5 << (4*7));
 
 	//PC0 output, PC1 output, PC3 output, PC4 altfun 7, PC5 altfun 7, PC6&PC7&PC8&PC9 output

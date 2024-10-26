@@ -28,7 +28,9 @@ void play_wavetable(uint8_t channel)
 	TIM6->ARR = 720;
 	TIM6->PSC = 0;
 
-	DMA2_Channel3->CMAR = &wavetable_array[0][0];
+	NVIC_DisableIRQ(DMA2_Channel3_IRQn);
+
+	DMA2_Channel3->CMAR = (uint32_t)&wavetable_array[0][0];
 	DMA2_Channel3->CNDTR = WAVETABLE_SIZE;
 	DMA2_Channel3->CCR |= DMA_CCR_CIRC;
 

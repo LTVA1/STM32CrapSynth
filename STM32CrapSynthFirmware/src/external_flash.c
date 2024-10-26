@@ -26,25 +26,36 @@ uint32_t memory_size;
 
 uint32_t erased_boundary;
 
+uint8_t dummy_read_target;
+
 void external_flash_init_and_request_info()
 {
-	CS_EXT_FLASH_LOW
 	//we assume that the memory we are working with is either w25q80, w25q16, w25q32,   w25q64  or  w25q128
 	//                                                  size:   1MiB    2MiB    4MiB     8MiB        16MiB
 	//                                                    ID: 0x4014  0x4015  0x4016    0x6017      0x4018 OR 0x7018?
 	//                                                                                 OR 0x4017?
+
+	//dummy_read_target = (uint8_t)SPI1->DR;
+
+	//spi1_receive_via_dma(&spi_rx_double_buf[0], 4);
+
+	//while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	//while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
 	//reset
 	spi_tx_buf[0] = 0x66;
 	spi_tx_buf[1] = 0x99;
 
+	CS_EXT_FLASH_LOW
 	spi1_send_via_dma(&spi_tx_buf[0], 2);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	CS_EXT_FLASH_HIGH
 
 	//100 ms delay
-	for(int i = 0; i < 720000; i++) { asm("nop"); }
+	for(int i = 0; i < 320000; i++) { asm("nop"); }
 
 	CS_EXT_FLASH_LOW
 	//request manufacturer/device ID
@@ -54,12 +65,12 @@ void external_flash_init_and_request_info()
 	spi1_send_via_dma(&spi_tx_buf[0], 1);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	spi_tx_buf[0] = 0; //just in case
-
-	spi1_receive_via_dma(&spi_tx_buf[0], &spi_rx_double_buf[0], 3);
+	spi1_receive_via_dma(&spi_rx_double_buf[0], 3);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	CS_EXT_FLASH_HIGH
 
@@ -72,14 +83,15 @@ void external_flash_init_and_request_info()
 	if(device_id == 0x4017 || device_id == 0x6017) memory_size = 1024 * 1024 * 8;
 	if(device_id == 0x4018 || device_id == 0x7018) memory_size = 1024 * 1024 * 16;
 
-	CS_EXT_FLASH_LOW
 	//write enable
 	//0x06
 	spi_tx_buf[0] = 0x06;
 
+	CS_EXT_FLASH_LOW
 	spi1_send_via_dma(&spi_tx_buf[0], 1);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	CS_EXT_FLASH_HIGH
 
@@ -99,24 +111,24 @@ void external_flash_init_and_request_info()
 	spi1_send_via_dma(&spi_tx_buf[0], 5);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	spi_tx_buf[0] = 0;
-
-	spi1_receive_via_dma(&spi_tx_buf[0], &spi_rx_double_buf[0], 8);
+	spi1_receive_via_dma(&spi_rx_double_buf[0], 8);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-
-	device_uid =
-			((uint64_t)spi_rx_double_buf[0] << 60) |
-			((uint64_t)spi_rx_double_buf[1] << 54) |
-			((uint64_t)spi_rx_double_buf[2] << 48) |
-			((uint64_t)spi_rx_double_buf[3] << 32) |
-			((uint64_t)spi_rx_double_buf[4] << 24) |
-			((uint64_t)spi_rx_double_buf[5] << 16) |
-			((uint64_t)spi_rx_double_buf[6] << 8) |
-			(uint64_t)spi_rx_double_buf[7];
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	CS_EXT_FLASH_HIGH
+
+	device_uid =
+		((uint64_t)spi_rx_double_buf[0] << 60) |
+		((uint64_t)spi_rx_double_buf[1] << 54) |
+		((uint64_t)spi_rx_double_buf[2] << 48) |
+		((uint64_t)spi_rx_double_buf[3] << 32) |
+		((uint64_t)spi_rx_double_buf[4] << 24) |
+		((uint64_t)spi_rx_double_buf[5] << 16) |
+		((uint64_t)spi_rx_double_buf[6] << 8) |
+		(uint64_t)spi_rx_double_buf[7];
 
 	erased_boundary = 0;
 }
@@ -136,9 +148,17 @@ void external_flash_wait_until_not_busy()
 		spi_tx_buf[0] = 0x05;
 		spi_tx_buf[1] = 0;
 
-		spi1_receive_via_dma(&spi_tx_buf[0], &spi_rx_double_buf[0], 2);
+		spi1_send_via_dma(&spi_tx_buf[0], 1);
 
-		if(!(spi_rx_double_buf[1] & 1))
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+		spi1_receive_via_dma(&spi_rx_double_buf[0], 1);
+
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+		if(!(spi_rx_double_buf[0] & 1))
 		{
 			busy = 0;
 		}
@@ -164,6 +184,7 @@ void external_flash_erase_sector(uint32_t address)
 	spi1_send_via_dma(&spi_tx_buf[0], 4);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	CS_EXT_FLASH_HIGH
 
@@ -210,10 +231,12 @@ void external_flash_write_page(uint32_t address, uint8_t* data, uint8_t size) //
 	spi1_send_via_dma(&spi_tx_buf[0], 4);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	spi1_send_via_dma(&data[0], size);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	CS_EXT_FLASH_HIGH
 

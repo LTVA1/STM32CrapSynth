@@ -88,7 +88,7 @@ int main(void)
 	uart_init();
 	uart_send_comms_establish_packet();
 
-	ad9833_write_freq(2, 5000);
+	//ad9833_write_freq(2, 5000);
 
 	//TIM20->ARR = 7200;
 	//TIM20->PSC = 10000;

@@ -14,6 +14,8 @@ uint8_t spi1_ready_tx;
 uint8_t spi1_ready_rx;
 uint8_t spi1_rxtx;
 uint8_t spi2_ready;
+uint32_t null_var;
+
 extern uint8_t att_need_write;
 
 __attribute__((section (".ccmram")))
@@ -40,7 +42,7 @@ void DMA1_Channel3_IRQHandler() //send
 }
 
 __attribute__((section (".ccmram")))
-void DMA1_Channel5_IRQHandler() //receive
+void DMA1_Channel5_IRQHandler() //send
 {
 	DMA1->IFCR |= DMA_IFCR_CTCIF5;
 	DMA1_Channel5->CCR &= ~DMA_CCR_EN; //stop DMA
@@ -55,8 +57,10 @@ void DMA1_Channel5_IRQHandler() //receive
 void spi1_send_via_dma(uint8_t* sendbuf, uint16_t size)
 {
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	DMA1_Channel3->CCR &= ~DMA_CCR_EN;
+	DMA1_Channel3->CCR |= DMA_CCR_MINC;
 	DMA1_Channel3->CMAR = (uint32_t)sendbuf;
 	DMA1_Channel3->CNDTR = size;
 	spi1_ready_tx = 0;
@@ -65,26 +69,30 @@ void spi1_send_via_dma(uint8_t* sendbuf, uint16_t size)
 	DMA1_Channel3->CCR |= DMA_CCR_EN;
 }
 
-void spi1_receive_via_dma(uint8_t* sendbuf, uint8_t* receivebuf, uint16_t size)
+void spi1_receive_via_dma(uint8_t* receivebuf, uint16_t size)
 {
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	//we need to specify dummy send buffer for DMA "TX" channel to force SPI clock
 
 	DMA1_Channel3->CCR &= ~DMA_CCR_EN;
 	DMA1_Channel2->CCR &= ~DMA_CCR_EN;
 
-	DMA1_Channel3->CMAR = (uint32_t)sendbuf;
-	DMA1_Channel3->CNDTR = size;
-
 	DMA1_Channel2->CMAR = (uint32_t)receivebuf;
 	DMA1_Channel2->CNDTR = size;
+
+	DMA1_Channel2->CCR |= DMA_CCR_EN; //enable receive
+
+	DMA1_Channel3->CCR &= ~(DMA_CCR_MINC);
+	DMA1_Channel3->CMAR = (uint32_t)&null_var;
+	DMA1_Channel3->CNDTR = size;
 
 	spi1_ready_tx = 0;
 	spi1_ready_rx = 0;
 	spi1_rxtx = 1;
-	DMA1_Channel2->CCR |= DMA_CCR_EN;
-	DMA1_Channel3->CCR |= DMA_CCR_EN;
+
+	DMA1_Channel3->CCR |= DMA_CCR_EN; //enable transmit
 }
 
 void spi2_send_via_dma(uint16_t* sendbuf, uint16_t size)
@@ -106,9 +114,9 @@ void spi2_send_16bits(uint16_t data)
 
 void spi_init()
 {
-	SPI1->CR1 |= SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM; //fclk / 2, master mode, software slave management
+	SPI1->CR1 |= SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_BR_2 | SPI_CR1_BR_0; //fclk / 32, master mode, software slave management
 	//without software slave management does not work!
-	SPI1->CR2 = SPI_CR2_DS_2 | SPI_CR2_DS_1 | SPI_CR2_DS_0 | SPI_CR2_TXDMAEN | SPI_CR2_RXDMAEN;   //  8 bit, enable DMA TX & RX
+	SPI1->CR2 = SPI_CR2_DS_2 | SPI_CR2_DS_1 | SPI_CR2_DS_0 | SPI_CR2_TXDMAEN | SPI_CR2_RXDMAEN;   //  8 bit, enable DMA TX & RX, FLUSH RX FIFO!!!
 	SPI1->CR1 |= SPI_CR1_SPE; // enable
 
 	SPI2->CR1 |= SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_CPOL | SPI_CR1_BR_2; //fclk / 32, master mode, software slave management, clock to high
@@ -121,4 +129,5 @@ void spi_init()
 	spi1_ready_rx = 1;
 	spi1_rxtx = 0;
 	spi2_ready = 1;
+	null_var = 0;
 }
