@@ -44,7 +44,7 @@ void external_flash_init_and_request_info()
 	CS_EXT_FLASH_HIGH
 
 	//100 ms delay
-	for(int i = 0; i < 7200000; i++) { asm("nop"); }
+	for(int i = 0; i < 720000; i++) { asm("nop"); }
 
 	CS_EXT_FLASH_LOW
 	//request manufacturer/device ID

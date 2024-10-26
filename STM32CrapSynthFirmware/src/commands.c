@@ -72,7 +72,7 @@ void decode_command()
 			++cmd_buf_pointer;
 			our_xor ^= curr_byte;
 
-			if(cmd_buf_pointer == size + 3) //size + sync byte = 3 bytes
+			if(cmd_buf_pointer == size) //size + sync byte = 3 bytes
 			{
 				state = CMD_DECODE_STATE_READ_XOR;
 			}
@@ -91,13 +91,17 @@ void decode_command()
 				{
 					state_ccm.block_start_offset = cmd_buf[4] + ((uint32_t)cmd_buf[5] << 8) +
 							((uint32_t)cmd_buf[6] << 16) + ((uint32_t)cmd_buf[7] << 24);
-					state_ccm.block_length = size - 4;
+					state_ccm.block_length = size - 8;
 					state_ccm.data_pointer = &cmd_buf[8];
+					state_ccm.last_packet_xor = our_xor;
 
 					if(cmd_buf[3] == SYNTH_CMD_LOAD_RAM)
 					{
 						memcpy(&sample_mem_ram[state_ccm.block_start_offset], state_ccm.data_pointer, state_ccm.block_length);
 						state_ccm.state = STATE_PROG_RAM;
+						uart_send_response();
+						state_ccm.state = STATE_IDLE;
+
 					}
 					if(cmd_buf[3] == SYNTH_CMD_LOAD_FLASH)
 					{
@@ -108,11 +112,9 @@ void decode_command()
 						state_ccm.state = STATE_PROG_EXTERNAL_FLASH;
 					}
 				}
-
-				state_ccm.last_packet_xor = our_xor;
 			}
 
-			if(our_xor != curr_byte && cmd_buf[1] < SYNTH_CMD_MAX)
+			if(our_xor != curr_byte && cmd_buf[3] < SYNTH_CMD_MAX)
 			{
 				our_xor = 0;
 				tx_buf[0] = SYNTH_SYNC_BYTE;
@@ -131,7 +133,7 @@ void decode_command()
 				uart_send_via_dma(SYNTH_RESPONSE_SIZE);
 			}
 
-			if(our_xor == curr_byte && cmd_buf[1] >= SYNTH_CMD_MAX)
+			if(our_xor == curr_byte && cmd_buf[3] >= SYNTH_CMD_MAX)
 			{
 				our_xor = 0;
 				tx_buf[0] = SYNTH_SYNC_BYTE;

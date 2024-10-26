@@ -5,9 +5,7 @@ A software/hardware synth based on STM32F303RE, 4xAD9833 wave generators, one MM
 # Folders
 
 `board` - KiCAD project of the board that mounts on top of custom teacher's board like Arduino shield.
-
 `pc_program` - small CLI program using serial library to send data to the MCU.
-
 `STM32CrapSynthFirmware` - MCU firmware written only with CMSIS register defs and simple functions. Zero HAL, LL, SPL libraries usage.
 
 # Other programs

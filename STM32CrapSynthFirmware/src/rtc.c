@@ -8,6 +8,7 @@
 #include "rtc.h"
 #include "stm32f3xx.h"
 
+__attribute__((section (".ccmram")))
 void RTC_WKUP_IRQHandler()
 {
 	RTC->ISR = ~(RTC_ISR_WUTF);

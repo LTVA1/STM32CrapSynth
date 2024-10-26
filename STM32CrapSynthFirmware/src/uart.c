@@ -25,6 +25,7 @@ uint8_t usart_ready;
 
 uint8_t our_xor;
 
+__attribute__((section (".ccmram")))
 void USART1_IRQHandler()
 {
 	if (USART1->ISR & USART_ISR_RXNE)
@@ -33,6 +34,7 @@ void USART1_IRQHandler()
 	}
 }
 
+__attribute__((section (".ccmram")))
 void DMA1_Channel4_IRQHandler()
 {
 	DMA1->IFCR |= DMA_IFCR_CTCIF4;
@@ -158,12 +160,12 @@ void uart_send_response()
 	tx_buf[2] = state_ccm.last_packet_xor;
 
 	tx_buf[3] = state_ccm.block_start_offset & 0xff;
-	tx_buf[4] = (state_ccm.block_start_offset & 0xff) >> 8;
-	tx_buf[5] = (state_ccm.block_start_offset & 0xff) >> 16;
-	tx_buf[6] = (state_ccm.block_start_offset & 0xff) >> 24;
+	tx_buf[4] = (state_ccm.block_start_offset >> 8) & 0xff;
+	tx_buf[5] = (state_ccm.block_start_offset >> 16) & 0xff;
+	tx_buf[6] = (state_ccm.block_start_offset >> 24) & 0xff;
 
 	tx_buf[7] = state_ccm.block_length & 0xff;
-	tx_buf[8] = (state_ccm.block_length & 0xff) >> 8;
+	tx_buf[8] = (state_ccm.block_length >> 8) & 0xff;
 
 	for(int i = 9; i < SYNTH_RESPONSE_SIZE; i++)
 	{
@@ -174,5 +176,6 @@ void uart_send_response()
 		our_xor ^= tx_buf[i];
 	}
 
+	tx_buf[SYNTH_RESPONSE_SIZE - 1] = our_xor;
 	uart_send_via_dma(SYNTH_RESPONSE_SIZE);
 }

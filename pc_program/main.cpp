@@ -44,7 +44,7 @@ int load_file(serialib serial)
 	unsigned char txbuf[4096] = {0};
 	unsigned char rxbuf[4096] = {0};
 
-	/*serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
+	serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
 
 	for(int i = 0; i < SYNTH_RESPONSE_SIZE - 1; i++)
 	{
@@ -61,19 +61,19 @@ int load_file(serialib serial)
 	{
 		std::cout << "Wrong packet ID in comms establishing packet!" << std::endl;
 		return -1;
-	}*/
+	}
 
 	//TODO: uncomment
 
-	MCU_FIRMWARE_SIZE = (uint32_t)rxbuf[2] + ((uint32_t)rxbuf[3] << 8) + ((uint32_t)rxbuf[4] << 16) + ((uint32_t)rxbuf[5] << 24);
-	BASE_ADDR_FLASH = (uint32_t)rxbuf[6] + ((uint32_t)rxbuf[7] << 8) + ((uint32_t)rxbuf[8] << 16) + ((uint32_t)rxbuf[9] << 24);
-	BASE_ADDR_RAM = (uint32_t)rxbuf[10] + ((uint32_t)rxbuf[11] << 8) + ((uint32_t)rxbuf[12] << 16) + ((uint32_t)rxbuf[13] << 24);
+	MCU_FIRMWARE_SIZE = (uint32_t)rxbuf[5] + ((uint32_t)rxbuf[4] << 8) + ((uint32_t)rxbuf[3] << 16) + ((uint32_t)rxbuf[2] << 24);
+	BASE_ADDR_FLASH = (uint32_t)rxbuf[9] + ((uint32_t)rxbuf[8] << 8) + ((uint32_t)rxbuf[7] << 16) + ((uint32_t)rxbuf[6] << 24);
+	BASE_ADDR_RAM = (uint32_t)rxbuf[13] + ((uint32_t)rxbuf[12] << 8) + ((uint32_t)rxbuf[11] << 16) + ((uint32_t)rxbuf[10] << 24);
 
-	SUPPORTED_FILE_VERSION = (uint32_t)rxbuf[14] + ((uint32_t)rxbuf[15] << 8) + ((uint32_t)rxbuf[16] << 16) + ((uint32_t)rxbuf[17] << 24);
-	FIRMWARE_VERSION = (uint32_t)rxbuf[18] + ((uint32_t)rxbuf[19] << 8) + ((uint32_t)rxbuf[20] << 16) + ((uint32_t)rxbuf[21] << 24);
-	EXTERNAL_FLASH_SIZE = (uint32_t)rxbuf[22] + ((uint32_t)rxbuf[23] << 8) + ((uint32_t)rxbuf[24] << 16) + ((uint32_t)rxbuf[25] << 24);
-	EXTERNAL_FLASH_UID = (uint64_t)rxbuf[26] + ((uint64_t)rxbuf[27] << 8) + ((uint64_t)rxbuf[28] << 16) + ((uint64_t)rxbuf[29] << 24)
-		 + ((uint64_t)rxbuf[30] << 32) + ((uint64_t)rxbuf[31] << 40) + ((uint64_t)rxbuf[32] << 48) + ((uint64_t)rxbuf[33] << 56);
+	SUPPORTED_FILE_VERSION = (uint32_t)rxbuf[17] + ((uint32_t)rxbuf[16] << 8) + ((uint32_t)rxbuf[15] << 16) + ((uint32_t)rxbuf[14] << 24);
+	FIRMWARE_VERSION = (uint32_t)rxbuf[21] + ((uint32_t)rxbuf[20] << 8) + ((uint32_t)rxbuf[19] << 16) + ((uint32_t)rxbuf[18] << 24);
+	EXTERNAL_FLASH_SIZE = (uint32_t)rxbuf[25] + ((uint32_t)rxbuf[24] << 8) + ((uint32_t)rxbuf[23] << 16) + ((uint32_t)rxbuf[22] << 24);
+	EXTERNAL_FLASH_UID = (uint64_t)rxbuf[33] + ((uint64_t)rxbuf[32] << 8) + ((uint64_t)rxbuf[31] << 16) + ((uint64_t)rxbuf[30] << 24)
+		 + ((uint64_t)rxbuf[29] << 32) + ((uint64_t)rxbuf[28] << 40) + ((uint64_t)rxbuf[27] << 48) + ((uint64_t)rxbuf[26] << 56);
 	EXTERNAL_FLASH_MANUFACTURER_ID = rxbuf[34];
 
 	EXTERNAL_FLASH_SIZE = 1024 * 1024 * 16; //16 MiB TODO: remove when actual comms are established
@@ -174,8 +174,8 @@ int load_file(serialib serial)
 		uint32_t block_size = ((flash_samples_size - flash_samples_pos) > FLASH_BLOCK_SIZE ? FLASH_BLOCK_SIZE : (flash_samples_size - flash_samples_pos));
 		uint8_t data_xor = 0;
 
-		txbuf[1] = (block_size + 4) >> 8;
-		txbuf[2] = (block_size + 4) & 0xff;
+		txbuf[1] = (block_size + 8) >> 8;
+		txbuf[2] = (block_size + 8) & 0xff;
 		txbuf[3] = SYNTH_CMD_LOAD_FLASH;
 
 		txbuf[4] = (flash_samples_pos) & 0xff;
@@ -192,6 +192,12 @@ int load_file(serialib serial)
 			data_xor ^= txbuf[i];
 		}
 
+		for(int i = 0; i < 8; i++)
+		{
+			//snprintf(buffer_cout, 666, "%d %02X", txbuf[i], txbuf[i]);
+			//std::cout << buffer_cout << std::endl;
+		}
+
 		txbuf[8 + block_size] = data_xor;
 		
 		snprintf(buffer_cout, 666, "Writing flash samples, block size %d bytes: 0x%08X-0x%08X (%.2f%)", block_size, BASE_ADDR_FLASH + flash_samples_pos, BASE_ADDR_FLASH + flash_samples_pos + block_size, (double)(flash_samples_pos) * 100.0 / (double)flash_samples_size);
@@ -201,7 +207,7 @@ int load_file(serialib serial)
 
 		flash_samples_pos += block_size;
 
-		/*serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
+		serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
 		our_xor = 0;
 
 		for(int i = 0; i < SYNTH_RESPONSE_SIZE - 1; i++)
@@ -218,7 +224,7 @@ int load_file(serialib serial)
 
 		if(rxbuf[1] != SYNTH_RESPONSE_FLASH_BLOCK)
 		{
-			std::cout << "Wrong packet ID in Flash block receive confirmation packet!" << std::endl;
+			std::cout << "Wrong packet ID in Flash block receive confirmation packet: " << rxbuf[1] << "!" << std::endl;
 			fclose(f);
 			return -1;
 		}
@@ -243,10 +249,10 @@ int load_file(serialib serial)
 
 		if(mcu_response_data_len != block_size)
 		{
-			std::cout << "Wrong block length telemetry in Flash block receive confirmation packet!" << std::endl;
+			std::cout << "Wrong block length telemetry in Flash block receive confirmation packet: " << (int)mcu_response_data_len << "!" << std::endl;
 			fclose(f);
 			return -1;
-		}*/
+		}
 
 		//TODO: uncomment
 	}
@@ -274,8 +280,8 @@ int load_file(serialib serial)
 		uint32_t block_size = ((ram_samples_size - ram_samples_pos) > RAM_BLOCK_SIZE ? RAM_BLOCK_SIZE : (ram_samples_size - ram_samples_pos));
 		uint8_t data_xor = 0;
 
-		txbuf[1] = (block_size + 4) >> 8;
-		txbuf[2] = (block_size + 4) & 0xff;
+		txbuf[1] = (block_size + 8) >> 8;
+		txbuf[2] = (block_size + 8) & 0xff;
 		txbuf[3] = SYNTH_CMD_LOAD_RAM;
 
 		txbuf[4] = (ram_samples_pos) & 0xff;
@@ -297,11 +303,11 @@ int load_file(serialib serial)
 		snprintf(buffer_cout, 666, "Writing RAM samples, block size %d bytes: 0x%08X-0x%08X (%.2f%)", block_size, BASE_ADDR_RAM + ram_samples_pos, BASE_ADDR_RAM + ram_samples_pos + block_size, (double)(ram_samples_pos) * 100.0 / (double)ram_samples_size);
 		std::cout << buffer_cout << std::endl;
 
-		serial.writeBytes(txbuf, 8 + block_size);
+		serial.writeBytes(txbuf, 8 + block_size + 1);
 
 		ram_samples_pos += block_size;
 
-		/*serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
+		serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
 		our_xor = 0;
 
 		for(int i = 0; i < SYNTH_RESPONSE_SIZE - 1; i++)
@@ -318,7 +324,7 @@ int load_file(serialib serial)
 
 		if(rxbuf[1] != SYNTH_RESPONSE_RAM_BLOCK)
 		{
-			std::cout << "Wrong packet ID in RAM block receive confirmation packet!" << std::endl;
+			std::cout << "Wrong packet ID in RAM block receive confirmation packet: " << rxbuf[1] << "!" << std::endl;
 			fclose(f);
 			return -1;
 		}
@@ -346,7 +352,7 @@ int load_file(serialib serial)
 			std::cout << "Wrong block length telemetry in RAM block receive confirmation packet!" << std::endl;
 			fclose(f);
 			return -1;
-		}*/
+		}
 
 		//TODO: uncomment
 	}
@@ -383,8 +389,8 @@ int load_file(serialib serial)
 		uint32_t block_size = ((regdump_size - regdump_pos) > EXT_FLASH_BLOCK_SIZE ? EXT_FLASH_BLOCK_SIZE : (regdump_size - regdump_pos));
 		uint8_t data_xor = 0;
 
-		txbuf[1] = (block_size + 4) >> 8;
-		txbuf[2] = (block_size + 4) & 0xff;
+		txbuf[1] = (block_size + 8) >> 8;
+		txbuf[2] = (block_size + 8) & 0xff;
 		txbuf[3] = SYNTH_CMD_LOAD_EXT_FLASH;
 
 		txbuf[4] = (regdump_pos) & 0xff;
@@ -406,11 +412,11 @@ int load_file(serialib serial)
 		snprintf(buffer_cout, 666, "Writing external flash, block size %d bytes: 0x%08X-0x%08X (%.2f%)", block_size, regdump_pos, regdump_pos + block_size, (double)(regdump_pos) * 100.0 / (double)regdump_size);
 		std::cout << buffer_cout << std::endl;
 
-		serial.writeBytes(txbuf, 8 + block_size);
+		serial.writeBytes(txbuf, 8 + block_size + 1);
 
 		regdump_pos += block_size;
 
-		/*serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
+		serial.readBytes(rxbuf, SYNTH_RESPONSE_SIZE);
 		our_xor = 0;
 
 		for(int i = 0; i < SYNTH_RESPONSE_SIZE - 1; i++)
@@ -427,7 +433,7 @@ int load_file(serialib serial)
 
 		if(rxbuf[1] != SYNTH_RESPONSE_EXTERNAL_FLASH_BLOCK)
 		{
-			std::cout << "Wrong packet ID in external Flash block receive confirmation packet!" << std::endl;
+			std::cout << "Wrong packet ID in external Flash block receive confirmation packet: " << rxbuf[1] << "!" << std::endl;
 			fclose(f);
 			return -1;
 		}
@@ -455,7 +461,7 @@ int load_file(serialib serial)
 			std::cout << "Wrong block length telemetry in external Flash block receive confirmation packet!" << std::endl;
 			fclose(f);
 			return -1;
-		}*/
+		}
 
 		//TODO: uncomment
 	}

@@ -63,8 +63,8 @@ void write_packet_to_flash()
 {
 	if(state_ccm.state != STATE_PROG_INTERNAL_FLASH) return;
 
-	flash_erase(state_ccm.block_start_offset);
-	flash_write(state_ccm.data_pointer, state_ccm.block_start_offset, state_ccm.block_length);
+	//flash_erase(state_ccm.block_start_offset);
+	//flash_write(state_ccm.data_pointer, state_ccm.block_start_offset, state_ccm.block_length);
 
 	uart_send_response();
 

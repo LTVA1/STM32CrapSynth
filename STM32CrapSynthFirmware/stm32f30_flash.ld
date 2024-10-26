@@ -47,7 +47,7 @@ MEMORY
   FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 512K
   RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 64K
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
-  CCMRAM (rw)     : ORIGIN = 0x10000000, LENGTH = 16K
+  CCMRAM (xrw)    : ORIGIN = 0x10000000, LENGTH = 16K
 }
 
 /* Define output sections */
@@ -138,16 +138,19 @@ SECTIONS
   * If initialized variables will be placed in this section, 
   * the startup code needs to be modified to copy the init-values.  
   */
+  /*--- New CCMRAM linker section definition ---*/
+  _siccmram = LOADADDR(.ccmram);
+  /* CCMRAM section */
   .ccmram :
   {
     . = ALIGN(4);
-    _sccmram = .;       /* create a global symbol at ccmram start */
-    *(.ccmram)
+    _sccmram = .;        /* define a global symbols at ccmram start */
+    *(.ccmram)     
     *(.ccmram*)
-    
     . = ALIGN(4);
-    _eccmram = .;       /* create a global symbol at ccmram end */
+    _eccmram = .;        /* define a global symbols at ccmram end */
   } >CCMRAM AT> FLASH
+  /*--- End of CCMRAM linker section definition ---*/
 
   /* Uninitialized data section */
   . = ALIGN(4);
