@@ -95,6 +95,8 @@ int main(void)
 
 	//TIM20->CR1 = TIM_CR1_CEN;
 
+	play_wavetable(0);
+
 	while(1)
 	{
 		decode_command();

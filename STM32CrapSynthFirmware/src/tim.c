@@ -62,9 +62,11 @@ void timers_all_init()
 
 	//DAC ch1 driver
 	TIM6->CR2 |= TIM_CR2_MMS_1;	//generate TRG0 after overflow TIM6_CNT
+	TIM6->DIER |= TIM_DIER_UDE;
 
 	//DAC ch2 driver
-	TIM7->CR2 |= TIM_CR2_MMS_1;	//generate TRG0 after overflow TIM6_CNT
+	TIM7->CR2 |= TIM_CR2_MMS_1;	//generate TRG0 after overflow TIM7_CNT
+	TIM7->DIER |= TIM_DIER_UDE;
 
 	//PWM ch. 3 -> TIM8 ch.3 complementary
 	TIM8->CCMR2 |= TIM_CCMR2_OC3CE | TIM_CCMR2_OC3PE;
@@ -90,6 +92,7 @@ void timers_all_init()
 	TIM17->CCMR1 |= TIM_CCMR1_OC1M_2 | TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_0;	//<-- pwm mode 2
 	TIM17->CCR1 = 0;	//<-- here need put pwm value...
 	TIM17->CCER |= TIM_CCER_CC1E | TIM_CCER_CC1NP; //TIM_CCER_CC1NP - change polarity (since complementary channel is used)
+	TIM17->DIER |= TIM_DIER_UDE; //DMA req
 
 	TIM17->DIER |= TIM_DIER_UIE;
 	NVIC_SetPriority(TIM1_TRG_COM_TIM17_IRQn, 8);
