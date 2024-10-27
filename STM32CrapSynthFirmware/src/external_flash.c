@@ -26,7 +26,141 @@ uint32_t memory_size;
 
 uint32_t erased_boundary;
 
-uint8_t dummy_read_target;
+uint8_t test_data[256];
+uint8_t test_data_read[256];
+
+uint8_t busy;
+
+void external_flash_wait_until_not_busy()
+{
+	busy = 1;
+
+	while(busy)
+	{
+		CS_EXT_FLASH_LOW
+
+		//read status register 1
+		//0x05, 8 bits of register
+		spi_tx_buf[0] = 0x05;
+
+		spi1_send_via_dma(&spi_tx_buf[0], 1);
+
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+		spi1_receive_data_via_dma(&spi_rx_double_buf[0], 1);
+
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+		if(!(spi_rx_double_buf[0] & 1))
+		{
+			busy = 0;
+		}
+
+		CS_EXT_FLASH_HIGH
+	}
+}
+
+void external_flash_erase_sector(uint32_t address)
+{
+	//sector erase (4KiB)
+	//0x20, addr 24 bits (MSB to LSB)
+	spi_tx_buf[0] = 0x20;
+	spi_tx_buf[1] = (address >> 16) & 0xff;
+	spi_tx_buf[2] = (address >> 8) & 0xff;
+	spi_tx_buf[3] = address & 0xff;
+
+	CS_EXT_FLASH_LOW
+	spi1_send_via_dma(&spi_tx_buf[0], 4);
+
+	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	CS_EXT_FLASH_HIGH
+
+	//poll status register until busy bit is reset
+	external_flash_wait_until_not_busy();
+
+	CS_EXT_FLASH_HIGH
+
+	erased_boundary += 4 * 1024;
+}
+
+void external_flash_read_data(uint32_t address, uint8_t* data, uint16_t size, uint8_t start)
+{
+	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	if(start) //we lower chip select and issue command only the 1st time
+	// then we just read n bytes over and over without issuing a command
+	{
+		//read data
+		//0x03, addr 24 bits (MSB to LSB)
+		spi_tx_buf[0] = 0x03;
+		spi_tx_buf[1] = (address >> 16) & 0xff;
+		spi_tx_buf[2] = (address >> 8) & 0xff;
+		spi_tx_buf[3] = address & 0xff;
+
+		CS_EXT_FLASH_LOW
+		spi1_send_via_dma(&spi_tx_buf[0], 4);
+
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+	}
+
+	spi1_receive_data_via_dma(data, size);
+}
+
+void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size) //no more than 256 bytes at a time
+{
+	if(address == 0)
+	{
+		erased_boundary = 0; //we start writing from beginning
+	}
+
+	if(erased_boundary < address + (uint32_t)size)
+	{
+		external_flash_erase_sector(erased_boundary);
+
+		//write enable
+		//0x06
+		spi_tx_buf[0] = 0x06;
+
+		CS_EXT_FLASH_LOW
+		spi1_send_via_dma(&spi_tx_buf[0], 1);
+
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+		CS_EXT_FLASH_HIGH
+	}
+
+	//page program
+	//0x02, addr 24 bits (MSB to LSB), up to 256 bytes of data
+	spi_tx_buf[0] = 0x02;
+	spi_tx_buf[1] = (address >> 16) & 0xff;
+	spi_tx_buf[2] = (address >> 8) & 0xff;
+	spi_tx_buf[3] = address & 0xff;
+
+	CS_EXT_FLASH_LOW
+	spi1_send_via_dma(&spi_tx_buf[0], 4);
+
+	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	spi1_send_via_dma(&data[0], size);
+
+	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	CS_EXT_FLASH_HIGH
+
+	//poll status register until busy bit is reset
+	external_flash_wait_until_not_busy();
+
+	CS_EXT_FLASH_HIGH
+}
 
 void external_flash_init_and_request_info()
 {
@@ -67,7 +201,7 @@ void external_flash_init_and_request_info()
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	spi1_receive_via_dma(&spi_rx_double_buf[0], 3);
+	spi1_receive_data_via_dma(&spi_rx_double_buf[0], 3);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
@@ -102,9 +236,6 @@ void external_flash_init_and_request_info()
 	spi_tx_buf[2] = 0;
 	spi_tx_buf[3] = 0;
 	spi_tx_buf[4] = 0;
-	spi_tx_buf[5] = 0;
-	spi_tx_buf[6] = 0;
-	spi_tx_buf[7] = 0;
 
 	CS_EXT_FLASH_LOW
 
@@ -113,7 +244,7 @@ void external_flash_init_and_request_info()
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	spi1_receive_via_dma(&spi_rx_double_buf[0], 8);
+	spi1_receive_data_via_dma(&spi_rx_double_buf[0], 8);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
@@ -131,119 +262,14 @@ void external_flash_init_and_request_info()
 		(uint64_t)spi_rx_double_buf[7];
 
 	erased_boundary = 0;
-}
 
-uint8_t busy;
-
-void external_flash_wait_until_not_busy()
-{
-	busy = 1;
-
-	while(busy)
+	for(int i = 0; i < 256; i++)
 	{
-		CS_EXT_FLASH_LOW
-
-		//read status register 1
-		//0x05, 8 bits of register
-		spi_tx_buf[0] = 0x05;
-		spi_tx_buf[1] = 0;
-
-		spi1_send_via_dma(&spi_tx_buf[0], 1);
-
-		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-		spi1_receive_via_dma(&spi_rx_double_buf[0], 1);
-
-		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-		if(!(spi_rx_double_buf[0] & 1))
-		{
-			busy = 0;
-		}
-
-		CS_EXT_FLASH_HIGH
-		asm("nop");
-		asm("nop");
-		asm("nop");
-	}
-}
-
-void external_flash_erase_sector(uint32_t address)
-{
-	CS_EXT_FLASH_LOW
-
-	//sector erase (4KiB)
-	//0x20, addr 24 bits (MSB to LSB)
-	spi_tx_buf[0] = 0x20;
-	spi_tx_buf[1] = (address >> 16) & 0xff;
-	spi_tx_buf[2] = (address >> 8) & 0xff;
-	spi_tx_buf[3] = address & 0xff;
-
-	spi1_send_via_dma(&spi_tx_buf[0], 4);
-
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-	CS_EXT_FLASH_HIGH
-
-	//poll status register until busy bit is reset
-	external_flash_wait_until_not_busy();
-
-	CS_EXT_FLASH_HIGH
-
-	erased_boundary += 4 * 1024;
-}
-
-void external_flash_write_page(uint32_t address, uint8_t* data, uint8_t size) //no more than 256 bytes at a time
-{
-	if(address == 0)
-	{
-		erased_boundary = 0; //we start writing from beginning
+		test_data[i] = 255 - i;
 	}
 
-	if(erased_boundary < address + (uint32_t)size)
-	{
-		external_flash_erase_sector(erased_boundary);
-
-		CS_EXT_FLASH_LOW
-		//write enable
-		//0x06
-		spi_tx_buf[0] = 0x06;
-
-		spi1_send_via_dma(&spi_tx_buf[0], 1);
-
-		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-
-		CS_EXT_FLASH_HIGH
-	}
-
-	CS_EXT_FLASH_LOW
-
-	//page program
-	//0x02, addr 24 bits (MSB to LSB), up to 256 bytes of data
-	spi_tx_buf[0] = 0x02;
-	spi_tx_buf[1] = (address >> 16) & 0xff;
-	spi_tx_buf[2] = (address >> 8) & 0xff;
-	spi_tx_buf[3] = address & 0xff;
-
-	spi1_send_via_dma(&spi_tx_buf[0], 4);
-
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-	spi1_send_via_dma(&data[0], size);
-
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-	CS_EXT_FLASH_HIGH
-
-	//poll status register until busy bit is reset
-	external_flash_wait_until_not_busy();
-
-	CS_EXT_FLASH_HIGH
+	//external_flash_write_page(0, (uint8_t*)test_data, 256);
+	//external_flash_read_data(0, test_data_read, 256, 1);
 }
 
 void external_flash_write_page_task()
