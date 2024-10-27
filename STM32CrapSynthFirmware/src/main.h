@@ -16,6 +16,9 @@
 #define STATE_PROG_EXTERNAL_FLASH 2
 #define STATE_PROG_RAM 3
 
+#define my_min(a,b) (((a)<(b))?(a):(b))
+#define my_max(a,b) (((a)>(b))?(a):(b))
+
 typedef struct
 {
 	uint8_t state;
@@ -53,9 +56,11 @@ typedef struct
 	uint32_t start_offset;
 	uint32_t length;
 	uint32_t loop_point;
+	uint32_t curr_pos;
 	uint8_t volume;
 	uint16_t autoreload;
 	uint16_t prescaler;
+	uint16_t curr_portion_size;
 } Sample_state;
 
 typedef struct

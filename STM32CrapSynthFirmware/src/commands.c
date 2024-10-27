@@ -101,6 +101,8 @@ void decode_command()
 						state_ccm.state = STATE_PROG_RAM;
 						uart_send_response();
 						state_ccm.state = STATE_IDLE;
+
+						//play_sample();
 					}
 					if(cmd_buf[3] == SYNTH_CMD_LOAD_FLASH)
 					{
