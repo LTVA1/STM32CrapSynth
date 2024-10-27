@@ -254,9 +254,9 @@ void external_flash_init_and_request_info()
 	CS_EXT_FLASH_HIGH
 
 	device_uid =
-		((uint64_t)spi_rx_double_buf[0] << 60) |
-		((uint64_t)spi_rx_double_buf[1] << 54) |
-		((uint64_t)spi_rx_double_buf[2] << 48) |
+		((uint64_t)spi_rx_double_buf[0] << 56) |
+		((uint64_t)spi_rx_double_buf[1] << 48) |
+		((uint64_t)spi_rx_double_buf[2] << 40) |
 		((uint64_t)spi_rx_double_buf[3] << 32) |
 		((uint64_t)spi_rx_double_buf[4] << 24) |
 		((uint64_t)spi_rx_double_buf[5] << 16) |

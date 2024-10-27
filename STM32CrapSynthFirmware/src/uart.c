@@ -106,7 +106,7 @@ void uart_send_comms_establish_packet()
 	tx_buf[24] = (memory_size >> 8) & 0xff;
 	tx_buf[25] = memory_size & 0xff;
 
-	tx_buf[26] = device_uid >> 50;
+	tx_buf[26] = device_uid >> 56;
 	tx_buf[27] = (device_uid >> 48) & 0xff;
 	tx_buf[28] = (device_uid >> 40) & 0xff;
 	tx_buf[29] = (device_uid >> 32) & 0xff;

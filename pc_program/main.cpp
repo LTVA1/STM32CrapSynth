@@ -76,7 +76,7 @@ int load_file(serialib serial)
 		 + ((uint64_t)rxbuf[29] << 32) + ((uint64_t)rxbuf[28] << 40) + ((uint64_t)rxbuf[27] << 48) + ((uint64_t)rxbuf[26] << 56);
 	EXTERNAL_FLASH_MANUFACTURER_ID = rxbuf[34];
 
-	EXTERNAL_FLASH_SIZE = 1024 * 1024 * 16; //16 MiB TODO: remove when actual comms are established
+	//EXTERNAL_FLASH_SIZE = 1024 * 1024 * 16; //16 MiB TODO: remove when actual comms are established
 
 	char buffer_cout[1666] = {0};
 
@@ -88,7 +88,7 @@ int load_file(serialib serial)
 		"Samples array in RAM starting address: 0x%08X\n"
 		"Highest supported .scs file version: %d.%d.%d.%d\n"
 		"External Flash memory size: %d bytes (%d%s)\n"
-		"External Flash memory UID: 0x%08X\n"
+		"External Flash memory UID: 0x%016llX\n"
 		"External Flash manufacturer ID: 0x%02X\n",
 			rxbuf[21], rxbuf[20], rxbuf[19], rxbuf[18],
 			MCU_FIRMWARE_SIZE,
