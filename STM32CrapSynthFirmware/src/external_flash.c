@@ -62,8 +62,25 @@ void external_flash_wait_until_not_busy()
 	}
 }
 
+void external_flash_write_enable_command()
+{
+	//write enable
+	//0x06
+	spi_tx_buf[0] = 0x06;
+
+	CS_EXT_FLASH_LOW
+	spi1_send_via_dma(&spi_tx_buf[0], 1);
+
+	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	CS_EXT_FLASH_HIGH
+}
+
 void external_flash_erase_sector(uint32_t address)
 {
+	external_flash_write_enable_command();
+
 	//sector erase (4KiB)
 	//0x20, addr 24 bits (MSB to LSB)
 	spi_tx_buf[0] = 0x20;
@@ -110,6 +127,9 @@ void external_flash_read_data(uint32_t address, uint8_t* data, uint16_t size, ui
 	}
 
 	spi1_receive_data_via_dma(data, size);
+
+	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); } //TODO: remove?
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 }
 
 void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size) //no more than 256 bytes at a time
@@ -122,19 +142,9 @@ void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size) /
 	if(erased_boundary < address + (uint32_t)size)
 	{
 		external_flash_erase_sector(erased_boundary);
-
-		//write enable
-		//0x06
-		spi_tx_buf[0] = 0x06;
-
-		CS_EXT_FLASH_LOW
-		spi1_send_via_dma(&spi_tx_buf[0], 1);
-
-		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-		CS_EXT_FLASH_HIGH
 	}
+
+	external_flash_write_enable_command();
 
 	//page program
 	//0x02, addr 24 bits (MSB to LSB), up to 256 bytes of data
@@ -160,6 +170,10 @@ void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size) /
 	external_flash_wait_until_not_busy();
 
 	CS_EXT_FLASH_HIGH
+
+	//external_flash_read_data(address, test_data_read, size, 1);
+
+	//CS_EXT_FLASH_HIGH
 }
 
 void external_flash_init_and_request_info()
@@ -217,18 +231,6 @@ void external_flash_init_and_request_info()
 	if(device_id == 0x4017 || device_id == 0x6017) memory_size = 1024 * 1024 * 8;
 	if(device_id == 0x4018 || device_id == 0x7018) memory_size = 1024 * 1024 * 16;
 
-	//write enable
-	//0x06
-	spi_tx_buf[0] = 0x06;
-
-	CS_EXT_FLASH_LOW
-	spi1_send_via_dma(&spi_tx_buf[0], 1);
-
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-	CS_EXT_FLASH_HIGH
-
 	//device unique ID
 	//0x4B, dummy, dummy, dummy, dummy, UID MSB to LSB (8 bytes)
 	spi_tx_buf[0] = 0x4B;
@@ -263,10 +265,22 @@ void external_flash_init_and_request_info()
 
 	erased_boundary = 0;
 
-	for(int i = 0; i < 256; i++)
+	//write enable
+	//0x06
+	/*spi_tx_buf[0] = 0x06;
+
+	CS_EXT_FLASH_LOW
+	spi1_send_via_dma(&spi_tx_buf[0], 1);
+
+	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	CS_EXT_FLASH_HIGH*/
+
+	/*for(int i = 0; i < 256; i++)
 	{
 		test_data[i] = 255 - i;
-	}
+	}*/
 
 	//external_flash_write_page(0, (uint8_t*)test_data, 256);
 	//external_flash_read_data(0, test_data_read, 256, 1);

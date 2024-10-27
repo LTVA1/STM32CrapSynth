@@ -70,7 +70,6 @@ void state_init()
 
 int main(void)
 {
-	remap_and_place_interrupt_vectors_table_to_ccmram();
 	enable_all_clocks(); // in that order because http://efton.sk/STM32/gotcha/g183.html
 	set_72MHz();
 	unlock_flash();
@@ -103,12 +102,12 @@ int main(void)
 		write_packet_to_flash();
 		external_flash_write_page_task();
 
-		for(int i = 0; i < 4; i++)
+		/*for(int i = 0; i < 4; i++)
 		{
 			for(int j = 0; j < 7200000; j++) { asm("nop"); }
 
 			ad9833_change_wave(2, i);
-		}
+		}*/
 	}
 
 	return 0;
