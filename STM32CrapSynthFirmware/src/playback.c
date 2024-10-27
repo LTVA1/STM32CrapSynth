@@ -20,13 +20,23 @@ void play_wavetable(uint8_t channel)
 {
 	for(int i = 0; i < WAVETABLE_SIZE; i++)
 	{
-		wavetable_array[channel][i] = i;
+		wavetable_array[0][i] = i;
 	}
 
-	wavetable_array[channel][200] = 0xff;
+	//wavetable_array[0][200] = 0xff;
 
-	TIM6->ARR = 720;
+	for(int i = 0; i < WAVETABLE_SIZE; i++)
+	{
+		wavetable_array[1][i] = (i > 127) ? ~(i * 2) : (i * 2);
+	}
+
+	//wavetable_array[1][210] = 0xff;
+
+	TIM6->ARR = 300;
 	TIM6->PSC = 0;
+
+	TIM7->ARR = 300;
+	TIM7->PSC = 0;
 
 	NVIC_DisableIRQ(DMA2_Channel3_IRQn);
 
@@ -36,5 +46,14 @@ void play_wavetable(uint8_t channel)
 
 	DMA2_Channel3->CCR |= DMA_CCR_EN;
 
+	NVIC_DisableIRQ(DMA2_Channel4_IRQn);
+
+	DMA2_Channel4->CMAR = (uint32_t)&wavetable_array[1][0];
+	DMA2_Channel4->CNDTR = WAVETABLE_SIZE;
+	DMA2_Channel4->CCR |= DMA_CCR_CIRC;
+
+	DMA2_Channel4->CCR |= DMA_CCR_EN;
+
 	TIM6->CR1 = TIM_CR1_CEN;
+	TIM7->CR1 = TIM_CR1_CEN;
 }

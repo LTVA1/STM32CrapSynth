@@ -94,6 +94,9 @@ int main(void)
 
 	//TIM20->CR1 = TIM_CR1_CEN;
 
+	DAC1->CR |= DAC_CR_WAVE1_0 | DAC_CR_MAMP1_3 | DAC_CR_MAMP1_0;
+	//DAC1->CR |= DAC_CR_WAVE2_1 | DAC_CR_MAMP2_3;
+
 	play_wavetable(0);
 
 	while(1)
