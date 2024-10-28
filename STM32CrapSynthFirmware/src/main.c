@@ -70,6 +70,7 @@ void state_init()
 
 int main(void)
 {
+	remap_and_place_interrupt_vectors_table_to_ccmram();
 	enable_all_clocks(); // in that order because http://efton.sk/STM32/gotcha/g183.html
 	set_72MHz();
 	unlock_flash();

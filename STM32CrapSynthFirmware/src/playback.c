@@ -111,7 +111,7 @@ void play_sample()
 	state_ram.dac[0].start_offset = 0;
 	state_ram.dac[0].length = 130897;
 	state_ram.dac[0].loop = 1;
-	state_ram.dac[0].loop_point = 100000;
+	state_ram.dac[0].loop_point = 0;
 	state_ram.dac[0].prescaler = 0;
 	state_ram.dac[0].volume = 0xff;
 	state_ram.dac[0].wavetable = 0;
