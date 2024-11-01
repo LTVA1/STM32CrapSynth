@@ -1940,7 +1940,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:UART_port"
 			(at -5.08 0 0)
 			(effects
 				(font
