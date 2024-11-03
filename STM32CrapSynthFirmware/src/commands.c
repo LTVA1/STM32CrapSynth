@@ -122,7 +122,7 @@ void decode_command()
 				{
 					start_playback();
 				}
-				if(cmd_buf[4] == SYNTH_CMD_PLAYBACK_STOP)
+				if(cmd_buf[3] == SYNTH_CMD_PLAYBACK_STOP)
 				{
 					stop_playback();
 				}

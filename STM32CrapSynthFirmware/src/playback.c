@@ -448,6 +448,8 @@ void execute_commands()
 {
 	if(!new_tick) return;
 
+	//ZCEN_DAC_ENABLE
+
 	while(1)
 	{
 		curr_command = reg_dump_read_byte();
@@ -499,14 +501,14 @@ void execute_commands()
 
 			CS_EXT_FLASH_HIGH
 			//__disable_irq();
-			TIM2->CR1 &= ~TIM_CR1_CEN;
+			//TIM2->CR1 &= ~TIM_CR1_CEN;
 			curr_read_buf_pos = 0;
 
 			read_reg_dump(0, 1);
 			//__enable_irq();
 			read_reg_dump(1, 0);
 
-			TIM2->CR1 |= TIM_CR1_CEN;
+			//TIM2->CR1 |= TIM_CR1_CEN;
 
 			//NVIC_EnableIRQ(TIM2_IRQn);
 			//TIM2->CR1 |= TIM_CR1_CEN;
@@ -514,6 +516,8 @@ void execute_commands()
 	}
 
 	new_tick = 0;
+
+	//ZCEN_DAC_DISABLE
 }
 
 
