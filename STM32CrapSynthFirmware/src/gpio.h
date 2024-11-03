@@ -26,6 +26,18 @@
 #define CS_ATTEN_LOW *(volatile uint32_t*)&(GPIOA->BSRRL) = (1 << (2 + 16));
 #define CS_ATTEN_HIGH *(volatile uint32_t*)&(GPIOA->BSRRL) = (1 << (2));
 
+#define ZCEN_1_ENABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (6));
+#define ZCEN_1_DISABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (6 + 16));
+
+#define ZCEN_2_ENABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (7));
+#define ZCEN_2_DISABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (7 + 16));
+
+#define ZCEN_3_ENABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (8));
+#define ZCEN_3_DISABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (8 + 16));
+
+#define ZCEN_DAC_ENABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (9));
+#define ZCEN_DAC_DISABLE *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (9 + 16));
+
 void gpio_init();
 
 #endif /* GPIO_H_ */

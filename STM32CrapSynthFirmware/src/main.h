@@ -61,6 +61,8 @@ typedef struct
 	uint16_t autoreload;
 	uint16_t prescaler;
 	uint16_t curr_portion_size;
+	uint8_t wave_type;
+	uint8_t duty;
 } Sample_state;
 
 typedef struct

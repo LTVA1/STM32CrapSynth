@@ -85,6 +85,7 @@ int main(void)
 	ad9833_init_all();
 	att_init_all();
 	external_flash_init_and_request_info();
+	playback_init();
 	uart_init();
 	uart_send_comms_establish_packet();
 
@@ -98,14 +99,15 @@ int main(void)
 	//DAC1->CR |= DAC_CR_WAVE1_0 | DAC_CR_MAMP1_3 | DAC_CR_MAMP1_0;
 	//DAC1->CR |= DAC_CR_WAVE2_1 | DAC_CR_MAMP2_3;
 
-	//play_wavetable(0);
-	play_sample();
+	//test_play_wavetable();
+	//test_play_sample();
 
 	while(1)
 	{
 		decode_command();
 		write_packet_to_flash();
 		external_flash_write_page_task();
+		execute_commands();
 
 		/*for(int i = 0; i < 4; i++)
 		{

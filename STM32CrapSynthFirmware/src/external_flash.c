@@ -26,8 +26,8 @@ uint32_t memory_size;
 
 uint32_t erased_boundary;
 
-uint8_t test_data[256];
-uint8_t test_data_read[256];
+//uint8_t test_data[256];
+//uint8_t test_data_read[256];
 
 uint8_t busy;
 
@@ -104,6 +104,7 @@ void external_flash_erase_sector(uint32_t address)
 	erased_boundary += 4 * 1024;
 }
 
+__attribute__((section (".ccmram")))
 void external_flash_read_data(uint32_t address, uint8_t* data, uint16_t size, uint8_t start)
 {
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
@@ -128,8 +129,8 @@ void external_flash_read_data(uint32_t address, uint8_t* data, uint16_t size, ui
 
 	spi1_receive_data_via_dma(data, size);
 
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); } //TODO: remove?
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+	//while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); } //TODO: remove?
+	//while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 }
 
 void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size) //no more than 256 bytes at a time
@@ -292,7 +293,7 @@ void external_flash_write_page_task()
 
 	external_flash_write_page(state_ccm.block_start_offset, state_ccm.data_pointer, state_ccm.block_length);
 
-	uart_send_response();
+	//uart_send_response();
 
 	state_ccm.state = STATE_IDLE;
 }

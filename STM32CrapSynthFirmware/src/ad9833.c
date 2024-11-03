@@ -1,7 +1,7 @@
 /*
  * ad9833.c
  *
- *  Created on: 16 окт. 2024 г.
+ *  Created on: 16 пїЅпїЅпїЅ. 2024 пїЅ.
  *      Author: Georg
  */
 
@@ -13,7 +13,7 @@
 extern uint8_t spi2_ready;
 
 uint16_t spi_tx_buf[AD9833_NUM][AD9833_TX_BUF_SIZE];
-uint8_t waves[4] = { WAVE_SINE, WAVE_TRIANGLE, WAVE_SQUARE, WAVE_SQUARE_HALF_AMP };
+uint8_t waves[4] = { WAVE_SINE, WAVE_TRIANGLE, WAVE_SQUARE, WAVE_SQUARE_DOUBLE_FREQ };
 
 void ad9833_cs_low(uint8_t dds)
 {

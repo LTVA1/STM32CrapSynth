@@ -10,6 +10,7 @@
 #include "stm32f3xx.h"
 #include "uart.h"
 #include "ring_buf.h"
+#include "playback.h"
 #include <string.h>
 
 extern Program_state_ccm state_ccm;
@@ -17,6 +18,7 @@ extern RingBuffer rx_ring_buf;
 extern uint8_t tx_buf[];
 extern uint8_t sample_mem_ram[];
 
+__attribute__((section (".ccmram")))
 void decode_command()
 {
 	static uint8_t state = CMD_DECODE_STATE_BEGIN;
@@ -97,9 +99,9 @@ void decode_command()
 
 					if(cmd_buf[3] == SYNTH_CMD_LOAD_RAM)
 					{
-						memcpy(&sample_mem_ram[state_ccm.block_start_offset], state_ccm.data_pointer, state_ccm.block_length);
 						state_ccm.state = STATE_PROG_RAM;
 						uart_send_response();
+						memcpy(&sample_mem_ram[state_ccm.block_start_offset], state_ccm.data_pointer, state_ccm.block_length);
 						state_ccm.state = STATE_IDLE;
 
 						//play_sample();
@@ -107,11 +109,22 @@ void decode_command()
 					if(cmd_buf[3] == SYNTH_CMD_LOAD_FLASH)
 					{
 						state_ccm.state = STATE_PROG_INTERNAL_FLASH;
+						//uart_send_response();
 					}
 					if(cmd_buf[3] == SYNTH_CMD_LOAD_EXT_FLASH)
 					{
 						state_ccm.state = STATE_PROG_EXTERNAL_FLASH;
+						uart_send_response();
 					}
+				}
+
+				if(cmd_buf[3] == SYNTH_CMD_PLAYBACK_START)
+				{
+					start_playback();
+				}
+				if(cmd_buf[4] == SYNTH_CMD_PLAYBACK_STOP)
+				{
+					stop_playback();
 				}
 			}
 
@@ -156,6 +169,7 @@ void decode_command()
 			state = CMD_DECODE_STATE_BEGIN;
 			our_xor = 0;
 			size = 0;
+			//return;
 			break;
 		}
 		default: break;

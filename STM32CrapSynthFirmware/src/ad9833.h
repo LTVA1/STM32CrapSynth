@@ -1,7 +1,7 @@
 /*
  * ad9833.h
  *
- *  Created on: 16 окт. 2024 г.
+ *  Created on: 16 пїЅпїЅпїЅ. 2024 пїЅ.
  *      Author: Georg
  */
 
@@ -19,7 +19,7 @@
 #define B28 (1 << 13) /* two 14-bit writes, update of internal reg after 2nd write */
 #define WAVE_MASK ((1 << 5) | (1 << 3) | (1 << 1))
 #define WAVE_SQUARE (1 << 5)
-#define WAVE_SQUARE_HALF_AMP ((1 << 5) | (1 << 3))
+#define WAVE_SQUARE_DOUBLE_FREQ ((1 << 5) | (1 << 3))
 #define WAVE_SINE 0
 #define WAVE_TRIANGLE (1 << 1)
 

@@ -15,12 +15,6 @@ void TIM1_UP_TIM16_IRQHandler()
 }
 
 __attribute__((section (".ccmram")))
-void TIM2_IRQHandler()
-{
-
-}
-
-__attribute__((section (".ccmram")))
 void TIM20_UP_IRQHandler()
 {
 	if(TIM20->SR & TIM_SR_UIF)
