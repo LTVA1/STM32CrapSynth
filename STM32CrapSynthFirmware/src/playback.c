@@ -407,7 +407,7 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 		}
 		case CMD_DAC_DUTY:
 		{
-			//ZCEN_DAC_ENABLE
+			//ZCEN_2_ENABLE
 			ss->duty = reg_dump_read_byte();
 
 			if(ss->wave_type == 6 && ss->wavetable)
@@ -417,7 +417,7 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 					wavetable_array[chan][i] = ((i < ss->duty) ? 255 : 0);
 				}
 			}
-			//ZCEN_DAC_DISABLE
+			//ZCEN_2_DISABLE
 			break;
 		}
 		case CMD_DAC_WAVETABLE_DATA:
@@ -454,6 +454,14 @@ void execute_commands()
 	{
 		curr_command = reg_dump_read_byte();
 		curr_chan = 0xff;
+
+		if(curr_command == CMD_NOP)
+		{
+			while(curr_command == CMD_NOP)
+			{
+				curr_command = reg_dump_read_byte();
+			}
+		}
 
 		if(curr_command != CMD_NEXT_FRAME && curr_command != CMD_NOP)
 		{
