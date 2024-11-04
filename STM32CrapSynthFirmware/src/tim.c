@@ -33,9 +33,14 @@ void TIM1_TRG_COM_TIM17_IRQHandler()
 void timers_all_init()
 {
 	//phase reset timer 1
+	//or PWM DAC channel?
 	TIM1->DIER |= TIM_DIER_UIE;
 	NVIC_SetPriority(TIM1_UP_TIM16_IRQn, 8);
 	NVIC_EnableIRQ(TIM1_UP_TIM16_IRQn);
+	TIM1->CCMR1 |= TIM_CCMR1_OC1CE | TIM_CCMR1_OC1PE;
+	TIM1->CCMR1 |= TIM_CCMR1_OC1M_2 | TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_0;	//<-- pwm mode 2
+	TIM1->CCR1 = 0;	//<-- here need put pwm value...
+	TIM1->CCER |= TIM_CCER_CC1E;
 
 	//engine tick rate
 	TIM2->DIER |= TIM_DIER_UIE;

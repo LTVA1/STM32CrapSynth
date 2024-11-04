@@ -7555,6 +7555,16 @@
 	)
 	(wire
 		(pts
+			(xy 220.98 261.62) (xy 220.98 270.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "abbb8a6f-c7bc-4a6f-a70c-dee61d3242d7")
+	)
+	(wire
+		(pts
 			(xy 132.08 267.97) (xy 132.08 269.24)
 		)
 		(stroke
@@ -10902,6 +10912,28 @@
 			)
 		)
 	)
+	(global_label "PWM_DAC_out"
+		(shape input)
+		(at 48.26 162.56 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c7a573f4-dc08-41c5-a909-d4be24155dbb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 32.5145 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "NOISE_TOVOL"
 		(shape input)
 		(at 137.16 102.87 180)
@@ -10915,6 +10947,28 @@
 		(uuid "ca0bc90c-e1cc-4212-8605-aef50a46a585")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 121.8376 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "PWM_DAC_out"
+		(shape input)
+		(at 213.36 270.51 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ca8d9ae5-0e81-4fb3-831f-fed7a3e15dbb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 197.6145 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22296,6 +22350,123 @@
 			(project "board"
 				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
 					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "4ms_Resistor:3.0k_0603_0.1%")
+		(at 217.17 270.51 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e1207c67-b8a0-43a0-ab3f-f3c6c7564ef6")
+		(property "Reference" "R16"
+			(at 217.17 264.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "3.0k_0603_0.1%"
+			(at 217.17 273.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "4ms_Resistor:R_0603"
+			(at 229.87 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 217.17 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "3.0k, 0.1%, 1/16W, 0603"
+			(at 217.17 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Specifications" "3.0k, 0.1%, 1/16W, 0603"
+			(at 225.044 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Vishay / Dale"
+			(at 226.568 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Part Number" "TNPW06033K00BEEA"
+			(at 228.092 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Display" "3.0k 0.1%"
+			(at 217.17 266.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "JLCPCB ID" "C126481"
+			(at 217.17 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "92af0a37-757b-4d1f-be39-995aaf0407ad")
+		)
+		(pin "1"
+			(uuid "29ad460b-106a-4b10-8b38-793de98417d5")
+		)
+		(instances
+			(project "board"
+				(path "/e8cec806-e837-4d6f-b166-2de75a563bd6"
+					(reference "R16")
 					(unit 1)
 				)
 			)
