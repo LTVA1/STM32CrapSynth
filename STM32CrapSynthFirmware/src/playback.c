@@ -424,6 +424,7 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 		{
 			wave_copy_chans_dma[chan]->CCR &= ~DMA_CCR_EN;
 			wave_copy_chans_dma[chan]->CMAR = (uint32_t)&spi_rx_double_buf[curr_read_buf_pos];
+			//wave_copy_chans_dma[chan]->CPAR = (uint32_t)&wavetable_array[chan][0];
 			wave_copy_chans_dma[chan]->CNDTR = WAVETABLE_SIZE;
 			wave_copy_chans_dma[chan]->CCR |= DMA_CCR_EN;
 			curr_read_buf_pos += 256;
