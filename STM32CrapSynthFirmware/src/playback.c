@@ -14,7 +14,7 @@
 
 #include <string.h>
 
-uint8_t wavetable_array[2][WAVETABLE_SIZE];
+uint8_t wavetable_array[3][WAVETABLE_SIZE];
 uint32_t noise_lfsr_load[NOISE_LFSR_LENGTH * 2];
 uint8_t sample_mem_ram[SAMPLE_MEM_RAM_SIZE];
 
@@ -23,7 +23,7 @@ uint16_t curr_read_buf_pos;
 uint32_t curr_dump_pos;
 uint8_t new_tick;
 
-uint8_t chan_base_addr[13];
+uint8_t chan_base_addr[20];
 
 uint8_t curr_command;
 uint8_t curr_chan;
@@ -84,7 +84,7 @@ void DMA2_Channel4_IRQHandler()
 
 	if(ss->curr_pos < ss->length)
 	{
-		DMA2_Channel4->CMAR = BASE_ADDR_FLASH + ss->start_offset + ss->curr_pos;
+		DMA2_Channel4->CMAR = (ss->in_ram ? (uint32_t)&sample_mem_ram[0] : BASE_ADDR_FLASH) + ss->start_offset + ss->curr_pos;
 		DMA2_Channel4->CNDTR = my_min(0xffff, ss->length - ss->curr_pos);
 		ss->curr_portion_size = my_min(0xffff, ss->length - ss->curr_pos);
 
@@ -97,7 +97,7 @@ void DMA2_Channel4_IRQHandler()
 	if(ss->curr_pos == ss->length && ss->loop)
 	{
 		ss->curr_pos = ss->loop_point;
-		DMA2_Channel4->CMAR = BASE_ADDR_FLASH + ss->start_offset + ss->loop_point;
+		DMA2_Channel4->CMAR = (ss->in_ram ? (uint32_t)&sample_mem_ram[0] : BASE_ADDR_FLASH) + ss->start_offset + ss->loop_point;
 		DMA2_Channel4->CNDTR = my_min(0xffff, ss->length - ss->curr_pos);
 		ss->curr_portion_size = my_min(0xffff, ss->length - ss->curr_pos);
 
@@ -135,17 +135,18 @@ void read_reg_dump(uint8_t half, uint8_t start)
 __attribute__((section (".ccmram")))
 uint8_t reg_dump_read_byte()
 {
+	if(curr_read_buf_pos >= EXT_FLASH_RX_BUF_SIZE)
+	{
+		read_reg_dump(1, 0);
+		curr_read_buf_pos = 0;
+	}
+
 	uint8_t data = spi_rx_double_buf[curr_read_buf_pos];
 	curr_read_buf_pos++;
 
 	if(curr_read_buf_pos == EXT_FLASH_RX_BUF_SIZE / 2)
 	{
 		read_reg_dump(0, 0);
-	}
-	if(curr_read_buf_pos == EXT_FLASH_RX_BUF_SIZE)
-	{
-		read_reg_dump(1, 0);
-		curr_read_buf_pos = 0;
 	}
 
 	return data;
@@ -236,6 +237,7 @@ void stop_playback()
 	for(int i = 0; i < 2; i++)
 	{
 		samp_chans_dma[i]->CCR &= ~DMA_CCR_EN;
+		wave_copy_chans_dma[i]->CCR &= ~DMA_CCR_EN;
 		samp_chans_timers[i]->CR1 &= ~TIM_CR1_CEN;
 		NVIC_DisableIRQ(samp_chans_IRQ[i]);
 	}
@@ -261,7 +263,8 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 		case CMD_DAC_PLAY_SAMPLE_LOOPED:
 		{
 			samp_chans_timers[chan]->CR1 &= ~TIM_CR1_CEN;
-			samp_chans_dma[chan]->CCR &= ~DMA_CCR_EN;
+			samp_chans_dma[chan]->CCR &= ~(DMA_CCR_EN);
+			samp_chans_dma[chan]->CCR &= ~(DMA_CCR_CIRC);
 			ss->curr_pos = 0;
 			ss->wavetable = 0;
 			samp_chans_dma[chan]->CMAR = (ss->in_ram ? (uint32_t)&sample_mem_ram[0] : BASE_ADDR_FLASH) + ss->start_offset;
@@ -271,6 +274,8 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			ss->loop = (command == CMD_DAC_PLAY_SAMPLE_LOOPED ? 1 : 0);
 
 			NVIC_EnableIRQ(samp_chans_IRQ[chan]);
+
+			samp_chans_dma[chan]->CCR |= DMA_CCR_TCIE;
 
 			samp_chans_dma[chan]->CCR |= DMA_CCR_EN;
 			samp_chans_timers[chan]->CR1 |= TIM_CR1_CEN;
@@ -424,7 +429,6 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 		{
 			wave_copy_chans_dma[chan]->CCR &= ~DMA_CCR_EN;
 			wave_copy_chans_dma[chan]->CMAR = (uint32_t)&spi_rx_double_buf[curr_read_buf_pos];
-			//wave_copy_chans_dma[chan]->CPAR = (uint32_t)&wavetable_array[chan][0];
 			wave_copy_chans_dma[chan]->CNDTR = WAVETABLE_SIZE;
 			wave_copy_chans_dma[chan]->CCR |= DMA_CCR_EN;
 			curr_read_buf_pos += 256;
@@ -464,7 +468,7 @@ void execute_commands()
 			}
 		}
 
-		if(curr_command != CMD_NEXT_FRAME && curr_command != CMD_NOP)
+		if(curr_command != CMD_NEXT_FRAME)
 		{
 			for(int i = 0; i < 12; i++)
 			{
@@ -501,26 +505,20 @@ void execute_commands()
 
 		if(curr_command == CMD_LOOP_POINT)
 		{
-			//stop_playback();
-
-			//TIM2->CR1 &= ~TIM_CR1_CEN;
-			//TIM2->CNT = 0;
 			curr_buf_pos = 0;
 			curr_dump_pos = reg_dump_read_four_bytes();
 
 			CS_EXT_FLASH_HIGH
-			//__disable_irq();
-			//TIM2->CR1 &= ~TIM_CR1_CEN;
 			curr_read_buf_pos = 0;
 
 			read_reg_dump(0, 1);
-			//__enable_irq();
 			read_reg_dump(1, 0);
 
-			//TIM2->CR1 |= TIM_CR1_CEN;
-
-			//NVIC_EnableIRQ(TIM2_IRQn);
-			//TIM2->CR1 |= TIM_CR1_CEN;
+			if(curr_dump_pos == 0)
+			{
+				TIM2->ARR = reg_dump_read_four_bytes();
+				TIM2->PSC = 0;
+			}
 		}
 	}
 
@@ -622,7 +620,7 @@ void test_play_sample()
 	state_ram.dac[0].start_offset = 0;
 	state_ram.dac[0].length = 130897;
 	state_ram.dac[0].loop = 1;
-	state_ram.dac[0].loop_point = 0;
+	state_ram.dac[0].loop_point = 50000;
 	state_ram.dac[0].prescaler = 0;
 	state_ram.dac[0].volume = 0xff;
 	state_ram.dac[0].wavetable = 0;
