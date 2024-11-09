@@ -141,13 +141,13 @@ uint8_t reg_dump_read_byte()
 		curr_read_buf_pos = 0;
 	}
 
-	uint8_t data = spi_rx_double_buf[curr_read_buf_pos];
-	curr_read_buf_pos++;
-
 	if(curr_read_buf_pos == EXT_FLASH_RX_BUF_SIZE / 2)
 	{
 		read_reg_dump(0, 0);
 	}
+
+	uint8_t data = spi_rx_double_buf[curr_read_buf_pos];
+	curr_read_buf_pos++;
 
 	return data;
 }
@@ -432,6 +432,11 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			wave_copy_chans_dma[chan]->CNDTR = WAVETABLE_SIZE;
 			wave_copy_chans_dma[chan]->CCR |= DMA_CCR_EN;
 			curr_read_buf_pos += 256;
+
+			if(curr_read_buf_pos >= EXT_FLASH_RX_BUF_SIZE / 2 && curr_read_buf_pos - 256 < EXT_FLASH_RX_BUF_SIZE / 2)
+			{
+				read_reg_dump(0, 0);
+			}
 			/*for(int i = 0; i < WAVETABLE_SIZE; i++)
 			{
 				wavetable_array[chan][i] = reg_dump_read_byte();
@@ -507,12 +512,15 @@ void execute_commands()
 		{
 			curr_buf_pos = 0;
 			curr_dump_pos = reg_dump_read_four_bytes();
+			uint32_t temp = curr_dump_pos;
 
 			CS_EXT_FLASH_HIGH
 			curr_read_buf_pos = 0;
 
 			read_reg_dump(0, 1);
 			read_reg_dump(1, 0);
+
+			curr_dump_pos = temp;
 
 			if(curr_dump_pos == 0)
 			{
