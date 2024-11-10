@@ -5,7 +5,8 @@ module noise_gen (
     input spi_clock,
     input spi_data,
     input spi_cs,
-    output reg noise_signal
+    output reg noise_signal,
+    output reg led
 );
 
 reg [16:0] counter;
@@ -38,6 +39,7 @@ wire MOSI_data = MOSIr[1];
 reg [5:0] bitcnt;
 
 reg data_received;  // high when a byte has been received
+always @(posedge sys_clk) data_received <= SSEL_active && SCK_risingedge && (bitcnt == 6'd39);
 
 always @(posedge sys_clk)
 begin
@@ -53,55 +55,47 @@ begin
     end
 end
 
-always @(posedge sys_clk) data_received <= SSEL_active && SCK_risingedge && (bitcnt == 6'd39);
-
-always @(posedge data_received)
+always @(posedge sys_clk)
 begin
-    if(SSEL_active)
-    begin
-        lfsr <= spi_receive_reg[22:0];
-        freq_div <= spi_receive_reg[39:23];
-    end
+    led <= SSEL_endmessage;
 end
 
-always @(posedge sys_clk or negedge sys_rst_n or posedge SSEL_active or posedge data_received)
+always @(posedge sys_clk or negedge sys_rst_n)
 begin
-    if(data_received)
-    begin
-        if(SSEL_active)
+    if (!sys_rst_n) begin
+        counter <= 17'd0;
+
+        lfsr <= 23'd111;
+        freq_div <= 17'd13000;
+    end
+    else if (counter < freq_div) begin
+        counter <= counter + 17'd1;
+        
+        if(SSEL_endmessage)
         begin
-            lfsr <= spi_receive_reg[22:0];
+            //lfsr <= spi_receive_reg[22:0];
             freq_div <= spi_receive_reg[39:23];
         end
     end
-    else
-    begin
-        if(SSEL_active) begin
-            
+    else begin
+        if(SSEL_endmessage)
+        begin
+            //lfsr <= spi_receive_reg[22:0];
+            freq_div <= spi_receive_reg[39:23];
         end
         else begin
-            if (!sys_rst_n) begin
-                counter <= 17'd0;
+            counter <= 17'd0;
 
+            if(lfsr === 23'd0) begin
                 lfsr <= 23'd111;
-                freq_div <= 17'd13000;
-                //spi_receive_reg <= 40'd0;
             end
-            else if (counter < freq_div)
-                counter <= counter + 1;
-            else begin
-                counter <= 17'd0;
-
-                if(lfsr === 23'd0) begin
-                    lfsr <= 23'd111;
-                end
-                
-                r_XNOR <= lfsr[22] ^ lfsr[17];
-                lfsr <= {lfsr[21:0], r_XNOR};
-                r_LFSR <= lfsr[0];
-                
-                noise_signal <= r_LFSR;
-            end
+            
+            r_XNOR <= lfsr[22] ^ lfsr[17];
+            lfsr <= {lfsr[21:0], r_XNOR};
+            r_LFSR <= lfsr[0];
+            
+            noise_signal <= r_LFSR;
+            //led <= r_LFSR;
         end
     end
 end
