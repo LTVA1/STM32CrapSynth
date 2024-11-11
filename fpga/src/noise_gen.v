@@ -5,8 +5,7 @@ module noise_gen (
     input spi_clock,
     input spi_data,
     input spi_cs,
-    output reg noise_signal,
-    output reg led
+    output reg noise_signal
 );
 
 reg [16:0] counter;
@@ -55,18 +54,13 @@ begin
     end
 end
 
-always @(posedge sys_clk)
-begin
-    led <= SSEL_endmessage;
-end
-
 always @(posedge sys_clk or negedge sys_rst_n)
 begin
     if (!sys_rst_n) begin
         counter <= 17'd0;
 
-        lfsr <= 23'd111;
-        freq_div <= 17'd53000;
+        lfsr <= 23'd111111;
+        freq_div <= 17'd13000;
     end
     else if (counter < freq_div) begin
         counter <= counter + 17'd1;
@@ -80,6 +74,12 @@ begin
             if(!spi_receive_reg[23])
             begin
                 freq_div <= spi_receive_reg[16:0];
+            end
+        end
+        else begin
+            if(lfsr === 23'd0) 
+            begin
+                lfsr <= 23'd111111;
             end
         end
     end
@@ -97,11 +97,6 @@ begin
         end
         else begin
             counter <= 17'd0;
-
-            if(lfsr === 23'd0) 
-            begin
-                lfsr <= 23'd111;
-            end
             
             r_XNOR <= lfsr[22] ^ lfsr[17];
             lfsr <= {lfsr[21:0], r_XNOR};
