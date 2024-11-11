@@ -13,7 +13,7 @@ reg [16:0] counter;
 
 reg [22:0] lfsr;
 reg [16:0] freq_div;
-reg [39:0] spi_receive_reg;
+reg [23:0] spi_receive_reg;
 
 reg r_XNOR;
 reg r_LFSR;
@@ -35,23 +35,23 @@ wire SSEL_endmessage = (SSELr[2:1]==2'b01);  // message stops at rising edge
 reg [1:0] MOSIr;  always @(posedge sys_clk) MOSIr <= {MOSIr[0], spi_data};
 wire MOSI_data = MOSIr[1];
 
-// we handle SPI in 40-bit format
-reg [5:0] bitcnt;
+// we handle SPI in 24-bit format
+reg [4:0] bitcnt;
 
 reg data_received;  // high when a byte has been received
-always @(posedge sys_clk) data_received <= SSEL_active && SCK_risingedge && (bitcnt == 6'd39);
+always @(posedge sys_clk) data_received <= SSEL_active && SCK_risingedge && (bitcnt == 5'd23);
 
 always @(posedge sys_clk)
 begin
     if(~SSEL_active)
-        bitcnt <= 6'd0;
+        bitcnt <= 5'd0;
     else
     if(SCK_risingedge)
     begin
-        bitcnt <= bitcnt + 6'd1;
+        bitcnt <= bitcnt + 5'd1;
 
         // implement a shift-left register (since we receive the data MSB first)
-        spi_receive_reg <= {spi_receive_reg[38:0], MOSI_data};
+        spi_receive_reg <= {spi_receive_reg[22:0], MOSI_data};
     end
 end
 
@@ -66,27 +66,40 @@ begin
         counter <= 17'd0;
 
         lfsr <= 23'd111;
-        freq_div <= 17'd13000;
+        freq_div <= 17'd53000;
     end
     else if (counter < freq_div) begin
         counter <= counter + 17'd1;
         
         if(SSEL_endmessage)
         begin
-            //lfsr <= spi_receive_reg[22:0];
-            freq_div <= spi_receive_reg[39:23];
+            if(spi_receive_reg[23])
+            begin
+                lfsr <= spi_receive_reg[22:0];
+            end
+            if(!spi_receive_reg[23])
+            begin
+                freq_div <= spi_receive_reg[16:0];
+            end
         end
     end
     else begin
         if(SSEL_endmessage)
         begin
-            //lfsr <= spi_receive_reg[22:0];
-            freq_div <= spi_receive_reg[39:23];
+            if(spi_receive_reg[23])
+            begin
+                lfsr <= spi_receive_reg[22:0];
+            end
+            if(!spi_receive_reg[23])
+            begin
+                freq_div <= spi_receive_reg[16:0];
+            end
         end
         else begin
             counter <= 17'd0;
 
-            if(lfsr === 23'd0) begin
+            if(lfsr === 23'd0) 
+            begin
                 lfsr <= 23'd111;
             end
             
