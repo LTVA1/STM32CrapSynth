@@ -17,6 +17,11 @@
 #define CS_AD4_LOW *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (12 + 16));
 #define CS_AD4_HIGH *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (12));
 
+#define CH1_CONNECT_DDS *(volatile uint32_t*)&(GPIOA->BSRRL) = (1 << (0 + 16));
+#define CH1_CONNECT_PWM *(volatile uint32_t*)&(GPIOA->BSRRL) = (1 << (0));
+#define CH2_CONNECT_DDS *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (3 + 16));
+#define CH2_CONNECT_PWM *(volatile uint32_t*)&(GPIOC->BSRRL) = (1 << (3));
+
 #define CS_EXT_FLASH_LOW *(volatile uint32_t*)&(GPIOD->BSRRL) = (1 << (2 + 16));
 #define CS_EXT_FLASH_HIGH *(volatile uint32_t*)&(GPIOD->BSRRL) = (1 << (2));
 

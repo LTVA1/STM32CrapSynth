@@ -48,9 +48,6 @@ void DMA1_Channel5_IRQHandler() //send
 	DMA1->IFCR |= DMA_IFCR_CTCIF5;
 	DMA1_Channel5->CCR &= ~DMA_CCR_EN; //stop DMA
 
-	ad9833_cs_high(0);
-
-	CS_ATTEN_HIGH //to not busy-wait until all 8 bytes are sent...
 	att_need_write = 0;
 	spi2_ready = 1;
 }
@@ -114,7 +111,8 @@ void spi1_receive_data_via_dma(uint8_t* receivebuf, uint16_t size)
 __attribute__((section (".ccmram")))
 void spi2_send_via_dma(uint16_t* sendbuf, uint16_t size)
 {
-	while(!spi2_ready) { asm("nop"); }
+	//while(!spi2_ready) { asm("nop"); }
+	//while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	DMA1_Channel5->CCR &= ~DMA_CCR_EN;
 	DMA1_Channel5->CMAR = (uint32_t)sendbuf;
@@ -126,7 +124,14 @@ void spi2_send_via_dma(uint16_t* sendbuf, uint16_t size)
 __attribute__((section (".ccmram")))
 void spi2_send_16bits(uint16_t data)
 {
+	while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	SPI2->CR1 &= ~SPI_CR1_SPE; //for AD9833
+	SPI2->CR1 &= ~SPI_CR1_CPHA;
+	SPI2->CR1 |= SPI_CR1_SPE;
+
 	SPI2->DR = data;
+
 	while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
 }
 
@@ -137,10 +142,10 @@ void spi_init()
 	SPI1->CR2 = SPI_CR2_DS_2 | SPI_CR2_DS_1 | SPI_CR2_DS_0 | SPI_CR2_TXDMAEN | SPI_CR2_RXDMAEN | SPI_CR2_FRXTH;   //  8 bit, enable DMA TX & RX, FLUSH RX FIFO!!!
 	SPI1->CR1 |= SPI_CR1_SPE; // enable
 
-	SPI2->CR1 |= SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_CPOL | SPI_CR1_BR_2; //fclk / 64, master mode, software slave management, clock to high
+	SPI2->CR1 |= SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_CPHA | SPI_CR1_CPOL | SPI_CR1_BR_1 | SPI_CR1_BR_0; //fclk / 16, master mode, software slave management, clock to high
 	//when idle
 	//without software slave management does not work!
-	SPI2->CR2 = SPI_CR2_DS_3 | SPI_CR2_DS_2 | SPI_CR2_DS_1 | SPI_CR2_DS_0 | SPI_CR2_TXDMAEN;   // 16 bit, DMA TX
+	SPI2->CR2 = SPI_CR2_DS_3 | SPI_CR2_DS_2 | SPI_CR2_DS_1 | SPI_CR2_DS_0 | SPI_CR2_TXDMAEN | SPI_CR2_FRXTH;   // 16 bit, DMA TX
 	SPI2->CR1 |= SPI_CR1_SPE; // enable
 
 	spi1_ready_tx = 1;

@@ -11,6 +11,7 @@
 #include "commands.h"
 #include "external_flash.h"
 #include "gpio.h"
+#include "pga2320.h"
 
 #include <string.h>
 
@@ -33,6 +34,8 @@ uint32_t dummy;
 extern Program_state_ccm state_ccm;
 extern Program_state_ram state_ram;
 extern uint8_t spi_rx_double_buf[];
+
+extern uint8_t att_need_write;
 
 __attribute__((section (".ccmram")))
 void DMA2_Channel3_IRQHandler()
@@ -256,7 +259,8 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 	{
 		case CMD_DAC_VOLUME:
 		{
-			dummy = reg_dump_read_byte();
+			att_write_vol(5 + chan, reg_dump_read_byte());
+			att_need_write = 1;
 			break;
 		}
 		case CMD_DAC_PLAY_SAMPLE:
@@ -532,6 +536,11 @@ void execute_commands()
 
 	new_tick = 0;
 
+	if(att_need_write)
+	{
+		att_flush();
+	}
+
 	//ZCEN_DAC_DISABLE
 }
 
@@ -587,19 +596,19 @@ void test_play_wavetable()
 
 	//wavetable_array[1][210] = 0xff;
 
-	//TIM6->ARR = 300;
-	//TIM6->PSC = 0;
+	TIM6->ARR = 601;
+	TIM6->PSC = 0;
 
-	TIM7->ARR = 300;
+	TIM7->ARR = 600;
 	TIM7->PSC = 0;
 
-	//NVIC_DisableIRQ(DMA2_Channel3_IRQn);
+	NVIC_DisableIRQ(DMA2_Channel3_IRQn);
 
-	//DMA2_Channel3->CMAR = (uint32_t)&wavetable_array[0][0];
-	//DMA2_Channel3->CNDTR = WAVETABLE_SIZE;
-	//DMA2_Channel3->CCR |= DMA_CCR_CIRC;
+	DMA2_Channel3->CMAR = (uint32_t)&wavetable_array[0][0];
+	DMA2_Channel3->CNDTR = WAVETABLE_SIZE;
+	DMA2_Channel3->CCR |= DMA_CCR_CIRC;
 
-	//DMA2_Channel3->CCR |= DMA_CCR_EN;
+	DMA2_Channel3->CCR |= DMA_CCR_EN;
 
 	NVIC_DisableIRQ(DMA2_Channel4_IRQn);
 
@@ -609,7 +618,7 @@ void test_play_wavetable()
 
 	DMA2_Channel4->CCR |= DMA_CCR_EN;
 
-	//TIM6->CR1 = TIM_CR1_CEN;
+	TIM6->CR1 = TIM_CR1_CEN;
 	TIM7->CR1 = TIM_CR1_CEN;
 }
 

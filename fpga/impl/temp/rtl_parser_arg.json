@@ -1,0 +1,17 @@
+{
+ "Device" : "GW1NZ-1",
+ "Files" : [
+  {
+   "Path" : "C:/Users/Georg/Nextcloud/\u043a\u0443\u0440\u0441\u0430\u0447_\u0441\u0435\u043c\u0435\u0440\u0435\u043d\u043a\u043e/STM32CrapSynth/fpga/src/led.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "C:/Users/Georg/Nextcloud/\u043a\u0443\u0440\u0441\u0430\u0447_\u0441\u0435\u043c\u0435\u0440\u0435\u043d\u043a\u043e/STM32CrapSynth/fpga/impl/temp/rtl_parser.result",
+ "Top" : "led",
+ "VerilogStd" : "sysv",
+ "VhdlStd" : "vhdl_93"
+}

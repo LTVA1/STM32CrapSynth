@@ -7,4 +7,3 @@ board/board-backups/*
 .metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
 .metadata/.plugins/org.eclipse.cdt.ui/STM32CrapSynthFirmware.build.log
 .metadata/.plugins/org.eclipse.cdt.ui/global-build.log
-fpga/impl/*
