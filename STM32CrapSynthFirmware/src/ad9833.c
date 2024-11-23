@@ -15,6 +15,8 @@ extern uint8_t spi2_ready;
 uint16_t spi_tx_buf_ad9833[AD9833_NUM][AD9833_TX_BUF_SIZE];
 uint8_t waves[4] = { WAVE_SINE, WAVE_TRIANGLE, WAVE_SQUARE, WAVE_SQUARE_DOUBLE_FREQ };
 
+uint8_t dds_freq_reg[4];
+
 void ad9833_cs_low(uint8_t dds)
 {
 	switch(dds)
@@ -88,15 +90,27 @@ void ad9833_reset(uint8_t dds)
 
 void ad9833_write_freq(uint8_t dds, uint32_t freq)
 {
-	spi_tx_buf_ad9833[dds][1] = FREQ0_REG_ADDRESS | (freq & 0x3fff);
-	spi_tx_buf_ad9833[dds][2] = FREQ0_REG_ADDRESS | ((freq >> 14) & 0x3fff);
+	spi_tx_buf_ad9833[dds][1] = (dds_freq_reg[dds] ? FREQ1_REG_ADDRESS : FREQ0_REG_ADDRESS) | (freq & 0x3fff);
+	spi_tx_buf_ad9833[dds][2] = (dds_freq_reg[dds] ? FREQ1_REG_ADDRESS : FREQ0_REG_ADDRESS) | ((freq >> 14) & 0x3fff);
 
 	ad9833_cs_low(dds);
 	spi2_send_16bits(spi_tx_buf_ad9833[dds][1]);
-	ad9833_cs_high(dds);
-	ad9833_cs_low(dds);
 	spi2_send_16bits(spi_tx_buf_ad9833[dds][2]);
 	ad9833_cs_high(dds);
+
+	spi_tx_buf_ad9833[dds][0] &= ~FSELECT;
+
+	if(dds_freq_reg[dds])
+	{
+		spi_tx_buf_ad9833[dds][0] |= FSELECT;
+	}
+
+	ad9833_cs_low(dds);
+	spi2_send_16bits(spi_tx_buf_ad9833[dds][0]);
+	ad9833_cs_high(dds);
+
+	dds_freq_reg[dds]++;
+	dds_freq_reg[dds] &= 1;
 }
 
 void ad9833_change_wave(uint8_t dds, uint8_t wave)
@@ -113,6 +127,7 @@ void ad9833_init(uint8_t dds)
 {
 	spi_tx_buf_ad9833[dds][0] |= B28;
 	ad9833_reset(dds);
+	dds_freq_reg[dds] = 0;
 	ad9833_write_freq(dds, 0);
 }
 

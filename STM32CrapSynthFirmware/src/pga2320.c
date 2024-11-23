@@ -47,7 +47,7 @@ void att_write_vol(uint8_t ch, uint8_t vol)
 		}
 		case 4:
 		{
-			spi_tx_buf[2] = vol;
+			spi_tx_buf[3] = vol;
 			break;
 		}
 		case 5:

@@ -14,9 +14,11 @@
 #define AD9833_NUM 4
 
 #define FREQ0_REG_ADDRESS (0b01 << 14)
+#define FREQ1_REG_ADDRESS (0b10 << 14)
 
 #define RESET_BIT (1 << 8)
 #define B28 (1 << 13) /* two 14-bit writes, update of internal reg after 2nd write */
+#define FSELECT (1 << 11)
 #define WAVE_MASK ((1 << 5) | (1 << 3) | (1 << 1))
 #define WAVE_SQUARE (1 << 5)
 #define WAVE_SQUARE_DOUBLE_FREQ ((1 << 5) | (1 << 3))

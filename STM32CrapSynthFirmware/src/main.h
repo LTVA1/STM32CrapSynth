@@ -77,7 +77,7 @@ typedef struct
 {
 	PSG_state psg[4];
 	Noise_state noise;
-	Sample_state dac[2];
+	Sample_state dac[3];
 	Timer_state timer[5]; //last timer shared between phase reset function and external noise clock source function
 } Program_state_ram; //in RAM so that it would be sent to PC via UART DMA
 
