@@ -78,42 +78,42 @@ void uart_init()
 {
 	//UARTs used as phase reset timers
 
-	USART1->CR1 |= USART_CR1_TE | USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
+	USART1->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
 	USART1->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	USART1->BRR = 1000;
 
-	USART1->CR1 |= USART_CR1_UE;
+	//USART1->CR1 |= USART_CR1_UE;
 
 	NVIC_SetPriority(USART1_IRQn, 8);
 	//NVIC_EnableIRQ(USART1_IRQn);
 
-	USART2->CR1 |= USART_CR1_TE | USART_CR1_TCIE | USART_CR1_M1; //9 data bits
+	USART2->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
 	USART2->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	USART2->BRR = 1000;
 
-	USART2->CR1 |= USART_CR1_UE;
+	//USART2->CR1 |= USART_CR1_UE;
 
 	NVIC_SetPriority(USART2_IRQn, 8);
 	//NVIC_EnableIRQ(USART2_IRQn);
 
-	USART3->CR1 |= USART_CR1_TE | USART_CR1_TCIE | USART_CR1_M1; //9 data bits
+	USART3->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
 	USART3->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	USART3->BRR = 1000;
 
-	USART3->CR1 |= USART_CR1_UE;
+	//USART3->CR1 |= USART_CR1_UE;
 
 	NVIC_SetPriority(USART3_IRQn, 8);
 	//NVIC_EnableIRQ(USART3_IRQn);
 
-	UART5->CR1 |= USART_CR1_TE | USART_CR1_TCIE | USART_CR1_M1; //9 data bits
+	UART5->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
 	UART5->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	UART5->BRR = 1000;
 
-	UART5->CR1 |= USART_CR1_UE;
+	//UART5->CR1 |= USART_CR1_UE;
 
 	NVIC_SetPriority(UART5_IRQn, 8);
 	//NVIC_EnableIRQ(UART5_IRQn);

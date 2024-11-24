@@ -42,7 +42,7 @@ TIM_TypeDef* pwm_timers[4] = { TIM3, TIM4, TIM8, TIM15 };
 TIM_TypeDef* noise_clock_timer = TIM17;
 
 USART_TypeDef* phase_reset_uarts[4] = { USART1, USART2, USART3, UART5 };
-IRQn_Type phase_reset_interrupts[6] = { 0, /*SysTick*/ TIM20_UP_IRQn, USART1_IRQn, USART2_IRQn, USART3_IRQn, UART5_IRQn };
+IRQn_Type phase_reset_interrupts[6] = { TIM20_UP_IRQn, 0, /*SysTick*/ USART1_IRQn, USART2_IRQn, USART3_IRQn, UART5_IRQn };
 
 DMA_Channel_TypeDef* samp_chans_dma[3] = { DMA2_Channel3, DMA2_Channel4, DMA1_Channel6 };
 DMA_Channel_TypeDef* wave_copy_chans_dma[3] = { DMA2_Channel1, DMA1_Channel7, DMA1_Channel1 };
@@ -384,7 +384,7 @@ __attribute__((section (".ccmram")))
 void USART2_IRQHandler()
 {
 	ZCEN_3_ENABLE
-	if (USART2->ISR & USART_ISR_TC)
+	if (USART2->ISR & USART_ISR_TXE)
 	{
 		USART2->TDR = 0; //clear interrupt
 
@@ -404,7 +404,7 @@ __attribute__((section (".ccmram")))
 void USART3_IRQHandler()
 {
 	ZCEN_DAC_ENABLE
-	if (USART3->ISR & USART_ISR_TC)
+	if (USART3->ISR & USART_ISR_TXE)
 	{
 		USART3->TDR = 0; //clear interrupt
 
@@ -424,7 +424,7 @@ __attribute__((section (".ccmram")))
 void UART5_IRQHandler()
 {
 	NOISE_CLOCK_EXTERNAL
-	if (UART5->ISR & USART_ISR_TC)
+	if (UART5->ISR & USART_ISR_TXE)
 	{
 		UART5->TDR = 0; //clear interrupt
 
