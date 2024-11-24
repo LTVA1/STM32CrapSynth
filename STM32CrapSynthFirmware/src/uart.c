@@ -1,7 +1,7 @@
 /*
  * uart.c
  *
- *  Created on: 5 окт. 2024 г.
+ *  Created on: 5 пїЅпїЅпїЅ. 2024 пїЅ.
  *      Author: Georg
  */
 
@@ -10,6 +10,7 @@
 #include "ring_buf.h"
 #include "commands.h"
 #include "main.h"
+#include "gpio.h"
 
 extern RingBuffer rx_ring_buf;
 
@@ -26,14 +27,17 @@ uint8_t usart_ready;
 uint8_t our_xor;
 
 __attribute__((section (".ccmram")))
-void USART1_IRQHandler()
+void UART4_IRQHandler()
 {
-	if (USART1->ISR & USART_ISR_RXNE)
+	if (UART4->ISR & USART_ISR_RXNE)
 	{
-		buffer_put_to_end(&rx_ring_buf, USART1->RDR);
+		//CS_NOISE_HIGH
+		buffer_put_to_end(&rx_ring_buf, UART4->RDR);
+		//CS_NOISE_LOW
 	}
 }
 
+/*
 __attribute__((section (".ccmram")))
 void DMA1_Channel4_IRQHandler()
 {
@@ -42,28 +46,93 @@ void DMA1_Channel4_IRQHandler()
 
 	usart_ready = 1;
 }
+*/
+
+__attribute__((section (".ccmram")))
+void DMA2_Channel5_IRQHandler()
+{
+	DMA2->IFCR |= DMA_IFCR_CTCIF5;
+	DMA2_Channel5->CCR &= ~DMA_CCR_EN; //stop DMA
+
+	usart_ready = 1;
+}
 
 void uart_send_via_dma(uint16_t size)
 {
-	while(!usart_ready) { asm("nop"); }
+	/*while(!usart_ready) { asm("nop"); }
 	DMA1_Channel4->CCR &= ~DMA_CCR_EN;
 	DMA1_Channel4->CNDTR = size;
 	DMA1_Channel4->CMAR = (uint32_t)(&tx_buf[0]);
 	usart_ready = 0;
-	DMA1_Channel4->CCR |= DMA_CCR_EN;
+	DMA1_Channel4->CCR |= DMA_CCR_EN;*/
+
+	while(!usart_ready) { asm("nop"); }
+	DMA2_Channel5->CCR &= ~DMA_CCR_EN;
+	DMA2_Channel5->CNDTR = size;
+	DMA2_Channel5->CMAR = (uint32_t)(&tx_buf[0]);
+	usart_ready = 0;
+	DMA2_Channel5->CCR |= DMA_CCR_EN;
 }
 
 void uart_init()
 {
-	USART1->CR1 |= USART_CR1_TE | USART_CR1_RE | USART_CR1_RXNEIE;	//enable transmit and receive and interruption
+	//UARTs used as phase reset timers
 
-	USART1->BRR = SystemCoreClock/256000; //256000 baud rate
-	NVIC_SetPriority(USART1_IRQn, 3);
+	USART1->CR1 |= USART_CR1_TE | USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
+	USART1->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
-	USART1->CR3 |= USART_CR3_DMAT; //enable DMA tx mode
+	USART1->BRR = 1000;
 
 	USART1->CR1 |= USART_CR1_UE;
-	NVIC_EnableIRQ(USART1_IRQn);
+
+	NVIC_SetPriority(USART1_IRQn, 8);
+	//NVIC_EnableIRQ(USART1_IRQn);
+
+	USART2->CR1 |= USART_CR1_TE | USART_CR1_TCIE | USART_CR1_M1; //9 data bits
+	USART2->CR2 |= USART_CR2_STOP_1; //2 stop bits
+
+	USART2->BRR = 1000;
+
+	USART2->CR1 |= USART_CR1_UE;
+
+	NVIC_SetPriority(USART2_IRQn, 8);
+	//NVIC_EnableIRQ(USART2_IRQn);
+
+	USART3->CR1 |= USART_CR1_TE | USART_CR1_TCIE | USART_CR1_M1; //9 data bits
+	USART3->CR2 |= USART_CR2_STOP_1; //2 stop bits
+
+	USART3->BRR = 1000;
+
+	USART3->CR1 |= USART_CR1_UE;
+
+	NVIC_SetPriority(USART3_IRQn, 8);
+	//NVIC_EnableIRQ(USART3_IRQn);
+
+	UART5->CR1 |= USART_CR1_TE | USART_CR1_TCIE | USART_CR1_M1; //9 data bits
+	UART5->CR2 |= USART_CR2_STOP_1; //2 stop bits
+
+	UART5->BRR = 1000;
+
+	UART5->CR1 |= USART_CR1_UE;
+
+	NVIC_SetPriority(UART5_IRQn, 8);
+	//NVIC_EnableIRQ(UART5_IRQn);
+
+
+	//================================================
+	//UART
+
+	UART4->CR1 |= USART_CR1_TE | USART_CR1_RE | USART_CR1_RXNEIE;	//enable transmit and receive and interruption
+
+	UART4->BRR = SystemCoreClock/2/(2000000); //2M baud rate
+
+	UART4->CR3 |= USART_CR3_DMAT; //enable DMA tx mode
+
+	UART4->CR1 |= USART_CR1_UE;
+	NVIC_SetPriority(UART4_IRQn, 3);
+	NVIC_EnableIRQ(UART4_IRQn);
+
+	//UART4->TDR = 0xdd;
 
 	buffer_init(&rx_ring_buf, rx_buf, RX_BUF_SIZE);
 	usart_ready = 1;

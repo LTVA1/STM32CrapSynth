@@ -21,7 +21,6 @@ void dma_init()
 	//DMA1_Channel1 - Copy wavetable data for DAC ch.3 (MEM2MEM)
 	//DMA1_Channel2 - SPI1 RX
 	//DMA1_Channel3 - SPI1 TX
-	//DMA1_Channel4 - USART1 TX
 	//DMA1_Channel5 - SPI2 TX (16 bits)
 	//DMA1_Channel6 - PWM DAC wave/sample rate
 	//DMA1_Channel7 - Copy wavetable data for DAC ch.2 (MEM2MEM)
@@ -29,6 +28,7 @@ void dma_init()
 	//DMA2_Channel1 - Copy wavetable data for DAC ch.1 (MEM2MEM)
 	//DMA2_Channel3 - DAC ch.1 request
 	//DMA2_Channel4 - DAC ch.2 request
+	//DMA2_Channel5 - UART4 TX
 
 	DMA1_Channel1->CCR = DMA_CCR_MINC | DMA_CCR_PINC | DMA_CCR_MEM2MEM | DMA_CCR_DIR;
 	DMA1_Channel1->CPAR = (uint32_t)(&wavetable_array[2][0]);
@@ -43,10 +43,13 @@ void dma_init()
 	NVIC_SetPriority(DMA1_Channel3_IRQn, 8);
 	NVIC_EnableIRQ(DMA1_Channel3_IRQn);
 
+	//DMA1_Channel4 - USART1 TX
+	/*
 	DMA1_Channel4->CCR = DMA_CCR_MINC | DMA_CCR_DIR | DMA_CCR_TCIE;
 	DMA1_Channel4->CPAR = (uint32_t)(&(USART1->TDR));
 	NVIC_SetPriority(DMA1_Channel4_IRQn, 8);
 	NVIC_EnableIRQ(DMA1_Channel4_IRQn);
+	*/
 
 	DMA1_Channel5->CCR = DMA_CCR_MINC | DMA_CCR_MSIZE_0 | DMA_CCR_PSIZE_0 | DMA_CCR_DIR | DMA_CCR_TCIE; //16 bits
 	DMA1_Channel5->CPAR = (uint32_t)(&(SPI2->DR));
@@ -72,4 +75,9 @@ void dma_init()
 
 	DMA2_Channel4->CCR = DMA_CCR_MINC | DMA_CCR_DIR | DMA_CCR_TCIE;
 	DMA2_Channel4->CPAR = (uint32_t)(&DAC1->DHR8R2);
+
+	DMA2_Channel5->CCR = DMA_CCR_MINC | DMA_CCR_DIR | DMA_CCR_TCIE;
+	DMA2_Channel5->CPAR = (uint32_t)(&(UART4->TDR));
+	NVIC_SetPriority(DMA2_Channel5_IRQn, 8);
+	NVIC_EnableIRQ(DMA2_Channel5_IRQn);
 }

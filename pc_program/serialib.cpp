@@ -183,6 +183,9 @@ char serialib::openDevice(const char *Device, const unsigned int Bauds,
     case 115200 :   dcbSerialParams.BaudRate=CBR_115200; break;
     case 128000 :   dcbSerialParams.BaudRate=CBR_128000; break;
     case 256000 :   dcbSerialParams.BaudRate=CBR_256000; break;
+    //add
+    case 1000000 :   dcbSerialParams.BaudRate=1000000; break;
+    case 2000000 :   dcbSerialParams.BaudRate=2000000; break;
     default : return -4;
     }
     //select data size
@@ -270,6 +273,11 @@ char serialib::openDevice(const char *Device, const unsigned int Bauds,
     case 38400 :    Speed=B38400; break;
     case 57600 :    Speed=B57600; break;
     case 115200 :   Speed=B115200; break;
+
+    //add
+    case 1000000 :   Speed=B1000000; break;
+    case 2000000 :   Speed=B2000000; break;
+
 #if defined (B230400)
     case 230400 :   Speed=B230400; break;
 #endif

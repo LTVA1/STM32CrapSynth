@@ -90,7 +90,22 @@ int main(void)
 	uart_init();
 	uart_send_comms_establish_packet();
 
-	GPIOC->MODER &= ~(GPIO_MODER_MODER10 | GPIO_MODER_MODER11);
+	/*for(int i = 0; i < 100000; i++) { asm("nop"); }
+
+	NVIC_DisableIRQ(USART3_IRQn);
+	USART3->CR1 &= ~(USART_CR1_TE | USART_CR1_UE);
+	USART3->BRR = 2000;
+	USART3->CR1 |= (USART_CR1_TE | USART_CR1_UE);
+	NVIC_EnableIRQ(USART3_IRQn);*/
+
+	//TIM20->ARR = 10000;
+	//TIM20->CR1 = TIM_CR1_CEN;
+
+	//state_ram.timer[1].chan_bitmask = 0xff;
+
+	//SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
+
+	/*GPIOC->MODER &= ~(GPIO_MODER_MODER10 | GPIO_MODER_MODER11);
 
 	GPIOC->MODER |= GPIO_MODER_MODER10_1 | GPIO_MODER_MODER11_1;
 
@@ -98,13 +113,13 @@ int main(void)
 
 	UART4->CR1 |= USART_CR1_TE;	//enable transmit
 
-	UART4->BRR = SystemCoreClock/2/(1000000); //1M baud rate
+	UART4->BRR = SystemCoreClock/2/(2000000); //1M baud rate
 
 	//UART4->CR3 |= USART_CR3_DMAT; //enable DMA tx mode
 
 	UART4->CR1 |= USART_CR1_UE;
 
-	UART4->TDR = 0xdd;
+	UART4->TDR = 0xdd;*/
 
 	//ad9833_write_freq(2, 5000);
 

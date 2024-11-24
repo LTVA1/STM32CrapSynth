@@ -7,8 +7,8 @@
 #define FILE_VERSION 1
 
 #define FLASH_BLOCK_SIZE 2048
-#define RAM_BLOCK_SIZE 256
-#define EXT_FLASH_BLOCK_SIZE 256
+#define RAM_BLOCK_SIZE 2048
+#define EXT_FLASH_BLOCK_SIZE 2048
 
 #define SYNTH_SYNC_BYTE 0x69
 
@@ -598,7 +598,7 @@ int main()
 	std::cin >> baud;
 
 #if defined (_WIN32) || defined( _WIN64)
-	if(baud < 110 || baud > 256000)
+	if(baud < 110 || baud > 2000000)
 #endif
 #ifdef __linux__
 	if(baud < 110 || baud > 4000000)

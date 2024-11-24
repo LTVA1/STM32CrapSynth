@@ -133,7 +133,7 @@ void external_flash_read_data(uint32_t address, uint8_t* data, uint16_t size, ui
 	//while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 }
 
-void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size) //no more than 256 bytes at a time
+void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size)
 {
 	if(address == 0)
 	{
@@ -145,32 +145,39 @@ void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size) /
 		external_flash_erase_sector(erased_boundary);
 	}
 
-	external_flash_write_enable_command();
+	uint16_t curr_pos = 0;
 
-	//page program
-	//0x02, addr 24 bits (MSB to LSB), up to 256 bytes of data
-	spi_tx_buf[0] = 0x02;
-	spi_tx_buf[1] = (address >> 16) & 0xff;
-	spi_tx_buf[2] = (address >> 8) & 0xff;
-	spi_tx_buf[3] = address & 0xff;
+	while(size > curr_pos)
+	{
+		external_flash_write_enable_command();
 
-	CS_EXT_FLASH_LOW
-	spi1_send_via_dma(&spi_tx_buf[0], 4);
+		//page program
+		//0x02, addr 24 bits (MSB to LSB), up to 256 bytes of data
+		spi_tx_buf[0] = 0x02;
+		spi_tx_buf[1] = ((address + curr_pos) >> 16) & 0xff;
+		spi_tx_buf[2] = ((address + curr_pos) >> 8) & 0xff;
+		spi_tx_buf[3] = (address + curr_pos) & 0xff;
 
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+		CS_EXT_FLASH_LOW
+		spi1_send_via_dma(&spi_tx_buf[0], 4);
 
-	spi1_send_via_dma(&data[0], size);
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+		spi1_send_via_dma(&data[curr_pos], ((size - curr_pos) > 256 ? 256 : (size - curr_pos)));
 
-	CS_EXT_FLASH_HIGH
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	//poll status register until busy bit is reset
-	external_flash_wait_until_not_busy();
+		CS_EXT_FLASH_HIGH
 
-	CS_EXT_FLASH_HIGH
+		//poll status register until busy bit is reset
+		external_flash_wait_until_not_busy();
+
+		CS_EXT_FLASH_HIGH
+
+		curr_pos += 256;
+	}
 
 	//external_flash_read_data(address, test_data_read, size, 1);
 

@@ -59,6 +59,8 @@
 #define CMD_TIMER_RESET 2
 #define CMD_TIMER_ENABLE 3
 #define CMD_TIMER_DISABLE 4
+#define CMD_TIMER_FREQ_SYSTICK 5
+#define CMD_TIMER_FREQ_UART 6
 
 #define CMD_NEXT_FRAME 0xfb
 #define CMD_SET_RATE 0xfc

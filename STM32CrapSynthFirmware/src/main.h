@@ -67,7 +67,7 @@ typedef struct
 
 typedef struct
 {
-	uint32_t autoreload; //RTC wakeup timer effectively has 17-bit autoreload
+	uint32_t autoreload;
 	uint16_t prescaler;
 	uint8_t enable;
 	uint8_t chan_bitmask;
@@ -78,7 +78,7 @@ typedef struct
 	PSG_state psg[4];
 	Noise_state noise;
 	Sample_state dac[3];
-	Timer_state timer[5]; //last timer shared between phase reset function and external noise clock source function
+	Timer_state timer[6]; //last timer shared between phase reset function and external noise clock source function
 } Program_state_ram; //in RAM so that it would be sent to PC via UART DMA
 
 #endif /* MAIN_H_ */

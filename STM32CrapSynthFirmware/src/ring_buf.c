@@ -18,6 +18,7 @@ void buffer_init(RingBuffer* buf, uint8_t* buf_data, uint16_t size_buf)
 	buf->data_size = 0;
 }
 
+__attribute__((section (".ccmram")))
 uint8_t buffer_put_to_end(RingBuffer* buf, uint8_t data)
 {
 	if(buf->data_size >= buf->size) return 1; //buffer overflow
@@ -39,6 +40,7 @@ uint8_t buffer_put_to_end(RingBuffer* buf, uint8_t data)
 	return 0; //success
 }
 
+__attribute__((section (".ccmram")))
 uint8_t buffer_get_from_front(RingBuffer* buf, uint8_t* data)
 {
 	if(buf->data_size <= 0)
