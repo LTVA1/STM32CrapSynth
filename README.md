@@ -1,6 +1,6 @@
 # STM32CrapSynth
 
-A software/hardware synth based on STM32F303RE, 4xAD9833 wave generators, one MM5437 noise generator and LTC1063 lowpass filter.
+A software/hardware synth based on STM32F303RE, 4xAD9833 wave generators, one MM5437 noise generator and LTC1063 lowpass filter. Currently I seem to have burned the filter so instead there's 3rd PCM channel using the timer that was planned for filter clocking.
 
 # Folders
 
