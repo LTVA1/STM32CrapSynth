@@ -20,6 +20,7 @@ extern uint32_t memory_size;
 extern Program_state_ccm state_ccm;
 
 uint8_t tx_buf[TX_BUF_SIZE];
+__attribute__((section (".ccmram_variables")))
 uint8_t rx_buf[RX_BUF_SIZE];
 
 uint8_t usart_ready;
@@ -57,6 +58,7 @@ void DMA2_Channel5_IRQHandler()
 	usart_ready = 1;
 }
 
+__attribute__((section (".ccmram")))
 void uart_send_via_dma(uint16_t size)
 {
 	/*while(!usart_ready) { asm("nop"); }
@@ -78,42 +80,46 @@ void uart_init()
 {
 	//UARTs used as phase reset timers
 
-	USART1->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
+	USART1->CR1 |= USART_CR1_TXEIE | USART_CR1_M0; //9 data bits
 	USART1->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	USART1->BRR = 1000;
 
-	//USART1->CR1 |= USART_CR1_UE;
+	USART1->CR1 |= USART_CR1_UE;
+	//USART1->CR1 |= USART_CR1_TE;
 
 	NVIC_SetPriority(USART1_IRQn, 8);
 	//NVIC_EnableIRQ(USART1_IRQn);
 
-	USART2->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
+	USART2->CR1 |= USART_CR1_TXEIE | USART_CR1_M0; //9 data bits
 	USART2->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	USART2->BRR = 1000;
 
-	//USART2->CR1 |= USART_CR1_UE;
+	USART2->CR1 |= USART_CR1_UE;
+	//USART2->CR1 |= USART_CR1_TE;
 
 	NVIC_SetPriority(USART2_IRQn, 8);
 	//NVIC_EnableIRQ(USART2_IRQn);
 
-	USART3->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
+	USART3->CR1 |= USART_CR1_TXEIE | USART_CR1_M0; //9 data bits
 	USART3->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	USART3->BRR = 1000;
 
-	//USART3->CR1 |= USART_CR1_UE;
+	USART3->CR1 |= USART_CR1_UE;
+	//USART3->CR1 |= USART_CR1_TE;
 
 	NVIC_SetPriority(USART3_IRQn, 8);
 	//NVIC_EnableIRQ(USART3_IRQn);
 
-	UART5->CR1 |= USART_CR1_TXEIE | USART_CR1_M1; //9 data bits
+	UART5->CR1 |= USART_CR1_TXEIE | USART_CR1_M0; //9 data bits
 	UART5->CR2 |= USART_CR2_STOP_1; //2 stop bits
 
 	UART5->BRR = 1000;
 
-	//UART5->CR1 |= USART_CR1_UE;
+	UART5->CR1 |= USART_CR1_UE;
+	//UART5->CR1 |= USART_CR1_TE;
 
 	NVIC_SetPriority(UART5_IRQn, 8);
 	//NVIC_EnableIRQ(UART5_IRQn);
@@ -155,10 +161,10 @@ void uart_send_comms_establish_packet()
 	tx_buf[8] = (BASE_ADDR_FLASH >> 8) & 0xff;
 	tx_buf[9] = BASE_ADDR_FLASH & 0xff;
 
-	tx_buf[10] = BASE_ADDR_RAM >> 24;
-	tx_buf[11] = (BASE_ADDR_RAM >> 16) & 0xff;
-	tx_buf[12] = (BASE_ADDR_RAM >> 8) & 0xff;
-	tx_buf[13] = BASE_ADDR_RAM & 0xff;
+	tx_buf[10] = ((uint32_t)&sample_mem_ram[0]) >> 24;
+	tx_buf[11] = (((uint32_t)&sample_mem_ram[0]) >> 16) & 0xff;
+	tx_buf[12] = (((uint32_t)&sample_mem_ram[0]) >> 8) & 0xff;
+	tx_buf[13] = ((uint32_t)&sample_mem_ram[0]) & 0xff;
 
 	tx_buf[14] = SUPPORTED_FILE_VERSION >> 24;
 	tx_buf[15] = (SUPPORTED_FILE_VERSION >> 16) & 0xff;
@@ -200,6 +206,7 @@ void uart_send_comms_establish_packet()
 	uart_send_via_dma(SYNTH_RESPONSE_SIZE);
 }
 
+__attribute__((section (".ccmram")))
 void uart_send_response()
 {
 	our_xor = 0;

@@ -147,6 +147,13 @@ SECTIONS
     KEEP(*(.isr_vector_ccmram)) /* Startup code */
     . = ALIGN(4);
   } >CCMRAM
+
+  .ccmram_variables :
+  {
+    . = ALIGN(4);
+    *(.ccmram_variables)
+    . = ALIGN(4);
+  } >CCMRAM
   
   /* CCMRAM section */
   .ccmram :
@@ -154,8 +161,7 @@ SECTIONS
     . = ALIGN(4);
     _sccmram = .;        /* define a global symbols at ccmram start */
     *(.isr_vector_ccmram)
-    *(.ccmram)     
-    *(.ccmram*)
+    *(.ccmram)
     . = ALIGN(4);
     _eccmram = .;        /* define a global symbols at ccmram end */
   } >CCMRAM AT> FLASH

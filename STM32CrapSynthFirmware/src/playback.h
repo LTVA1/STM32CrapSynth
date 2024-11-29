@@ -12,8 +12,7 @@
 #include <stdint.h>
 
 #define WAVETABLE_SIZE 256
-#define NOISE_LFSR_LENGTH 23
-#define SAMPLE_MEM_RAM_SIZE (50 * 1024)
+#define SAMPLE_MEM_RAM_SIZE (52 * 1024)
 
 //commands
 #define CMD_AD9833_VOL 0
@@ -72,5 +71,7 @@ void playback_init();
 void start_playback();
 void stop_playback();
 void execute_commands();
+
+uint8_t sample_mem_ram[SAMPLE_MEM_RAM_SIZE];
 
 #endif /* PLAYBACK_H_ */

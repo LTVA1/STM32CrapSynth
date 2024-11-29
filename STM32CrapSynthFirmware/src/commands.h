@@ -10,9 +10,8 @@
 
 #define FIRMWARE_VERSION 0x00000001
 
-#define MCU_FIRMWARE_SIZE (2048 * 24)
+#define MCU_FIRMWARE_SIZE (1024 * 16) /*16 KiB*/
 #define BASE_ADDR_FLASH (0x08000000 + MCU_FIRMWARE_SIZE)
-#define BASE_ADDR_RAM (0x20002070) /*todo: do we really need it?*/
 #define SUPPORTED_FILE_VERSION 1
 
 #define SYNTH_SYNC_BYTE 0x69

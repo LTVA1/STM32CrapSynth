@@ -118,7 +118,7 @@ void decode_command()
 						if(cmd_buf[3] == SYNTH_CMD_LOAD_EXT_FLASH)
 						{
 							state_ccm.state = STATE_PROG_EXTERNAL_FLASH;
-							uart_send_response();
+							//uart_send_response();
 						}
 
 						//CS_NOISE_LOW

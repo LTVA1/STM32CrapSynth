@@ -13,59 +13,60 @@
 
 #define my_min(a, b)  (((a)<(b))?(a):(b))
 
-uint8_t spi_tx_buf[ATT_TX_BUF_SIZE]; //SPI will send 16 bits at a time but each 16-bit section holds volumes for 2 channels
+uint8_t spi_tx_buf_vol[ATT_TX_BUF_SIZE]; //SPI will send 16 bits at a time but each 16-bit section holds volumes for 2 channels
 uint8_t att_need_write;
 
 extern uint8_t spi2_ready;
 extern Program_state_ram state_ram;
 
-void att_write_filter_resonance(uint8_t resonance)
+/*void att_write_filter_resonance(uint8_t resonance)
 {
-	spi_tx_buf[3] = resonance;
+	spi_tx_buf_vol[3] = resonance;
 	att_need_write = 1;
-}
+}*/
 
+__attribute__((section (".ccmram")))
 void att_write_vol(uint8_t ch, uint8_t vol)
 {
 	switch(ch)
 	{
 		case 0:
 		{
-			spi_tx_buf[6] = vol;
+			spi_tx_buf_vol[6] = vol;
 			break;
 		}
 		case 1:
 		{
-			spi_tx_buf[7] = vol;
+			spi_tx_buf_vol[7] = vol;
 			break;
 		}
 		case 2:
 		{
-			//spi_tx_buf[4] = my_min(255, (int)vol + 36);
-			//if(state_ram.psg[2].wave == 5) spi_tx_buf[4] = my_min(255, (int)vol + 36); //for ch3 PWM vol correction.... (faulty mux out line?)
-			//else spi_tx_buf[4] = vol;
-			spi_tx_buf[4] = vol;
+			//spi_tx_buf_vol[4] = my_min(255, (int)vol + 36);
+			//if(state_ram.psg[2].wave == 5) spi_tx_buf_vol[4] = my_min(255, (int)vol + 36); //for ch3 PWM vol correction.... (faulty mux out line?)
+			//else spi_tx_buf_vol[4] = vol;
+			spi_tx_buf_vol[4] = vol;
 			break;
 		}
 		case 3:
 		{
 			//spi_tx_buf[5] = my_min(255, (int)vol + 14);
-			spi_tx_buf[5] = vol;
+			spi_tx_buf_vol[5] = vol;
 			break;
 		}
 		case 4:
 		{
-			spi_tx_buf[3] = vol;
+			spi_tx_buf_vol[3] = vol;
 			break;
 		}
 		case 5:
 		{
-			spi_tx_buf[0] = vol;
+			spi_tx_buf_vol[0] = vol;
 			break;
 		}
 		case 6:
 		{
-			spi_tx_buf[1] = vol;
+			spi_tx_buf_vol[1] = vol;
 			break;
 		}
 		default: break;
@@ -73,17 +74,18 @@ void att_write_vol(uint8_t ch, uint8_t vol)
 	att_need_write = 1;
 }
 
+__attribute__((section (".ccmram")))
 void att_flush()
 {
 	while(!spi2_ready) { asm("nop"); }
 	while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	SPI2->CR1 &= ~SPI_CR1_SPE;
-	SPI2->CR1 |= SPI_CR1_CPHA; //for PGA2320
+	SPI2->CR1 |= (SPI_CR1_CPHA | SPI_CR1_BR_1); //for PGA2320 slower speed
 	SPI2->CR1 |= SPI_CR1_SPE;
 
 	CS_ATTEN_LOW
-	spi2_send_via_dma((uint16_t*)&spi_tx_buf[0], ATT_TX_BUF_SIZE / 2);
+	spi2_send_via_dma((uint16_t*)&spi_tx_buf_vol[0], ATT_TX_BUF_SIZE / 2);
 
 	while(!spi2_ready) { asm("nop"); }
 	while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
@@ -97,7 +99,7 @@ void att_init_all()
 
 	for(int i = 0; i < ATT_TX_BUF_SIZE; i++)
 	{
-		spi_tx_buf[i] = 0;
+		spi_tx_buf_vol[i] = 0;
 	}
 
 	att_flush();

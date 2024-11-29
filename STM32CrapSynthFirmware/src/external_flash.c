@@ -300,7 +300,7 @@ void external_flash_write_page_task()
 
 	external_flash_write_page(state_ccm.block_start_offset, state_ccm.data_pointer, state_ccm.block_length);
 
-	//uart_send_response();
+	uart_send_response();
 
 	state_ccm.state = STATE_IDLE;
 }

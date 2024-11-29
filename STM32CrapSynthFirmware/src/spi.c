@@ -126,8 +126,8 @@ void spi2_send_16bits(uint16_t data)
 {
 	while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	SPI2->CR1 &= ~SPI_CR1_SPE; //for AD9833
-	SPI2->CR1 &= ~SPI_CR1_CPHA;
+	SPI2->CR1 &= ~SPI_CR1_SPE; //for AD9833 max speed
+	SPI2->CR1 &= ~(SPI_CR1_CPHA);
 	SPI2->CR1 |= SPI_CR1_SPE;
 
 	SPI2->DR = data;

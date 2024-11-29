@@ -45,9 +45,9 @@ SOFTWARE.
 #include "pga2320.h"
 #include "clocks_interrupts.h"
 
-__attribute__((section (".ccmram")))
+__attribute__((section (".ccmram_variables")))
 Program_state_ccm state_ccm;
-__attribute__((section (".ccmram")))
+__attribute__((section (".ccmram_variables")))
 Program_state_ram state_ram;
 
 extern uint8_t spi_tx_buf[];
@@ -92,34 +92,13 @@ int main(void)
 
 	/*for(int i = 0; i < 100000; i++) { asm("nop"); }
 
-	NVIC_DisableIRQ(USART3_IRQn);
-	USART3->CR1 &= ~(USART_CR1_TE | USART_CR1_UE);
-	USART3->BRR = 2000;
-	USART3->CR1 |= (USART_CR1_TE | USART_CR1_UE);
-	NVIC_EnableIRQ(USART3_IRQn);*/
+	NVIC_DisableIRQ(UART5_IRQn);
+	UART5->BRR = 0xfff7;
+	NVIC_EnableIRQ(UART5_IRQn);
 
-	//TIM20->ARR = 10000;
-	//TIM20->CR1 = TIM_CR1_CEN;
+	for(int i = 0; i < 400000; i++) { asm("nop"); }
 
-	//state_ram.timer[1].chan_bitmask = 0xff;
-
-	//SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
-
-	/*GPIOC->MODER &= ~(GPIO_MODER_MODER10 | GPIO_MODER_MODER11);
-
-	GPIOC->MODER |= GPIO_MODER_MODER10_1 | GPIO_MODER_MODER11_1;
-
-	GPIOC->AFR[1] |= (5 << (4*2)) | (5 << (4*3));
-
-	UART4->CR1 |= USART_CR1_TE;	//enable transmit
-
-	UART4->BRR = SystemCoreClock/2/(2000000); //1M baud rate
-
-	//UART4->CR3 |= USART_CR3_DMAT; //enable DMA tx mode
-
-	UART4->CR1 |= USART_CR1_UE;
-
-	UART4->TDR = 0xdd;*/
+	NVIC_DisableIRQ(UART5_IRQn);*/
 
 	//ad9833_write_freq(2, 5000);
 
