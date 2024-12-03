@@ -39,6 +39,7 @@ void flash_erase(uint32_t page_address) //pageAddress - any address on the page 
 //data - block data pointer
 //address - flash page start address
 //count - number of bytes, divisible by 2
+
 void flash_write(uint8_t* data, uint32_t address, uint32_t count)
 {
 	while (FLASH->SR & FLASH_SR_BSY) { asm("nop"); }

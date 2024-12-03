@@ -17,6 +17,7 @@ uint8_t waves[4] = { WAVE_SINE, WAVE_TRIANGLE, WAVE_SQUARE, WAVE_SQUARE_DOUBLE_F
 
 uint8_t dds_freq_reg[4];
 
+__attribute__((section (".ccmram")))
 void ad9833_cs_low(uint8_t dds)
 {
 	switch(dds)
@@ -45,6 +46,7 @@ void ad9833_cs_low(uint8_t dds)
 	}
 }
 
+__attribute__((section (".ccmram")))
 void ad9833_cs_high(uint8_t dds)
 {
 	switch(dds)
@@ -73,6 +75,7 @@ void ad9833_cs_high(uint8_t dds)
 	}
 }
 
+__attribute__((section (".ccmram")))
 void ad9833_reset(uint8_t dds)
 {
 	spi_tx_buf_ad9833[dds][0] |= RESET_BIT; //reset bit on
@@ -88,6 +91,7 @@ void ad9833_reset(uint8_t dds)
 	ad9833_cs_high(dds);
 }
 
+__attribute__((section (".ccmram")))
 void ad9833_write_freq(uint8_t dds, uint32_t freq)
 {
 	spi_tx_buf_ad9833[dds][1] = (dds_freq_reg[dds] ? FREQ1_REG_ADDRESS : FREQ0_REG_ADDRESS) | (freq & 0x3fff);
@@ -113,6 +117,7 @@ void ad9833_write_freq(uint8_t dds, uint32_t freq)
 	dds_freq_reg[dds] &= 1;
 }
 
+__attribute__((section (".ccmram")))
 void ad9833_change_wave(uint8_t dds, uint8_t wave)
 {
 	spi_tx_buf_ad9833[dds][0] &= ~(WAVE_MASK);

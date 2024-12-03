@@ -19,12 +19,6 @@ uint8_t att_need_write;
 extern uint8_t spi2_ready;
 extern Program_state_ram state_ram;
 
-/*void att_write_filter_resonance(uint8_t resonance)
-{
-	spi_tx_buf_vol[3] = resonance;
-	att_need_write = 1;
-}*/
-
 __attribute__((section (".ccmram")))
 void att_write_vol(uint8_t ch, uint8_t vol)
 {
@@ -42,15 +36,11 @@ void att_write_vol(uint8_t ch, uint8_t vol)
 		}
 		case 2:
 		{
-			//spi_tx_buf_vol[4] = my_min(255, (int)vol + 36);
-			//if(state_ram.psg[2].wave == 5) spi_tx_buf_vol[4] = my_min(255, (int)vol + 36); //for ch3 PWM vol correction.... (faulty mux out line?)
-			//else spi_tx_buf_vol[4] = vol;
 			spi_tx_buf_vol[4] = vol;
 			break;
 		}
 		case 3:
 		{
-			//spi_tx_buf[5] = my_min(255, (int)vol + 14);
 			spi_tx_buf_vol[5] = vol;
 			break;
 		}

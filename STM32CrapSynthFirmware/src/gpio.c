@@ -47,6 +47,7 @@ void gpio_init()
 	GPIOD->MODER |= GPIO_MODER_MODER2_0;
 }
 
+__attribute__((section (".ccmram")))
 void connect_dds(uint8_t chan)
 {
 	switch(chan)
@@ -75,6 +76,7 @@ void connect_dds(uint8_t chan)
 	}
 }
 
+__attribute__((section (".ccmram")))
 void connect_pwm(uint8_t chan)
 {
 	switch(chan)

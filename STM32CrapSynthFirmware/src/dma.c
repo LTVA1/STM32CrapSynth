@@ -43,14 +43,6 @@ void dma_init()
 	NVIC_SetPriority(DMA1_Channel3_IRQn, 8);
 	NVIC_EnableIRQ(DMA1_Channel3_IRQn);
 
-	//DMA1_Channel4 - USART1 TX
-	/*
-	DMA1_Channel4->CCR = DMA_CCR_MINC | DMA_CCR_DIR | DMA_CCR_TCIE;
-	DMA1_Channel4->CPAR = (uint32_t)(&(USART1->TDR));
-	NVIC_SetPriority(DMA1_Channel4_IRQn, 8);
-	NVIC_EnableIRQ(DMA1_Channel4_IRQn);
-	*/
-
 	DMA1_Channel5->CCR = DMA_CCR_MINC | DMA_CCR_MSIZE_0 | DMA_CCR_PSIZE_0 | DMA_CCR_DIR | DMA_CCR_TCIE; //16 bits
 	DMA1_Channel5->CPAR = (uint32_t)(&(SPI2->DR));
 	NVIC_SetPriority(DMA1_Channel5_IRQn, 8);

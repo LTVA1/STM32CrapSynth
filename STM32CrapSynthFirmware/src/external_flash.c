@@ -26,11 +26,9 @@ uint32_t memory_size;
 
 uint32_t erased_boundary;
 
-//uint8_t test_data[256];
-//uint8_t test_data_read[256];
-
 uint8_t busy;
 
+__attribute__((section (".ccmram")))
 void external_flash_wait_until_not_busy()
 {
 	busy = 1;
@@ -62,6 +60,7 @@ void external_flash_wait_until_not_busy()
 	}
 }
 
+__attribute__((section (".ccmram")))
 void external_flash_write_enable_command()
 {
 	//write enable
@@ -77,6 +76,7 @@ void external_flash_write_enable_command()
 	CS_EXT_FLASH_HIGH
 }
 
+__attribute__((section (".ccmram")))
 void external_flash_erase_sector(uint32_t address)
 {
 	external_flash_write_enable_command();
@@ -128,11 +128,9 @@ void external_flash_read_data(uint32_t address, uint8_t* data, uint16_t size, ui
 	}
 
 	spi1_receive_data_via_dma(data, size);
-
-	//while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); } //TODO: remove?
-	//while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 }
 
+__attribute__((section (".ccmram")))
 void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size)
 {
 	if(address == 0)
@@ -190,13 +188,6 @@ void external_flash_init_and_request_info()
 	//                                                  size:   1MiB    2MiB    4MiB     8MiB        16MiB
 	//                                                    ID: 0x4014  0x4015  0x4016    0x6017      0x4018 OR 0x7018?
 	//                                                                                 OR 0x4017?
-
-	//dummy_read_target = (uint8_t)SPI1->DR;
-
-	//spi1_receive_via_dma(&spi_rx_double_buf[0], 4);
-
-	//while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	//while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	//reset
 	spi_tx_buf[0] = 0x66;
@@ -272,28 +263,9 @@ void external_flash_init_and_request_info()
 		(uint64_t)spi_rx_double_buf[7];
 
 	erased_boundary = 0;
-
-	//write enable
-	//0x06
-	/*spi_tx_buf[0] = 0x06;
-
-	CS_EXT_FLASH_LOW
-	spi1_send_via_dma(&spi_tx_buf[0], 1);
-
-	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
-	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
-
-	CS_EXT_FLASH_HIGH*/
-
-	/*for(int i = 0; i < 256; i++)
-	{
-		test_data[i] = 255 - i;
-	}*/
-
-	//external_flash_write_page(0, (uint8_t*)test_data, 256);
-	//external_flash_read_data(0, test_data_read, 256, 1);
 }
 
+__attribute__((section (".ccmram")))
 void external_flash_write_page_task()
 {
 	if(state_ccm.state != STATE_PROG_EXTERNAL_FLASH) return;

@@ -333,7 +333,6 @@ void phase_reset(uint8_t channel)
 __attribute__((section (".ccmram")))
 void TIM20_UP_IRQHandler()
 {
-	//CS_NOISE_HIGH
 	if(TIM20->SR & TIM_SR_UIF)
 	{
 		TIM20->SR = ~(TIM_SR_UIF); //clear interrupt
@@ -346,14 +345,12 @@ void TIM20_UP_IRQHandler()
 			}
 		}
 	}
-	//CS_NOISE_LOW
 }
 
 //phase reset timer 2
 __attribute__((section (".ccmram")))
 void SysTick_Handler()
 {
-	//ZCEN_1_ENABLE
 	for(uint8_t i = 0; i < 8; i++)
 	{
 		if(state_ram.timer[1].chan_bitmask & (1 << i))
@@ -361,14 +358,12 @@ void SysTick_Handler()
 			phase_reset(i);
 		}
 	}
-	//ZCEN_1_DISABLE
 }
 
 //phase reset timer 3
 __attribute__((section (".ccmram")))
 void USART1_IRQHandler()
 {
-	//ZCEN_2_ENABLE
 	if (USART1->ISR & USART_ISR_TXE)
 	{
 		USART1->TDR = 0; //clear interrupt
@@ -381,14 +376,12 @@ void USART1_IRQHandler()
 			}
 		}
 	}
-	//ZCEN_2_DISABLE
 }
 
 //phase reset timer 4
 __attribute__((section (".ccmram")))
 void USART2_IRQHandler()
 {
-	//ZCEN_3_ENABLE
 	if (USART2->ISR & USART_ISR_TXE)
 	{
 		USART2->TDR = 0; //clear interrupt
@@ -401,14 +394,12 @@ void USART2_IRQHandler()
 			}
 		}
 	}
-	//ZCEN_3_DISABLE
 }
 
 //phase reset timer 5
 __attribute__((section (".ccmram")))
 void USART3_IRQHandler()
 {
-	//ZCEN_DAC_ENABLE
 	if (USART3->ISR & USART_ISR_TXE)
 	{
 		USART3->TDR = 0; //clear interrupt
@@ -421,14 +412,12 @@ void USART3_IRQHandler()
 			}
 		}
 	}
-	//ZCEN_DAC_DISABLE
 }
 
 //phase reset timer 6
 __attribute__((section (".ccmram")))
 void UART5_IRQHandler()
 {
-	//NOISE_CLOCK_EXTERNAL
 	if (UART5->ISR & USART_ISR_TXE)
 	{
 		UART5->TDR = 0; //clear interrupt
@@ -441,7 +430,6 @@ void UART5_IRQHandler()
 			}
 		}
 	}
-	//NOISE_CLOCK_INTERNAL
 }
 
 __attribute__((section (".ccmram")))
@@ -565,6 +553,7 @@ void set_playback_rate()
 	TIM2->CR1 |= TIM_CR1_CEN;
 }
 
+__attribute__((section (".ccmram")))
 void start_playback()
 {
 	TIM2->CR1 &= ~TIM_CR1_CEN;
@@ -601,6 +590,7 @@ void start_playback()
 	TIM2->CR1 |= TIM_CR1_CEN;
 }
 
+__attribute__((section (".ccmram")))
 void stop_playback()
 {
 	NVIC_DisableIRQ(TIM2_IRQn);
@@ -648,7 +638,6 @@ void execute_dds_pwm_command(uint8_t chan, uint8_t command)
 		{
 			psg->volume = reg_dump_read_byte();
 			att_write_vol(chan, psg->volume);
-			//att_need_write = 1;
 			break;
 		}
 		case CMD_AD9833_WAVE_TYPE:
@@ -766,7 +755,6 @@ void execute_noise_command(uint8_t command)
 		{
 			noise->volume = reg_dump_read_byte();
 			att_write_vol(4, noise->volume);
-			//att_need_write = 1;
 			break;
 		}
 		case CMD_NOISE_CLOCK_INTERNAL:
@@ -839,13 +827,25 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			if(chan < 2)
 			{
 				att_write_vol(5 + chan, ss->volume);
-				//att_need_write = 1;
 			}
 			if(chan == 2)
 			{
-				TIM1->ARR = 1023 - ss->volume * 3;
-			}
+				if(ss->volume == 0)
+				{
+					TIM1->CR1 &= ~TIM_CR1_CEN;
+					TIM1->CNT = 1;
+					TIM1->CCR1 = 0;
+				}
+				else
+				{
+					if(!(TIM1->CR1 & TIM_CR1_CEN))
+					{
+						TIM1->CR1 |= TIM_CR1_CEN;
+					}
 
+					TIM1->ARR = 1023 - ss->volume * 3;
+				}
+			}
 			break;
 		}
 		case CMD_DAC_PLAY_SAMPLE:
@@ -1045,7 +1045,6 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 		}
 		case CMD_DAC_DUTY:
 		{
-			//ZCEN_2_ENABLE
 			ss->duty = reg_dump_read_byte();
 
 			if(ss->wave_type == 6 && ss->wavetable)
@@ -1055,7 +1054,6 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 					wavetable_array[chan][i] = ((i < ss->duty) ? 255 : 0);
 				}
 			}
-			//ZCEN_2_DISABLE
 			break;
 		}
 		case CMD_DAC_WAVETABLE_DATA:
@@ -1070,10 +1068,6 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			{
 				read_reg_dump(0, 0);
 			}
-			/*for(int i = 0; i < WAVETABLE_SIZE; i++)
-			{
-				wavetable_array[chan][i] = reg_dump_read_byte();
-			}*/
 			break;
 		}
 		case CMD_DAC_NOISE_TRI_AMP:
@@ -1330,122 +1324,4 @@ void execute_commands()
 	{
 		att_flush();
 	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void test_play_wavetable()
-{
-	for(int i = 0; i < WAVETABLE_SIZE; i++)
-	{
-		wavetable_array[0][i] = i;
-	}
-
-	//wavetable_array[0][200] = 0xff;
-
-	for(int i = 0; i < WAVETABLE_SIZE; i++)
-	{
-		wavetable_array[1][i] = (i > 127) ? ~(i * 2) : (i * 2);
-	}
-
-	//wavetable_array[1][210] = 0xff;
-
-	TIM6->ARR = 601;
-	TIM6->PSC = 0;
-
-	TIM7->ARR = 600;
-	TIM7->PSC = 0;
-
-	TIM16->ARR = 500;
-	TIM16->PSC = 0;
-
-	/*NVIC_DisableIRQ(DMA2_Channel3_IRQn);
-
-	DMA2_Channel3->CMAR = (uint32_t)&wavetable_array[0][0];
-	DMA2_Channel3->CNDTR = WAVETABLE_SIZE;
-	DMA2_Channel3->CCR |= DMA_CCR_CIRC;
-
-	DMA2_Channel3->CCR |= DMA_CCR_EN;
-
-	NVIC_DisableIRQ(DMA2_Channel4_IRQn);
-
-	DMA2_Channel4->CMAR = (uint32_t)&wavetable_array[1][0];
-	DMA2_Channel4->CNDTR = WAVETABLE_SIZE;
-	DMA2_Channel4->CCR |= DMA_CCR_CIRC;
-
-	DMA2_Channel4->CCR |= DMA_CCR_EN;*/
-
-	DMA1_Channel6->CMAR = (uint32_t)&wavetable_array[1][0];
-	DMA1_Channel6->CNDTR = WAVETABLE_SIZE;
-	DMA1_Channel6->CCR |= DMA_CCR_CIRC;
-
-	DMA1_Channel6->CCR |= DMA_CCR_EN;
-
-	NVIC_DisableIRQ(DMA1_Channel6_IRQn);
-
-	//TIM6->CR1 = TIM_CR1_CEN;
-	//TIM7->CR1 = TIM_CR1_CEN;
-
-	TIM1->ARR = 255;
-	TIM16->CR1 |= TIM_CR1_CEN;
-}
-
-void test_play_sample()
-{
-	TIM6->ARR = 1580;
-	TIM6->PSC = 0;
-
-	NVIC_EnableIRQ(DMA2_Channel3_IRQn);
-
-	DMA2_Channel3->CMAR = BASE_ADDR_FLASH;
-	DMA2_Channel3->CNDTR = 0xffff;
-	state_ram.dac[0].curr_portion_size = 0xffff;
-	DMA2_Channel3->CCR |= DMA_CCR_CIRC;
-
-	state_ram.dac[0].start_offset = 0;
-	state_ram.dac[0].length = 130897;
-	state_ram.dac[0].loop = 1;
-	state_ram.dac[0].loop_point = 50000;
-	state_ram.dac[0].prescaler = 0;
-	state_ram.dac[0].volume = 0xff;
-	state_ram.dac[0].wavetable = 0;
-	state_ram.dac[0].curr_pos = 0;
-
-	DMA2_Channel3->CCR |= DMA_CCR_EN;
-
-	TIM6->CR1 = TIM_CR1_CEN;
 }
