@@ -269,6 +269,7 @@ void phase_reset(uint8_t channel)
 		case 3:
 		{
 			ad9833_reset(channel);
+			pwm_timers[channel]->CNT = 0;
 			break;
 		}
 		case 4:
