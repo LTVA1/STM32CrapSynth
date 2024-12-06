@@ -150,7 +150,7 @@ void spi2_send_16bits(uint16_t data)
 
 void spi_init()
 {
-	SPI1->CR1 |= SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_BR_0; //fclk / 4, master mode, software slave management
+	SPI1->CR1 |= SPI_CR1_MSTR | SPI_CR1_SSI | SPI_CR1_SSM | SPI_CR1_BR_1; //fclk / 4, master mode, software slave management
 	//without software slave management does not work!
 	SPI1->CR2 = SPI_CR2_DS_2 | SPI_CR2_DS_1 | SPI_CR2_DS_0 | SPI_CR2_TXDMAEN | SPI_CR2_RXDMAEN | SPI_CR2_FRXTH;   //  8 bit, enable DMA TX & RX, FLUSH RX FIFO!!!
 	SPI1->CR1 |= SPI_CR1_SPE; // enable

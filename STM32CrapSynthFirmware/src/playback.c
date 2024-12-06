@@ -50,7 +50,7 @@ IRQn_Type samp_chans_IRQ[3] = { DMA2_Channel3_IRQn, DMA2_Channel4_IRQn, DMA1_Cha
 __attribute__((section (".ccmram")))
 void DMA2_Channel3_IRQHandler()
 {
-	DMA2->IFCR |= DMA_IFCR_CTCIF3;
+	DMA2->IFCR = DMA_IFCR_CTCIF3;
 	DMA2_Channel3->CCR &= ~DMA_CCR_EN; //stop DMA
 	TIM6->CR1 &= ~TIM_CR1_CEN;
 
@@ -87,7 +87,7 @@ void DMA2_Channel3_IRQHandler()
 __attribute__((section (".ccmram")))
 void DMA2_Channel4_IRQHandler()
 {
-	DMA2->IFCR |= DMA_IFCR_CTCIF4;
+	DMA2->IFCR = DMA_IFCR_CTCIF4;
 	DMA2_Channel4->CCR &= ~DMA_CCR_EN; //stop DMA
 	TIM7->CR1 &= ~TIM_CR1_CEN;
 
@@ -124,7 +124,7 @@ void DMA2_Channel4_IRQHandler()
 __attribute__((section (".ccmram")))
 void DMA1_Channel6_IRQHandler()
 {
-	DMA1->IFCR |= DMA_IFCR_CTCIF6;
+	DMA1->IFCR = DMA_IFCR_CTCIF6;
 	DMA1_Channel6->CCR &= ~DMA_CCR_EN; //stop DMA
 	TIM16->CR1 &= ~TIM_CR1_CEN;
 
@@ -858,17 +858,19 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			ss->curr_pos = 0;
 			ss->wavetable = 0;
 			samp_chans_dma[chan]->CMAR = (ss->in_ram ? (uint32_t)&sample_mem_ram[0] : BASE_ADDR_FLASH) + ss->start_offset;
-			samp_chans_dma[chan]->CNDTR = my_min(0xffff, ss->length);
+			//samp_chans_dma[chan]->CNDTR = my_min(0xffff, ss->length);
+			samp_chans_dma[chan]->CNDTR = 1;
 
-			ss->curr_portion_size = my_min(0xffff, ss->length);
+			ss->curr_portion_size = 1;
 			ss->loop = (command == CMD_DAC_PLAY_SAMPLE_LOOPED ? 1 : 0);
-
-			NVIC_EnableIRQ(samp_chans_IRQ[chan]);
 
 			samp_chans_dma[chan]->CCR |= DMA_CCR_TCIE;
 
 			samp_chans_dma[chan]->CCR |= DMA_CCR_EN;
+
 			samp_chans_timers[chan]->CR1 |= TIM_CR1_CEN;
+
+			NVIC_EnableIRQ(samp_chans_IRQ[chan]);
 			break;
 		}
 		case CMD_DAC_PLAY_WAVETABLE:
@@ -876,6 +878,9 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			samp_chans_timers[chan]->CR1 &= ~TIM_CR1_CEN;
 			samp_chans_dma[chan]->CCR &= ~DMA_CCR_EN;
 			ss->wavetable = 1;
+
+			DMA1->IFCR = DMA_IFCR_CGIF6;
+			DMA2->IFCR = DMA_IFCR_CGIF3 | DMA_IFCR_CGIF4;
 
 			NVIC_DisableIRQ(samp_chans_IRQ[chan]);
 
@@ -920,7 +925,7 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			{
 				uint32_t copy = DAC->CR;
 				DAC->CR &= (chan ? (~DAC_CR_WAVE2) : (~DAC_CR_WAVE1)); //reset wave gen
-				DAC->CR |= copy & (chan ? (~DAC_CR_WAVE2) : (~DAC_CR_WAVE1));
+				DAC->CR |= copy & (chan ? (DAC_CR_WAVE2) : (DAC_CR_WAVE1));
 			}
 
 			samp_chans_dma[chan]->CCR |= DMA_CCR_EN;
