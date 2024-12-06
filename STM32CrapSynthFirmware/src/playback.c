@@ -495,22 +495,22 @@ void pwm_set_duty(uint8_t chan, uint16_t duty)
 	{
 		case 0:
 		{
-			TIM3->CCR3 = duty * TIM3->ARR / 0xffff;
+			TIM3->CCR3 = duty;
 			break;
 		}
 		case 1:
 		{
-			TIM4->CCR1 = duty * TIM4->ARR / 0xffff;
+			TIM4->CCR1 = duty;
 			break;
 		}
 		case 2:
 		{
-			TIM8->CCR3 = duty * TIM8->ARR / 0xffff;
+			TIM8->CCR3 = duty;
 			break;
 		}
 		case 3:
 		{
-			TIM15->CCR1 = duty * TIM15->ARR / 0xffff;
+			TIM15->CCR1 = duty;
 			break;
 		}
 		default: break;
@@ -681,7 +681,7 @@ void execute_dds_pwm_command(uint8_t chan, uint8_t command)
 		}
 		case CMD_AD9833_PWM_FREQ:
 		{
-			pwm_timers[chan]->CR1 &= ~TIM_CR1_CEN;
+			//pwm_timers[chan]->CR1 &= ~TIM_CR1_CEN;
 
 			pwm_timers[chan]->PSC = reg_dump_read_byte();
 			pwm_timers[chan]->ARR = reg_dump_read_two_bytes();
@@ -691,9 +691,9 @@ void execute_dds_pwm_command(uint8_t chan, uint8_t command)
 				pwm_timers[chan]->CNT = pwm_timers[chan]->ARR - 3;
 			}
 
-			pwm_timers[chan]->CR1 |= TIM_CR1_CEN;
+			//pwm_timers[chan]->CR1 |= TIM_CR1_CEN;
 
-			pwm_set_duty(chan, psg->duty);
+			//pwm_set_duty(chan, psg->duty);
 			break;
 		}
 		case CMD_AD9833_PWM_DUTY:

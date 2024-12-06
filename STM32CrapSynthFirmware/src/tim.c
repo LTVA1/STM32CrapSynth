@@ -31,14 +31,14 @@ void timers_all_init()
 	TIM3->CCMR2 |= TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1 | TIM_CCMR2_OC3M_0;	//<-- pwm mode 2
 	TIM3->CCR3 = 0;	//<-- here need put pwm value...
 	TIM3->CCER |= TIM_CCER_CC3E;
-	TIM3->CR1 |= TIM_CR1_CEN;
+	TIM3->CR1 |= TIM_CR1_CEN | TIM_CR1_ARPE;
 
 	//PWM ch. 2 -> TIM4 ch.1
 	TIM4->CCMR1 |= TIM_CCMR1_OC1CE | TIM_CCMR1_OC1PE;
 	TIM4->CCMR1 |= TIM_CCMR1_OC1M_2 | TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_0;	//<-- pwm mode 2
 	TIM4->CCR1 = 0;	//<-- here need put pwm value...
 	TIM4->CCER |= TIM_CCER_CC1E;
-	TIM4->CR1 |= TIM_CR1_CEN;
+	TIM4->CR1 |= TIM_CR1_CEN | TIM_CR1_ARPE;
 
 	//DAC ch1 driver
 	TIM6->CR2 |= TIM_CR2_MMS_1;	//generate TRG0 after overflow TIM6_CNT
@@ -54,7 +54,7 @@ void timers_all_init()
 	TIM8->CCR3 = 0;	//<-- here need put pwm value...
 	TIM8->CCER |= TIM_CCER_CC3NE; //TIM_CCER_CC3NP - change polarity (since complementary channel is used)
 	TIM8->BDTR |= TIM_BDTR_MOE; //won't work without it
-	TIM8->CR1 |= TIM_CR1_CEN;
+	TIM8->CR1 |= TIM_CR1_CEN | TIM_CR1_ARPE;
 
 	//PWM ch. 4 -> TIM15 ch.1 complementary
 	TIM15->CCMR1 |= TIM_CCMR1_OC1CE | TIM_CCMR1_OC1PE;
@@ -62,7 +62,7 @@ void timers_all_init()
 	TIM15->CCR1 = 0;	//<-- here need put pwm value...
 	TIM15->CCER |= TIM_CCER_CC1NE; //TIM_CCER_CC1NP - change polarity (since complementary channel is used)
 	TIM15->BDTR |= TIM_BDTR_MOE; //won't work without it
-	TIM15->CR1 |= TIM_CR1_CEN;
+	TIM15->CR1 |= TIM_CR1_CEN | TIM_CR1_ARPE;
 
 	//PWM DAC clock
 	TIM16->DIER |= TIM_DIER_UDE;
