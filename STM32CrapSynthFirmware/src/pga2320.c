@@ -13,7 +13,7 @@
 
 #define my_min(a, b)  (((a)<(b))?(a):(b))
 
-uint8_t spi_tx_buf_vol[ATT_TX_BUF_SIZE]; //SPI will send 16 bits at a time but each 16-bit section holds volumes for 2 channels
+uint8_t spi_tx_buf_vol[ATT_TX_BUF_SIZE] __attribute__ ((aligned(2))); //SPI will send 16 bits at a time but each 16-bit section holds volumes for 2 channels
 uint8_t att_need_write;
 
 extern uint8_t spi2_ready;
@@ -71,14 +71,33 @@ void att_flush()
 	while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	SPI2->CR1 &= ~SPI_CR1_SPE;
+
+	asm("nop");
+	asm("nop");
+	asm("nop");
+	asm("nop");
+	asm("nop");
+
 	SPI2->CR1 |= (SPI_CR1_CPHA | SPI_CR1_BR_1); //for PGA2320 slower speed
 	SPI2->CR1 |= SPI_CR1_SPE;
+
+	asm("nop");
+	asm("nop");
+	asm("nop");
+	asm("nop");
+	asm("nop");
 
 	CS_ATTEN_LOW
 	spi2_send_via_dma((uint16_t*)&spi_tx_buf_vol[0], ATT_TX_BUF_SIZE / 2);
 
 	while(!spi2_ready) { asm("nop"); }
 	while(!(SPI2->SR & SPI_SR_TXE) || (SPI2->SR & SPI_SR_BSY)) { asm("nop"); }
+
+	asm("nop");
+	asm("nop");
+	asm("nop");
+	asm("nop");
+	asm("nop");
 
 	CS_ATTEN_HIGH
 }
