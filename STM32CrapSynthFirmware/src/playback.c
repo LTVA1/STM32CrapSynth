@@ -861,6 +861,13 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			//samp_chans_dma[chan]->CNDTR = my_min(0xffff, ss->length);
 			samp_chans_dma[chan]->CNDTR = 1;
 
+			if(chan < 2)
+			{
+				DAC->CR &= (chan ? (~(DAC_CR_EN2 | DAC_CR_TEN2)) : (~(DAC_CR_EN1 | DAC_CR_TEN1)));
+				DAC->CR &= (chan ? (~DAC_CR_WAVE2) : (~DAC_CR_WAVE1)); //reset wave gen
+				DAC->CR |= (chan ? (DAC_CR_EN2 | DAC_CR_TEN2) : (DAC_CR_EN1 | DAC_CR_TEN1));
+			}
+
 			ss->curr_portion_size = 1;
 			ss->loop = (command == CMD_DAC_PLAY_SAMPLE_LOOPED ? 1 : 0);
 
@@ -883,6 +890,13 @@ void execute_dac_command(uint8_t chan, uint8_t command)
 			DMA2->IFCR = DMA_IFCR_CGIF3 | DMA_IFCR_CGIF4;
 
 			NVIC_DisableIRQ(samp_chans_IRQ[chan]);
+
+			if(chan < 2)
+			{
+				DAC->CR &= (chan ? (~(DAC_CR_EN2 | DAC_CR_TEN2)) : (~(DAC_CR_EN1 | DAC_CR_TEN1)));
+				DAC->CR &= (chan ? (~DAC_CR_WAVE2) : (~DAC_CR_WAVE1)); //reset wave gen
+				DAC->CR |= (chan ? (DAC_CR_EN2 | DAC_CR_TEN2) : (DAC_CR_EN1 | DAC_CR_TEN1));
+			}
 
 			samp_chans_dma[chan]->CMAR = (uint32_t)&wavetable_array[chan][0];
 			samp_chans_dma[chan]->CNDTR = WAVETABLE_SIZE;

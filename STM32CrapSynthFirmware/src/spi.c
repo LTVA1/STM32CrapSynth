@@ -128,20 +128,8 @@ void spi2_send_16bits(uint16_t data)
 
 	SPI2->CR1 &= ~SPI_CR1_SPE; //for AD9833 max speed
 
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-
 	SPI2->CR1 &= ~(SPI_CR1_CPHA);
 	SPI2->CR1 |= SPI_CR1_SPE;
-
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
 
 	SPI2->DR = data;
 
