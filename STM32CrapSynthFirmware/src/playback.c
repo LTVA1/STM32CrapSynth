@@ -782,7 +782,7 @@ void execute_noise_command(uint8_t command)
 		}
 		case CMD_NOISE_FREQ:
 		{
-			noise_clock_timer->CR1 &= ~TIM_CR1_CEN;
+			//noise_clock_timer->CR1 &= ~TIM_CR1_CEN;
 
 			noise_clock_timer->PSC = reg_dump_read_byte();
 			noise_clock_timer->ARR = reg_dump_read_two_bytes();
@@ -1157,11 +1157,16 @@ void execute_phase_reset_timer_command(uint8_t channel, uint8_t command)
 
 			if(channel > 1 && channel < 6) //UARTs
 			{
-				//NVIC_DisableIRQ(phase_reset_interrupts[channel]);
+				NVIC_DisableIRQ(phase_reset_interrupts[channel]);
+				uint32_t temp = phase_reset_uarts[channel - 2]->BRR;
+				phase_reset_uarts[channel - 2]->BRR = 16;
+				while(!((phase_reset_uarts[channel - 2]->ISR & USART_ISR_TC) && (phase_reset_uarts[channel - 2]->ISR & USART_ISR_TXE))) { asm("nop"); }
 				phase_reset_uarts[channel - 2]->CR1 &= ~(USART_CR1_TE | USART_CR1_UE);
+
+				phase_reset_uarts[channel - 2]->BRR = temp;
 				phase_reset_uarts[channel - 2]->CR1 |= (USART_CR1_TE | USART_CR1_UE);
-				//phase_reset_uarts[channel - 2]->TDR = 0;
-				//NVIC_EnableIRQ(phase_reset_interrupts[channel]);
+				phase_reset_uarts[channel - 2]->TDR = 0;
+				NVIC_EnableIRQ(phase_reset_interrupts[channel]);
 			}
 			break;
 		}
