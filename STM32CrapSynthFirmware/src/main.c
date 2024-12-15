@@ -67,6 +67,7 @@ extern uint8_t spi_tx_buf[];
 
 void state_init()
 {
+
 	state_ccm.state = STATE_IDLE;
 }
 

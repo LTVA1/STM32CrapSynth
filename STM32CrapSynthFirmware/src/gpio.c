@@ -32,6 +32,9 @@ void gpio_init()
 	GPIOB->AFR[0] |= 2 | (4 << 4) | (5 << (4*3)) | (5 << (4*4)) | (5 << (4*5)) | (2 << (4*6)) | (1 << (4*7));
 	GPIOB->AFR[1] |= 1 | (5 << (4*5)) | (5 << (4*7));
 
+	//PB4 flash MISO, pull down?
+	GPIOB->PUPDR |= GPIO_PUPDR_PUPDR4_1;
+
 	//PC0 output, PC1 output, PC3 output, PC4 altfun 7, PC5 altfun 7, PC6&PC7&PC8&PC9 output, PC12&PC13 output
 	GPIOC->MODER |= GPIO_MODER_MODER0_0 | GPIO_MODER_MODER1_0 | GPIO_MODER_MODER3_0 | GPIO_MODER_MODER4_1 |
 			 GPIO_MODER_MODER5_1 | GPIO_MODER_MODER6_0 | GPIO_MODER_MODER7_0 | GPIO_MODER_MODER8_0 | GPIO_MODER_MODER9_0 |

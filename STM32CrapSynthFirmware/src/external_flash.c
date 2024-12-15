@@ -1,7 +1,7 @@
 /*
  * external_flash.c
  *
- *  Created on: 12 окт. 2024 г.
+ *  Created on: 12 пїЅпїЅпїЅ. 2024 пїЅ.
  *      Author: georg
  */
 
@@ -13,6 +13,7 @@
 #include "main.h"
 
 uint8_t spi_rx_double_buf[EXT_FLASH_RX_BUF_SIZE];
+uint8_t spi_rx_buf[8];
 uint8_t spi_tx_buf[EXT_FLASH_TX_BUF_SIZE];
 
 extern uint8_t spi1_ready_tx;
@@ -46,12 +47,12 @@ void external_flash_wait_until_not_busy()
 		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-		spi1_receive_data_via_dma(&spi_rx_double_buf[0], 1);
+		spi1_receive_data_via_dma(&spi_rx_buf[0], 1);
 
 		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-		if(!(spi_rx_double_buf[0] & 1))
+		if(!(spi_rx_buf[0] & 1))
 		{
 			busy = 0;
 		}
@@ -130,6 +131,8 @@ void external_flash_read_data(uint32_t address, uint8_t* data, uint16_t size, ui
 	spi1_receive_data_via_dma(data, size);
 }
 
+uint8_t test_data_read[256];
+
 __attribute__((section (".ccmram")))
 void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size)
 {
@@ -174,12 +177,25 @@ void external_flash_write_page(uint32_t address, uint8_t* data, uint16_t size)
 
 		CS_EXT_FLASH_HIGH
 
+		/*external_flash_read_data(address + curr_pos, test_data_read, size, 1);
+
+		while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
+		while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
+
+		CS_EXT_FLASH_HIGH
+
+		for(int i = 0; i < ((size - curr_pos) > 256 ? 256 : (size - curr_pos)); i++)
+		{
+			if(test_data_read[i] != data[curr_pos + i])
+			{
+				asm("nop");
+				int y = 0;
+				asm("nop");
+			}
+		}*/
+
 		curr_pos += 256;
 	}
-
-	//external_flash_read_data(address, test_data_read, size, 1);
-
-	//CS_EXT_FLASH_HIGH
 }
 
 void external_flash_init_and_request_info()
@@ -214,15 +230,15 @@ void external_flash_init_and_request_info()
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	spi1_receive_data_via_dma(&spi_rx_double_buf[0], 3);
+	spi1_receive_data_via_dma(&spi_rx_buf[0], 3);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
 	CS_EXT_FLASH_HIGH
 
-	manufacturer_id = spi_rx_double_buf[0];
-	device_id = (spi_rx_double_buf[1] << 8) | spi_rx_double_buf[2];
+	manufacturer_id = spi_rx_buf[0];
+	device_id = (spi_rx_buf[1] << 8) | spi_rx_buf[2];
 
 	if(device_id == 0x4014) memory_size = 1024 * 1024;
 	if(device_id == 0x4015) memory_size = 1024 * 1024 * 2;
@@ -245,7 +261,7 @@ void external_flash_init_and_request_info()
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
 
-	spi1_receive_data_via_dma(&spi_rx_double_buf[0], 8);
+	spi1_receive_data_via_dma(&spi_rx_buf[0], 8);
 
 	while(!spi1_ready_tx || !spi1_ready_rx) { asm("nop"); }
 	while(!(SPI1->SR & SPI_SR_TXE) || (SPI1->SR & SPI_SR_BSY)) { asm("nop"); }
@@ -253,14 +269,14 @@ void external_flash_init_and_request_info()
 	CS_EXT_FLASH_HIGH
 
 	device_uid =
-		((uint64_t)spi_rx_double_buf[0] << 56) |
-		((uint64_t)spi_rx_double_buf[1] << 48) |
-		((uint64_t)spi_rx_double_buf[2] << 40) |
-		((uint64_t)spi_rx_double_buf[3] << 32) |
-		((uint64_t)spi_rx_double_buf[4] << 24) |
-		((uint64_t)spi_rx_double_buf[5] << 16) |
-		((uint64_t)spi_rx_double_buf[6] << 8) |
-		(uint64_t)spi_rx_double_buf[7];
+		((uint64_t)spi_rx_buf[0] << 56) |
+		((uint64_t)spi_rx_buf[1] << 48) |
+		((uint64_t)spi_rx_buf[2] << 40) |
+		((uint64_t)spi_rx_buf[3] << 32) |
+		((uint64_t)spi_rx_buf[4] << 24) |
+		((uint64_t)spi_rx_buf[5] << 16) |
+		((uint64_t)spi_rx_buf[6] << 8) |
+		(uint64_t)spi_rx_buf[7];
 
 	erased_boundary = 0;
 }
