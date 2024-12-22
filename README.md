@@ -18,7 +18,7 @@ A software/hardware synth based on STM32F303RE, 4xAD9833 wave generators, one MM
 
 # Overview and explaination
 
-The device is capable of synthesizing 8 audio channels. Their signal is added together and the resulting sum is available on standard 3.5 mm audio jack.
+The device is capable of synthesizing 8 audio channels. Their signals are added together and the resulting sum is available on standard 3.5 mm audio jack.
 
 There also are six phase reset timers. Two of them are MCU's internal timers and four other are four MCU's internal USARTs/UARTs which were made to generate a periodic interrupt (just like the usual timers). Each timer has 8-bit bitmask dictating which channels it affects. Each time timer fires the correspodning channel's signal phase is reset.
 
