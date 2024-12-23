@@ -16,7 +16,7 @@ A software/hardware synth based on STM32F303RE, 4xAD9833 wave generators, one MM
 
 [STM32CrapSynth in Furnace](https://github.com/LTVA1/furnace/tree/stm32crapsynth) - A fork of Furnace chiptune tracker with added emulation of STM32CrapSynth. Also has an ability to export data (samples and stream of commands/wavetable data) into the file which is then used by `pc_program`.
 
-# Overview and explaination
+# Overview and explanation
 
 The device is capable of synthesizing 8 audio channels. Their signals are added together and the resulting sum is available on standard 3.5 mm audio jack.
 
